@@ -1,0 +1,135 @@
+Lyft Trip Data
+Let’s practice what we learned about joins by combining rows from different tables.
+
+Suppose you are a Data Analyst at Lyft, a ride-sharing platform. For a project, you were given three tables:
+
+trips: trips information
+riders: user data
+cars: autonomous cars
+Have fun!
+
+If you get stuck during this project or would like to see an experienced developer work through it, click Get Unstuck to see a walkthrough video.
+
+Tasks
+10/10 Complete
+Mark the tasks as complete by checking them off
+Write the following queries:
+1.Let’s examine the three tables.
+
+SELECT * FROM trips;
+ 
+SELECT * FROM riders;
+ 
+SELECT * FROM cars;
+What are the column names?
+
+
+2.What’s the primary key of trips?
+
+What’s the primary key of riders?
+
+What’s the primary key of cars?
+
+
+3.Try out a simple cross join between riders and cars.
+
+Is the result useful?
+
+
+4.Suppose we want to create a Trip Log with the trips and its users.
+
+Find the columns to join between trips and riders and combine the two tables using a LEFT JOIN.
+
+Let trips be the left table.
+
+
+5.Suppose we want to create a link between the trips and the cars used during those trips.
+
+Find the columns to join on and combine the trips and cars table using an INNER JOIN.
+
+
+6.The new riders data are in! There are three new users this month.
+
+Stack the riders table on top of the new table named riders2.
+
+
+Bonus: Queries and Aggregates
+7.What is the average cost for a trip?
+
+
+8.Lyft is looking to do an email campaign for all the irregular users.
+
+Find all the riders who have used Lyft less than 500 times!
+
+
+9.Calculate the number of cars that are active.
+
+
+10.It’s safety recall time for cars that have been on the road for a while.
+
+Write a query that finds the two cars that have the highest trips_completed.
+
+Code:
+SELECT *
+FROM trips;
+
+SELECT * 
+FROM riders;
+
+SELECT *
+FROM cars;
+
+SELECT *
+FROM riders
+CROSS JOIN cars;
+
+SELECT trips.date, 
+   trips.pickup, 
+   trips.dropoff, 
+   trips.type, 
+   trips.cost,
+   riders.first, 
+   riders.last,
+   riders.username
+FROM trips
+LEFT JOIN riders
+  ON trips.id = riders.id;
+
+SELECT trips.date,
+  trips.pickup,
+  trips.dropoff,
+  trips.type,
+  trips.cost, 
+  cars.model,
+  cars.OS,
+  cars.status,
+  cars.trips_completed
+FROM trips
+JOIN cars
+  ON trips.car_id = cars.id;
+
+SELECT *
+FROM riders
+UNION
+SELECT * 
+FROM riders2;
+
+SELECT ROUND(AVG(cost), 2)
+FROM trips;
+
+WITH total_riders AS (
+  SELECT * FROM riders
+  UNION
+  SELECT * FROM riders2
+)
+SELECT * FROM total_riders
+WHERE total_trips < 500;
+
+SELECT COUNT(*)
+FROM cars
+WHERE status = 'active';
+
+SELECT *
+FROM cars
+ORDER BY trips_completed DESC
+LIMIT 2;
