@@ -1,0 +1,537 @@
+What is a List?
+In programming, it is common to want to work with collections of data. 
+In Python, a list is one of the many built-in data structures that allows us to work with 
+a collection of data in sequential order.
+
+Suppose we want to make a list of the heights of students in a class:
+
+Noelle is 61 inches tall
+Ava is 70 inches tall
+Sam is 67 inches tall
+Mia is 64 inches tall
+In Python, we can create a variable called heights to store these integers into a list:
+
+heights = [61, 70, 67, 64]
+Notice that:
+
+A list begins and ends with square brackets ([ and ]).
+Each item (i.e., 67 or 70) is separated by a comma (,)
+It’s considered good practice to insert a space () after each comma, 
+but your code will run just fine if you forget the space.
+Let’s write our own list!
+
+Code:
+heights = [61, 70, 67, 64, 65]
+
+broken_heights = [65, 71, 59, 62]
+heights += [69]
+print(heights)
+
+
+
+What can a List contain?
+Lists can contain more than just numbers.
+
+Let’s revisit our classroom example with heights:
+
+Noelle is 61 inches tall
+Ava is 70 inches tall
+Sam is 67 inches tall
+Mia is 64 inches tall
+Instead of storing each student’s height, we can make a list that contains their names:
+
+names = ["Noelle", "Ava", "Sam", "Mia"]
+We can even combine multiple data types in one list. 
+For example, this list contains both a string and an integer:
+
+mixed_list_string_number = ["Noelle", 61]
+Lists can contain any data type in Python! 
+For example, this list contains a string, integer, boolean, and float.
+
+mixed_list_common = ["Mia", 27, False, 0.5]
+
+Let’s experiment with different data types in our own lists!
+
+Code:
+ints_and_strings = [1, 2, 3, "four", "five", "Kostis"]
+
+sam_height_and_testscore = ["Sam", 67, 85.5, True]
+
+
+
+Empty Lists
+A list doesn’t have to contain anything. You can create an empty list like this:
+
+empty_list = []
+Why would we create an empty list?
+
+Usually, it’s because we’re planning on filling it up later based on some other input. 
+We’ll talk about two ways of filling up a list in the next exercise.
+
+Let’s practice writing an empty list!
+
+Code:
+my_empty_list = []
+
+
+
+List Methods
+As we start exploring lists further in the next exercises, we will encounter the concept of a method.
+
+In Python, for any specific data-type ( strings, booleans, lists, etc. ) 
+there is built-in functionality that we can use to create, manipulate, and 
+even delete our data. We call this built-in functionality a method.
+
+For lists, methods will follow the form of list_name.method(). 
+Some methods will require an input value that will go between the parenthesis of the method ( ).
+
+An example of a popular list method is .append(), which allows us to add an element to the end of a list.
+
+append_example = [ 'This', 'is', 'an', 'example']
+append_example.append('list')
+ 
+print(append_example)
+Will output:
+
+['This', 'is', 'an', 'example', 'list']
+
+Code:
+example_list = [1, 2, 3, 4]
+
+#Using Append
+example_list.append(5)
+example_list += [6]
+print(example_list)
+
+#Using Remove
+example_list.remove(5)
+print(example_list)
+
+
+
+Growing a List: Append
+We can add a single element to a list using the .append() Python method.
+
+Suppose we have an empty list called garden:
+
+garden = []
+We can add the element "Tomatoes" by using the .append() method:
+
+garden.append("Tomatoes")
+ 
+print(garden)
+Will output:
+
+['Tomatoes']
+We see that garden now contains "Tomatoes"!
+
+When we use .append() on a list that already has elements, our new element is added to the end of the list:
+
+# Create a list
+garden = ["Tomatoes", "Grapes", "Cauliflower"]
+ 
+# Append a new element
+garden.append("Green Beans")
+print(garden)
+Will output:
+
+['Tomatoes', 'Grapes', 'Cauliflower', 'Green Beans']
+Let’s use the .append() method to manipulate a list.
+
+Code:
+orders = ["daisies", "periwinkle"]
+
+print(orders)
+
+orders.append("tulips")
+
+print(orders)
+
+orders.append("roses")
+
+print(orders)
+
+
+
+Growing a List: Plus (+)
+When we want to add multiple items to a list,
+we can use + to combine two lists (this is also known as concatenation).
+
+Below, we have a list of items sold at a bakery called items_sold:
+
+items_sold = ["cake", "cookie", "bread"]
+Suppose the bakery wants to start selling "biscuit" and "tart":
+
+items_sold_new = items_sold + ["biscuit", "tart"]
+print(items_sold_new)
+Would output:
+
+['cake', 'cookie', 'bread', 'biscuit', 'tart']
+In this example, we created a new variable, items_sold_new, 
+which contained both the original items sold, and the new items. 
+We can inspect the original items_sold and see that it did not change:
+
+print(items_sold)
+Would output:
+
+['cake', 'cookie', 'bread']
+We can only use + with other lists. If we type in this code:
+
+my_list = [1, 2, 3]
+my_list + 4
+we will get the following error:
+
+TypeError: can only concatenate list (not "int") to list
+If we want to add a single element using +, we have to put it into a list with brackets ([]):
+
+my_list + [4]
+Let’s use + to practice combining two lists!
+
+Code:
+orders = ["daisy", "buttercup", "snapdragon", "gardenia", "lily"]
+
+# Create new orders here:
+new_orders = ["lilac", "iris"]
+
+orders_combined = orders + new_orders
+
+broken_prices = [5, 3, 4, 5, 4] + [4]
+
+
+
+Accessing List Elements
+We are interviewing candidates for a job. 
+We will call each candidate in order, represented by a Python list:
+
+calls = ["Juan", "Zofia", "Amare", "Ezio", "Ananya"]
+First, we’ll call "Juan", then "Zofia", etc.
+
+In Python, we call the location of an element in a list its index.
+
+Python lists are zero-indexed. 
+This means that the first element in a list has index 0, rather than 1.
+
+Here are the index numbers for the list calls:
+
+Element	Index
+"Juan"	0
+"Zofia"	1
+"Amare"	2
+"Ezio"	3
+"Ananya"	4
+
+In this example, the element with index 2 is "Amare".
+
+We can select a single element from a list by using square brackets ([]) and 
+the index of the list item. If we wanted to select the third element from the list, we’d use calls[2]:
+
+print(calls[2])
+Will output:
+
+Amare
+Note: When accessing elements of a list, you must use an int as the index. 
+If you use a float, you will get an error. This can be especially tricky when using division. 
+For example print(calls[4/2]) will result in an error, because 4/2 gets evaluated to the float 2.0.
+
+To solve this problem, you can force the result of your division
+to be an int by using the int() function. int() takes a number and cuts off the decimal point. 
+For example, int(5.9) and int(5.0) will both become 5. 
+Therefore, calls[int(4/2)] will result in the same value as calls[2], 
+whereas calls[4/2] will result in an error.
+
+Code:
+employees = ["Michael", "Dwight", "Jim", "Pam", "Ryan", "Andy", "Robert"]
+
+employee_four= employees[3]
+
+print(employees[5])
+
+
+
+Accessing List Elements: Negative Index
+What if we want to select the last element of a list?
+
+We can use the index -1 to select the last item of a list, even when we don’t know how many elements are in a list.
+
+Consider the following list with 6 elements:
+
+pancake_recipe = ["eggs", "flour", "butter", "milk", "sugar", "love"]
+If we select the -1 index, we get the final element, "love".
+
+print(pancake_recipe[-1])
+Would output:
+
+love
+This is equivalent to selecting the element with index 5:
+
+print(pancake_recipe[5])
+Would output:
+
+love
+
+Here are the negative index numbers for our list:
+
+Element	 Index
+"eggs"	 -6
+"flour"	 -5
+"butter" -4
+"milk"	 -3
+"sugar"	 -2
+"love"	 -1
+
+Code:
+shopping_list = ["eggs", "butter", "milk", "cucumbers", "juice", "cereal"]
+
+last_element = shopping_list[-1]
+index5_element = shopping_list[5]
+
+print(last_element)
+print(index5_element)
+
+
+
+Modifying List Elements
+Let’s return to our garden.
+
+garden = ["Tomatoes", "Green Beans", "Cauliflower", "Grapes"]
+Unfortunately, we forgot to water our cauliflower and we don’t think it is going to recover.
+
+Thankfully our friend Jiho from Petal Power came to the rescue. 
+Jiho gifted us some strawberry seeds. We will replace the cauliflower with our new seeds.
+
+We will need to modify the list to accommodate the change to our garden list. 
+To change a value in a list, reassign the value using the specific index.
+
+garden[2] = "Strawberries"
+ 
+print(garden)
+Will output:
+
+["Tomatoes", "Green Beans", "Strawberries", "Grapes"]
+Negative indices will work as well.
+
+garden[-1] = "Raspberries"
+ 
+print(garden)
+Will output:
+
+["Tomatoes", "Green Beans", "Strawberries", "Raspberries"]
+
+Code:
+# Your code below:
+garden_waitlist = ["Jiho", "Adam", "Sonny", "Alisha"]
+
+garden_waitlist[1] = "Calla"
+
+print(garden_waitlist)
+
+garden_waitlist[-1] = "Alex"
+
+print(garden_waitlist)
+
+
+
+Shrinking a List: Remove
+We can remove elements in a list using the .remove() Python method.
+
+Suppose we have a filled list called shopping_line that represents a line at a grocery store:
+
+shopping_line = ["Cole", "Kip", "Chris", "Sylvana"]
+We could remove "Chris" by using the .remove() method:
+
+shopping_line.remove("Chris")
+ 
+print(shopping_line)
+If we examine shopping_line, we can see that it now doesn’t contain "Chris":
+
+["Cole", "Kip", "Sylvana"]
+We can also use .remove() on a list that has duplicate elements.
+
+Only the first instance of the matching element is removed:
+
+# Create a list
+shopping_line = ["Cole", "Kip", "Chris", "Sylvana", "Chris"]
+ 
+# Remove a element
+shopping_line.remove("Chris")
+print(shopping_line)
+Will output:
+
+["Cole", "Kip", "Sylvana", "Chris"]
+Let’s practice using the .remove() method to remove elements from a list.
+
+Code:
+# Your code below: 
+order_list = ["Celery", "Orange Juice", "Orange", "Flatbread"]
+
+print(order_list)
+
+order_list.remove("Flatbread")
+
+new_store_order_list = ["Orange", "Apple", "Mango", "Broccoli", "Mango"]
+print(new_store_order_list)
+
+new_store_order_list.remove("Mango")
+print(new_store_order_list)
+
+new_store_order_list.remove("Onions")
+print(new_store_order_list)
+
+
+
+Two-Dimensional (2D) Lists
+We’ve seen that the items in a list can be numbers or strings. 
+Lists can contain other lists! We will commonly refer to these as two-dimensional (2D) lists.
+
+Once more, let’s look at a class height example:
+
+Noelle is 61 inches tall
+Ava is 70 inches tall
+Sam is 67 inches tall
+Mia is 64 inches tall
+Previously, we saw that we could create a list representing both Noelle’s name and height:
+
+noelle = ["Noelle", 61]
+We can put several of these lists into one list, 
+such that each entry in the list represents a student and their height:
+
+heights = [["Noelle", 61], ["Ava", 70], ["Sam", 67], ["Mia", 64]]
+We will often find that a two-dimensional list is 
+a very good structure for representing grids such as games like tic-tac-toe.
+
+#A 2d list with three lists in each of the indices. 
+tic_tac_toe = [
+            ["X","O","X"], 
+            ["O","X","O"], 
+            ["O","O","X"]
+]
+
+Let’s practice creating our own 2D list!
+
+Code:
+heights = [["Jenny", 61], ["Alexus", 70], ["Sam", 67], ["Grace", 64]]
+
+heights.append(["Vik", 68])
+
+print(heights)
+
+ages = [["Aaron", 15], ["Dhruti", 16]]
+
+print(ages)
+
+
+
+Accessing 2D Lists
+Let’s return to our classroom heights example:
+
+heights = [["Noelle", 61], ["Ali", 70], ["Sam", 67]]
+Two-dimensional lists can be accessed similar to their one-dimensional counterpart. 
+Instead of providing a single pair of brackets [ ] 
+we will use an additional set for each dimension past the first.
+
+If we wanted to access "Noelle"‘s height:
+
+#Access the sublist at index 0, and then access the 1st index of that sublist. 
+noelles_height = heights[0][1] 
+print(noelles_height)
+Would output:
+
+61
+Here are the index numbers to access data for the list heights:
+
+Element	  Index
+"Noelle"	heights[0][0]
+61	      heights[0][1]
+"Ali"	    heights[1][0]
+70	      heights[1][1]
+"Sam"	    heights[2][0]
+67	      heights[2][1]
+
+Let’s practice accessing data in a two-dimensional list.
+
+Code:
+#Your code below:
+class_name_test = [["Jenny", 90], ["Alexus", 85.5], ["Sam", 83], ["Ellie", 101.5]]
+
+print(class_name_test)
+
+sams_score = class_name_test[2][1]
+print(sams_score)
+
+ellies_score = class_name_test[-1][-1]
+print(ellies_score)
+
+
+
+Modifying 2D Lists
+Now that we know how to access two-dimensional lists, modifying the elements should come naturally.
+
+Let’s return to a classroom example, but now instead of heights or test scores, 
+our list stores the student’s favorite hobby!
+
+class_name_hobbies = [["Jenny", "Breakdancing"], ["Alexus", "Photography"], ["Grace", "Soccer"]]
+"Jenny" changed their mind and is now more interested in "Meditation".
+
+We will need to modify the list to accommodate the change to our class_name_hobbies list. 
+To change a value in a two-dimensional list, reassign the value using the specific index.
+
+# The list of Jenny is at index 0. The hobby is at index 1. 
+class_name_hobbies[0][1] = "Meditation"
+print(class_name_hobbies)
+Would output:
+
+[["Jenny", "Meditation"], ["Alexus", "Photography"], ["Grace", "Soccer"]]
+Negative indices will work as well.
+
+# The list of Grace is the last entry. The hobby is the last element. 
+class_name_hobbies[-1][-1] = "Football"
+print(class_name_hobbies)
+Would output:
+
+[["Jenny", "Meditation"], ["Alexus", "Photography"], ["Grace", "Football"]]
+
+Code:
+#Your code below:
+incoming_class = [["Kenny", "American", 9], ["Tanya", "Ukrainian", 9], ["Madison", "Indian", 7]]
+print(incoming_class)
+
+incoming_class[2][2] = 8
+print(incoming_class)
+
+incoming_class[-3][-3] = "Ken"
+print(incoming_class)
+
+
+
+Review
+So far, we have learned:
+
+How to create a list
+How to access, add, remove, and modify list elements
+How to create a two-dimensional list
+How to access and modify two-dimensional list elements
+Let’s practice these skills.
+
+Code:
+# Your code below: 
+first_names = ["Ainsley", "Ben", "Chani", "Depak"]
+
+preferred_size = ["Small", "Large", "Medium"]
+
+preferred_size.append("Medium")
+print(preferred_size)
+
+customer_data = [["Ainsley", "Small", True], ["Ben", "Large", False], ["Chani", "Medium", True], ["Depak", "Medium", False]]
+
+print(customer_data)
+
+customer_data [2][2] = False
+
+print(customer_data)
+
+customer_data[1].remove(False)
+
+print(customer_data)
+
+customer_data_final = customer_data + [["Amit", "Large", True], ["Karim", "X-Large", False]]
+print(customer_data_final)
