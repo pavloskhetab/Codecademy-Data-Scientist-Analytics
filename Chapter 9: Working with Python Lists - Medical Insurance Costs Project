@@ -1,0 +1,46 @@
+from operator import itemgetter
+
+names = ["Mohamed", "Sara", "Xia", "Paul", "Valentina", "Jide", "Aaron", "Emily", "Nikita", "Paul"]
+insurance_costs = [13262.0, 4816.0, 6839.0, 5054.0, 14724.0, 5360.0, 7640.0, 6072.0, 2750.0, 12064.0]
+
+# Add your code here
+
+names.append("Priscilla")
+
+insurance_costs.append(8320.0)
+
+medical_records = list(zip(names, insurance_costs))
+
+print(medical_records)
+
+num_medical_records = len(medical_records)
+
+print("There are " + str(num_medical_records) + " medical records.")
+
+first_medical_record = medical_records[0]
+
+print(first_medical_record)
+
+sorted_medical_recoreds_by_low_insurance_costs = sorted(medical_records, key = itemgetter(1))
+
+print("Here are the medical records sorted by insurance costs: " + str(sorted_medical_recoreds_by_low_insurance_costs))
+
+cheapest_three = sorted_medical_recoreds_by_low_insurance_costs[0:3]
+
+print("Here are the cheapest insurance costs in our medical records: " + str(cheapest_three))
+
+priciest_three = sorted_medical_recoreds_by_low_insurance_costs[-3:]
+
+print("Here are the three most expensive insurance costs in our medical records: " + str(priciest_three))
+
+occurences_paul = names.count("Paul")
+
+print("There are " + str(occurences_paul) + " individuals with the name Paul in our medical records.")
+
+sorted_medical_recoreds_by_name = sorted(medical_records, key = itemgetter(0))
+
+print(sorted_medical_recoreds_by_name)
+
+middle_five_records = sorted_medical_recoreds_by_name[3:8]
+
+print(middle_five_records)
