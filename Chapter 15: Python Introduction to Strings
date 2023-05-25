@@ -1,0 +1,420 @@
+Introduction to Strings
+Words and sentences are fundamental to how we communicate, 
+so it follows that we’d want our computers to be able to work with words and sentences as well.
+
+In Python, the way we store something like a word, a sentence, or 
+even a whole paragraph is as a string. A string is a sequence of characters contained 
+within a pair of 'single quotes' or "double quotes". A string can be any length and can contain any letters, 
+numbers, symbols, and spaces.
+
+In this lesson, we will learn more about strings and how they are treated in Python. 
+We will learn how to slice strings, select specific characters from strings, search strings for characters, 
+iterate through strings, and use strings in conditional statements.
+
+Let’s get started.
+
+Code:
+favorite_word = "Crazy"
+
+print(favorite_word)
+
+
+
+They're all Lists!
+A string can be thought of as a list of characters.
+
+Like any other list, each character in a string has an index. Consider the string:
+
+favorite_fruit = "blueberry"
+We can select specific letters from this string using the index. Let’s look at the first letter of the string.
+
+print(favorite_fruit[1])
+# Output: l
+Whoops, is that the first letter you expected? Notice that the letter at index 1 of "blueberry" isn’t b, it’s l. This is because the indices of a string start at 0. b is located at the zero index and we could select it using:
+
+print(favorite_fruit[0])
+# Output: b
+It’s important to note that indices of strings must be integers. If we were to try to select a non-integer index we would get a TypeError.
+
+For example:
+
+print(favorite_fruit[1.5])
+This would result in:
+
+Traceback (most recent call last):
+  File "script.py", line 3, in <module>
+    print(favorite_fruit[1.5])
+TypeError: string indices must be integers
+
+Code:
+my_name = "Pavlos"
+first_initial = my_name[0]
+
+
+
+Cut Me a Slice of String
+Not only can we select a single character from a string, 
+but we can also select entire chunks of characters from a string. 
+We can do this with the following syntax:
+
+string[first_index:last_index]
+This is called slicing a string. When we slice a string we are creating a substring - 
+a brand new string that starts at (and includes) the first_index and ends at (but excludes) the last_index.
+
+Let’s look at some examples of this. Recall our favorite fruit:
+
+favorite_fruit = "blueberry"
+The indices of this string are shown in the diagram below.
+
+Blueberry String
+
+Let’s say we wanted a new string that contains the letters be. 
+We could slice favorite_fruit as follows:
+
+print(favorite_fruit[4:6])
+# Output: be
+Notice how the character at the first index, b, is included, but the character at the last index, r, is excluded. 
+If you look for the indices 4 and 6 in the diagram, you can see how the r is outside that range.
+
+We can also have open-ended selections. If we remove the first index, the slice starts at the beginning of the string and 
+if we remove the second index the slice continues to the end of the string.
+
+print(favorite_fruit[:4])
+# Output: blue
+ 
+print (favorite_fruit[4:])
+# Output: berry
+Again, notice how the b from berry is excluded from the first example and 
+included in the second example.
+
+Code:
+first_name = "Rodrigo"
+last_name = "Villanueva"
+
+new_account = last_name[:5]
+
+temp_password = last_name[2:6]
+
+
+
+Concatenating Strings
+We can also concatenate, or combine, two existing strings together into a new string. Consider the following two strings:
+
+fruit_prefix = "blue"
+fruit_suffix = "berries"
+We can create a new string by concatenating them together as follows:
+
+favorite_fruit = fruit_prefix + fruit_suffix
+ 
+print(favorite_fruit)
+# Output: blueberries
+Notice that there are no spaces added here. We have to manually add in the spaces when concatenating strings if we want to include them.
+
+fruit_sentence = "My favorite fruit is" + favorite_fruit
+ 
+print(fruit_sentence)
+# Output: My favorite fruit isblueberries
+ 
+fruit_sentence = "My favorite fruit is " + favorite_fruit
+ 
+print(fruit_sentence)
+# Output: My favorite fruit is blueberries
+It’s subtle, but notice that in the first example, there is no space between “is” and “blueberries”.
+
+Code:
+first_name = "Julie"
+last_name = "Blevins"
+
+def account_generator(name, surname):
+  temp_name = name[0:3]
+  temp_surname = surname[0:3]
+  return temp_name + temp_surname
+
+new_account = account_generator(first_name, last_name)
+print(new_account)
+
+
+
+More and More String Slicing (How Long is that String?)
+Python comes with some built-in functions for working with strings. 
+One of the most commonly used of these functions is len(). len() returns the number of characters in a string:
+
+favorite_fruit = "blueberry"
+ 
+length = len(favorite_fruit)
+ 
+print(length)
+# Output: 9
+If you are taking the length of a sentence the spaces are counted as well.
+
+fruit_sentence = "I love blueberries"
+ 
+print(len(fruit_sentence))
+# Output: 18
+len() comes in handy when we are trying to select characters from the end of a string. What is the index of the last character,"y", 
+of favorite_fruit from above? You can try to run the following code:
+
+last_char = favorite_fruit[len(favorite_fruit)]
+ 
+print(last_char)
+This will result in:
+
+IndexError: string index out of range
+Why does this generate an IndexError? Because the indices start at 0, so the final character in favorite_fruit has an index of 8. 
+len(favorite_fruit) returns 9 and, because there is no value at that index, an IndexError occurs.
+
+Instead, the last character in a string has an index that is len(string_name) - 1.
+
+last_char = favorite_fruit[len(favorite_fruit)-1]
+ 
+print(last_char)
+# Output: y
+You could also slice the last several characters of a string using len():
+
+length = len(favorite_fruit)
+last_chars = favorite_fruit[length-4:]
+print(last_chars)
+# Output: erry
+Using a len() statement as the starting index and omitting the final index lets you slice n characters from the end of a string, 
+where n is the amount you subtract from len().
+
+Code:
+first_name = "Reiko"
+last_name = "Matsuki"
+
+def password_generator(name, surname):
+  length_name = len(name)
+  length_surname = len(surname)
+
+  password = name[length_name-3:] + surname[length_surname-3:]
+
+  return password
+
+temp_password = password_generator(first_name, last_name)
+
+print(temp_password)
+
+
+
+Negative Indices
+In the previous exercise, we used len() to get a slice of characters at the end of a string.
+
+There’s a much easier way to do this — we can use negative indices! Negative indices count backward from the end of the string, 
+so string_name[-1] is the last character of the string, string_name[-2] is the second last character of the string, etc.
+
+Here are some examples:
+
+favorite_fruit = 'blueberry'
+print(favorite_fruit[-1])
+# => 'y'
+ 
+print(favorite_fruit[-2])
+# => 'r'
+ 
+print(favorite_fruit[-3:])
+# => 'rry'
+Notice that we are able to slice the last three characters of ‘blueberry’ by having a starting index of -3 and omitting a final index.
+
+Code:
+company_motto = "Copeland's Corporate Company helps you capably cope with the constant cacophony of daily life"
+
+second_to_last = company_motto[-2]
+
+final_word = company_motto[-4:]
+
+
+
+Strings are Immutable
+So far in this lesson, we’ve been selecting characters from strings, slicing strings, and concatenating strings. 
+Each time we perform one of these operations we are creating an entirely new string.
+
+This is because strings are immutable. This means that we cannot change a string once it is created. 
+We can use it to create other strings, but we cannot change the string itself.
+
+This property, generally, is known as mutability. Data types that are mutable can be changed, and data types, 
+like strings, that are immutable cannot be changed.
+
+Code:
+first_name = "Bob"
+last_name = "Daily"
+
+fixed_first_name = "R" + "ob"
+
+
+
+Escape Characters
+Occasionally when working with strings, you’ll find that you want to include characters 
+that already have a special meaning in python. For example let’s say I create the string
+
+ favorite_fruit_conversation = "He said, "blueberries are my favorite!""
+We’ll have accidentally ended the string before we wanted to by including the " character. 
+The way we can do this is by introducing escape characters. 
+By adding a backslash in front of the special character we want to escape, \", we can include it in a string.
+
+favorite_fruit_conversation = "He said, \"blueberries are my favorite!\""
+Now it works!
+
+Code:
+password = "theycallme\"crazy\"91"
+
+
+
+Iterating through Strings
+Now you know enough about strings that we can start doing the really fun stuff!
+
+Because strings are lists, that means we can iterate through a string using for or while loops. This opens up a whole range of possibilities of ways we can manipulate and analyze strings. Let’s take a look at an example.
+
+def print_each_letter(word):
+  for letter in word:
+    print(letter)
+This code will iterate through each letter in a given word and will print it to the terminal.
+
+favorite_color = "blue"
+print_each_letter(favorite_color)
+# => 'b'
+# => 'l'
+# => 'u'
+# => 'e'
+Let’s try a couple of problems where we need to iterate through a string.
+
+Code:
+# For loop
+def get_length(word):
+  x = 0
+  for letter in word:
+    x += 1
+  return x
+
+# While loop
+# def get_length(word):
+#   x = 0
+#   while word[x:]:
+#     x += 1
+#   return x
+
+#   print(get_length("Kosti"))
+
+
+
+Strings and Conditionals (Part One)
+Now that we are iterating through strings, we can really explore the potential of strings. 
+When we iterate through a string we do something with each character. 
+By including conditional statements inside of these iterations, we can start to do some really cool stuff.
+
+Take a look at the following code:
+
+favorite_fruit = "blueberry"
+counter = 0
+for character in favorite_fruit:
+  if character == "b":
+    counter = counter + 1
+print(counter)
+This code will count the number of bs in the string “blueberry” (hint: it’s two). 
+Let’s take a moment and break down what exactly this code is doing.
+
+First, we define our string, favorite_fruit, and a variable called counter, which we set equal to zero. 
+Then the for loop will iterate through each character in favorite_fruit and compare it to the letter b.
+
+Each time a character equals b the code will increase the variable counter by one. 
+Then, once all characters have been checked, the code will print the counter, telling us how many bs were in “blueberry”. 
+This is a great example of how iterating through a string can be used to solve a specific application, in this case counting a certain letter in a word.
+
+Code:
+def letter_check(word, letter):
+  for character in word:
+    if character == letter:
+      return True      
+  return False
+  
+
+
+Strings and Conditionals (Part Two)
+There’s an even easier way than iterating through the entire string to determine if a character is in a string. 
+We can do this type of check more efficiently using in. in checks if one string is part of another string.
+
+Here is what the syntax of in looks like:
+
+letter in word
+Here, letter in word is a boolean expression that is True if the string letter is in the string word. 
+Here are some examples:
+
+print("e" in "blueberry")
+# => True
+print("a" in "blueberry")
+# => False
+In fact, this method is more powerful than the function you wrote in the last exercise because 
+it not only works with letters, but with entire strings as well.
+
+print("blue" in "blueberry")
+# => True
+print("blue" in "strawberry")
+# => False
+It can be helpful to include more than one boolean expression in the same line of code. 
+To do this, use and or and not in between the boolean expressions.
+
+print("e" in "blueberry" and "e" in "carrot")
+# => False
+print("e" in "blueberry" and not "e" in "carrot")
+# => True
+The first example above is False because ONE of the expressions was False; there is no “e” in “carrot”. 
+The second example is True because there is an “e” in “blueberry” and not an “e” in “carrot”; both expressions are True.
+
+Code:
+def contains(big_string, little_string):
+  return little_string in big_string
+
+def common_letters(string_one, string_two):
+  list = []
+  for character in string_one:
+    if (character in string_two) and not(character in list):
+      list.append(character)
+  return list
+
+print(contains("watermelon", "melon"))
+
+
+
+Review
+Great work! I hope you are now starting to see the potential of strings and how they can be used to solve a huge variety of problems.
+
+In this lesson you learned:
+
+A string is a list of characters.
+
+A character can be selected from a string using its index string_name[index]. These indices start at 0.
+
+A ‘slice’ can be selected from a string. These can be between two indices or can be open-ended, selecting all of the string from a point.
+
+Strings can be concatenated to make larger strings.
+
+len() can be used to determine the number of characters in a string.
+
+Strings can be iterated through using for loops.
+
+Iterating through strings opens up a huge potential for applications, especially when combined with conditional statements.
+
+Let’s put your new skills to the test!
+
+Code:
+def username_generator(first_name, last_name):
+  if len(first_name) < 3:
+        user_name = first_name
+  else:
+    user_name = first_name[0:3]
+        
+  if len(last_name) < 4:
+    user_name += last_name
+  else:
+    user_name += last_name[0:4]
+  # user_name = first_name[:3] + last_name[:4]
+  return user_name;
+  
+def password_generator(user_name):
+  password = ""
+  for index in range(len(user_name)):
+   password += user_name[index-1]
+    # if index == len(user_name):
+    #   password[0] = user_name[index]
+    # else:
+    #   password[index + 1] = user_name[index]
+  return password;
