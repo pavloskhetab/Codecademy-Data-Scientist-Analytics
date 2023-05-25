@@ -535,3 +535,564 @@ print(customer_data)
 
 customer_data_final = customer_data + [["Amit", "Large", True], ["Karim", "X-Large", False]]
 print(customer_data_final)
+
+
+
+Combining Lists: The Zip Function
+Learn about a popular Python built-in function called zip().
+
+In Python, we have an assortment of built-in functions that allow us to build our programs faster and cleaner. One of those functions is zip().
+
+The zip() function allows us to quickly combine associated data-sets without needing to rely on multi-dimensional lists. While zip() can work with many different scenarios, we are going to explore only a single one in this article.
+
+Let’s use a list of student names and associated heights as our example data set:
+
+Jenny is 61 inches tall
+Alexus is 70 inches tall
+Sam is 67 inches tall
+Grace is 64 inches tall
+Suppose that we already had a list of names and a list of heights:
+
+names = ["Jenny", "Alexus", "Sam", "Grace"]
+heights = [61, 70, 67, 64]
+If we wanted to create a nested list that paired each name with a height, we could use the built-in function zip().
+
+The zip() function takes two (or more) lists as inputs and returns an object that contains a list of pairs. 
+Each pair contains one element from each of the inputs. This is how we would do it for our names and heights lists:
+
+names_and_heights = zip(names, heights)
+If we were to then examine this new variable names_and_heights, we would find it looks a bit strange:
+
+print(names_and_heights)
+Would output:
+
+<zip object at 0x7f1631e86b48>
+This zip object contains the location of this variable in our computer’s memory. 
+Don’t worry though, it is fairly simple to convert this object into a useable list by using the built-in function list():
+
+converted_list = list(names_and_heights)
+print(converted_list)
+Outputs:
+
+[('Jenny', 61), ('Alexus', 70), ('Sam', 67), ('Grace', 64)]
+Notice two things:
+
+Our data set has been converted from a zip memory object to an actual list (denoted by [ ])
+
+Our inner lists don’t use square brackets [ ] around the values. This is because they have been converted into tuples (an immutable type of list).
+
+Let’s practice using zip()!
+
+Task:
+Use zip() to create a new variable called names_and_dogs_names that combines owners and dogs_names lists into a zip object.
+
+Then, create a new variable named list_of_names_and_dogs_names by calling the list() function on names_and_dogs_names.
+
+Print list_of_names_and_dogs_names.
+
+Code:
+owners = ["Jenny", "Alexus", "Sam", "Grace"]
+dogs_names = ["Elphonse", "Dr. Doggy DDS", "Carter", "Ralph"]
+
+list_of_names_and_dogs_names = zip(owners, dogs_names)
+
+print(list(list_of_names_and_dogs_names))
+
+
+
+Working with Lists
+Now that we know how to create and access list data, we can start to explore additional ways of working with lists.
+
+In this lesson, you’ll learn how to:
+
+Add and remove items from a list using a specific index.
+Create lists with continuous values.
+Get the length of a list.
+Select portions of a list (called slicing).
+Count the number of times that an element appears in a list.
+Sort a list of items.
+Note: In some of the exercises, we will be using built-in functions in Python. If you haven’t yet explored the concept of a function, it may look a bit new. Below we compare it to the method syntax we learned in the earlier lesson.
+
+Here is a preview:
+
+# Example syntax for methods
+list.method(input)
+ 
+# Example syntax for a built-in function 
+builtinfunction(input)
+
+
+
+
+Adding by Index: Insert
+The Python list method .insert() allows us to add an element to a specific index in a list.
+
+The .insert() method takes in two inputs:
+
+The index you want to insert into.
+The element you want to insert at the specified index.
+The .insert() method will handle shifting over elements and can be used with negative indices.
+
+To see it in action let’s imagine we have a list representing a line at a store:
+
+store_line = ["Karla", "Maxium", "Martim", "Isabella"]
+"Maxium" saved a spot for his friend "Vikor" and we need to adjust the list to add him into the line right behind "Maxium".
+
+For this example, we can assume that "Karla" is the front of the line and the rest of the elements are behind her.
+
+Here is how we would use the .insert() method to insert "Vikor" :
+
+store_line.insert(2, "Vikor")
+print(store_line) 
+Would output:
+
+ ['Karla', 'Maxium', 'Vikor', 'Martim', 'Isabella']
+Some important things to note:
+
+The order and number of the inputs is important. The .insert() method expects two inputs, the first being a numerical index, followed by any value as the second input.
+
+When we insert an element into a list, all elements from the specified index and up to the last index are shifted one index to the right. This does not apply to inserting an element to the very end of a list as it will simply add an additional index and no other elements will need to shift.
+
+Let’s practice using .insert()!
+
+Instructions
+1.We are helping out a popular grocery store called Jiho’s Produce.
+
+Every week the store has to choose the order in which it displays some of its popular items on sale in the front window to attract customers.
+
+Jiho, the store owner, likes to store the items for the display in a list.
+
+Check out the current display list in our code editor. Click Run to print out the list.
+
+
+2.Jiho found out some great news! "Pineapple" is back in stock.
+
+Jiho would like to put "Pineapple" in the front of the list so it is the first item customers see in the display window.
+
+Use .insert() to add "Pineapple" to the front of the list.
+
+Print the resulting list to see the change.
+
+Note: For this list, the front will be the element at index 0
+
+Code:
+front_display_list = ["Mango", "Filet Mignon", "Chocolate Milk"]
+print(front_display_list)
+
+# Your code below: 
+front_display_list.insert(0, "Pineapple")
+print(front_display_list)
+
+
+
+Removing by Index: Pop
+Just as we learned to insert elements at specific indices, Python gives us a method to remove elements at a specific index using a method called .pop().
+
+The .pop() method takes an optional single input:
+
+The index for the element you want to remove.
+To see it in action, let’s consider a list called cs_topics that stores a collection of topics one might study in a computer science program.
+
+cs_topics = ["Python", "Data Structures", "Balloon Making", "Algorithms", "Clowns 101"]
+Two of these topics don’t look like they belong, let’s see how we remove them using .pop().
+
+First let’s remove "Clowns 101":
+
+removed_element = cs_topics.pop()
+print(cs_topics)
+print(removed_element)
+Would output:
+
+['Python', 'Data Structures', 'Balloon Making', 'Algorithms']
+'Clowns 101'
+Notice two things about this example:
+
+The method can be called without a specific index. Using .pop() without an index will remove whatever the last element of the list is. In our case "Clowns 101" gets removed.
+
+.pop() is unique in that it will return the value that was removed. If we wanted to know what element was deleted, simply assign a variable to the call of the .pop() method. In this case, we assigned it to removed_element.
+
+Lastly let’s remove "Balloon Making":
+
+cs_topics.pop(2)
+print(cs_topics)
+Would output:
+
+['Python', 'Data Structures', 'Algorithms']
+Notice two things about this example:
+
+The method can be called with an optional specific index to remove. In our case, the index 2 removes the value of "Balloon Making".
+We don’t have to save the removed value to any variable if we don’t care to use it later.
+Note: Passing in an index that does not exist or calling .pop() on an empty list will both result in an IndexError.
+
+Let’s apply what we learned about the .pop() method.
+
+Code:
+data_science_topics = ["Machine Learning", "SQL", "Pandas", "Algorithms", "Statistics", "Python 3"]
+print(data_science_topics)
+
+# Your code below: 
+data_science_topics.pop()
+print(data_science_topics)
+
+data_science_topics.pop(3)
+print(data_science_topics)
+
+
+
+Consecutive Lists: Range
+Often, we want to create a list of consecutive numbers in our programs. For example, suppose we want a list containing the numbers 0 through 9:
+
+my_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Typing out all of those numbers takes time and the more numbers we type, the more likely it is that we have a typo that can cause an error.
+
+Python gives us an easy way of creating these types of lists using a built-in function called range().
+
+The function range() takes a single input, and generates numbers starting at 0 and ending at the number before the input.
+
+So, if we want the numbers from 0 through 9, we use range(10) because 10 is 1 greater than 9:
+
+my_range = range(10)
+print(my_range)
+Would output:
+
+range(0, 10)
+Notice something different? The range() function is unique in that it creates a range object. It is not a typical list like the ones we have been working with.
+
+In order to use this object as a list, we have to first convert it using another built-in function called list().
+
+The list() function takes in a single input for the object you want to convert.
+
+We use the list() function on our range object like this:
+
+print(list(my_range))
+Would output:
+
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Let’s try out using range()!
+
+Code:
+# Your code below: 
+number_list = range(9)
+print(list(number_list))
+
+zero_to_seven = range(8)
+print(list(zero_to_seven))
+
+
+
+The Power of Range!
+By default, range() creates a list starting at 0. However, if we call range() with two inputs, we can create a list that starts at a different number.
+
+For example, range(2, 9) would generate numbers starting at 2 and ending at 8 (just before 9):
+
+my_list = range(2, 9)
+print(list(my_list))
+Would output:
+
+[2, 3, 4, 5, 6, 7, 8]
+If we use a third input, we can create a list that “skips” numbers.
+
+For example, range(2, 9, 2) will give us a list where each number is 2 greater than the previous number:
+
+my_range2 = range(2, 9, 2)
+print(list(my_range2))
+Would output:
+
+[2, 4, 6, 8]
+We can skip as many numbers as we want!
+
+For example, we’ll start at 1 and skip in increments of 10 between each number until we get to 99 (one before 100):
+
+my_range3 = range(1, 100, 10)
+print(list(my_range3))
+Would output:
+
+[1, 11, 21, 31, 41, 51, 61, 71, 81, 91]
+Our list stops at 91 because the next number in the sequence would be 101, which is greater than or equal to 100 (our stopping point).
+
+Let’s experiment with our additional range() inputs!
+
+Code:
+# Your code below: 
+range_five_three = range(5, 15, 3)
+
+range_diff_five = range(0, 40, 5)
+
+
+
+Length
+Often, we’ll need to find the number of items in a list, usually called its length.
+
+We can do this using a built-in function called len().
+
+When we apply len() to a list, we get the number of elements in that list:
+
+my_list = [1, 2, 3, 4, 5]
+ 
+print(len(my_list))
+Would output:
+
+5
+Let’s find the length of various lists!
+
+Code:
+long_list = [1, 5, 6, 7, -23, 69.5, True, "very", "long", "list", "that", "keeps", "going.", "Let's", "practice", "getting", "the", "length"]
+
+big_range = range(2, 3000, 100)
+
+# Your code below:
+long_list_len = len(long_list) 
+print(long_list_len)
+
+big_range_length = len(big_range)
+print(big_range_length)
+
+
+
+Slicing Lists I
+In Python, often we want to extract only a portion of a list. Dividing a list in such a manner is referred to as slicing.
+
+Lets assume we have a list of letters:
+
+letters = ["a", "b", "c", "d", "e", "f", "g"]
+Suppose we want to select from "b" through "f".
+
+We can do this using the following syntax: letters[start:end], where:
+
+start is the index of the first element that we want to include in our selection. In this case, we want to start at "b", which has index 1.
+end is the index of one more than the last index that we want to include. The last element we want is "f", which has index 5, so end needs to be 6.
+sliced_list = letters[1:6]
+print(sliced_list)
+Would output:
+
+["b", "c", "d", "e", "f"]
+Notice that the element at index 6 (which is "g") is not included in our selection.
+
+Code:
+suitcase = ["shirt", "shirt", "pants", "pants", "pajamas", "books"]
+
+beginning = suitcase[0:2]
+
+# Your code below: 
+print(beginning)
+
+middle = suitcase[2:4]
+
+print(middle)
+
+
+
+Slicing Lists II
+Slicing syntax in Python is very flexible. Let’s look at a few more problems we can tackle with slicing.
+
+Take the list fruits as our example:
+
+fruits = ["apple", "cherry", "pineapple", "orange", "mango"]
+If we want to select the first n elements of a list, we could use the following code:
+
+fruits[:n]
+For our fruits list, suppose we wanted to slice the first three elements.
+
+The following code would start slicing from index 0 and up to index 3. Note that the fruit at index 3 (orange) is not included in the results.
+
+print(fruits[:3])
+Would output:
+
+['apple', 'cherry', 'pineapple']
+We can do something similar when we want to slice the last n elements in a list:
+
+fruits[-n:]
+For our fruits list, suppose we wanted to slice the last two elements.
+
+This code slices from the element at index -2 up through the last index.
+
+print(fruits[-2:])
+Would output:
+
+['orange', 'mango']
+Negative indices can also accomplish taking all but n last elements of a list.
+
+fruits[:-n]
+For our fruits example, suppose we wanted to slice all but the last element from the list.
+
+This example starts counting from the 0 index up to the element at index -1.
+
+print(fruits[:-1])
+Would output:
+
+['apple', 'cherry', 'pineapple', 'orange']
+Let’s practice some of these extra slicing techniques!
+
+Code:
+suitcase = ["shirt", "shirt", "pants", "pants", "pyjamas", "books"]
+
+# Your code below: 
+last_two_elements = suitcase[-2:]
+
+print(last_two_elements)
+
+slice_off_last_three = suitcase[:-3]
+
+print(slice_off_last_three)
+
+
+
+Counting in a List
+In Python, it is common to want to count occurrences of an item in a list.
+
+Suppose we have a list called letters that represents the letters in the word “Mississippi”:
+
+letters = ["m", "i", "s", "s", "i", "s", "s", "i", "p", "p", "i"]
+If we want to know how many times i appears in this word, we can use the list method called .count():
+
+num_i = letters.count("i")
+print(num_i)
+Would output:
+
+4
+Notice that since .count() returns a value, we can assign it to a variable to use it.
+
+We can even use .count() to count element appearances in a two-dimensional list.
+
+Let’s use the list number_collection as an example:
+
+number_collection = [[100, 200], [100, 200], [475, 29], [34, 34]]
+If we wanted to know how often the sublist [100, 200] appears:
+
+num_pairs = number_collection.count([100, 200])
+print(num_pairs)
+Would output:
+
+2
+Let’s count some list items using the .count() method!
+
+Code:
+votes = ["Jake", "Jake", "Laurie", "Laurie", "Laurie", "Jake", "Jake", "Jake", "Laurie", "Cassie", "Cassie", "Jake", "Jake", "Cassie", "Laurie", "Cassie", "Jake", "Jake", "Cassie", "Laurie"]
+
+# Your code below: 
+jake_votes = votes.count("Jake")
+
+print(jake_votes)
+
+
+
+Sorting Lists I
+Often, we will want to sort a list in either numerical (1, 2, 3, …) or alphabetical (a, b, c, …) order.
+
+We can sort a list using the method .sort().
+
+Suppose that we have a list of names:
+
+names = ["Xander", "Buffy", "Angel", "Willow", "Giles"]
+Let’s see what happens when we apply .sort():
+
+names.sort()
+print(names)
+Would output:
+
+['Angel', 'Buffy', 'Giles', 'Willow', 'Xander']
+As we can see, the .sort() method sorted our list of names in alphabetical order.
+
+.sort() also provides us the option to go in reverse. Instead of sorting in ascending order like we just saw, we can do so in descending order.
+
+names.sort(reverse=True)
+print(names)
+Would output:
+
+['Xander', 'Willow', 'Giles', 'Buffy', 'Angel']
+Note: The .sort() method does not return any value and thus does not need to be assigned to a variable since it modifies the list directly. If we do assign the result of the method, it would assign the value of None to the variable.
+
+Let’s experiment sorting various lists!
+
+Code:
+# Checkpoint 1 & 2
+addresses = ["221 B Baker St.", "42 Wallaby Way", "12 Grimmauld Place", "742 Evergreen Terrace", "1600 Pennsylvania Ave", "10 Downing St."]
+
+
+# Checkpoint 3
+names = ["Ron", "Hermione", "Harry", "Albus", "Sirius"]
+names.sort()
+
+
+# Checkpoint 4 & 5
+cities = ["London", "Paris", "Rome", "Los Angeles", "New York"]
+sorted_cities = cities.sort(reverse = True)
+#sorted_cities = sorted(cities, reverse = True)
+
+addresses.sort()
+
+print(addresses)
+print(cities)
+#print(sorted_cities)
+
+
+
+Sorting Lists II
+A second way of sorting a list in Python is to use the built-in function sorted().
+
+The sorted() function is different from the .sort() method in two ways:
+
+It comes before a list, instead of after as all built-in functions do.
+It generates a new list rather than modifying the one that already exists.
+Let’s return to our list of names:
+
+names = ["Xander", "Buffy", "Angel", "Willow", "Giles"]
+Using sorted(), we can create a new list, called sorted_names:
+
+sorted_names = sorted(names)
+print(sorted_names)
+This yields the list sorted alphabetically:
+
+['Angel', 'Buffy', 'Giles', 'Willow', 'Xander']
+Note that using sorted did not change names:
+
+print(names)
+Would output:
+
+['Xander', 'Buffy', 'Angel', 'Willow', 'Giles']
+
+Code:
+games = ["Portal", "Minecraft", "Pacman", "Tetris", "The Sims", "Pokemon"]
+
+# Your code below:
+games_sorted = sorted(games)
+
+print(games)
+print(games_sorted)
+
+
+
+Review
+In this lesson, we learned how to:
+
+Add elements to a list by index using the .insert() method.
+Remove elements from a list by index using the .pop() method.
+Generate a list using the range() function.
+Get the length of a list using the len() function.
+Select portions of a list using slicing syntax.
+Count the number of times that an element appears in a list using the .count() method.
+Sort a list of items using either the .sort() method or sorted() function.
+As you go through the exercises, feel free to use print() to see changes when not explicitly asked to do so.
+
+Code:
+inventory = ["twin bed", "twin bed", "headboard", "queen bed", "king bed", "dresser", "dresser", "table", "table", "nightstand", "nightstand", "king bed", "king bed", "twin bed", "twin bed", "sheets", "sheets", "pillow", "pillow"]
+
+inventory_len = len(inventory)
+
+first = inventory[0]
+
+last = inventory[-1]
+
+inventory_2_6 = inventory[2:6]
+
+first_3 = inventory[:3]
+
+twin_beds = inventory.count("twin bed")
+
+removed_item = inventory.pop(4)
+
+inventory.insert(10, "19th Century Bed Frame")
+
+sorted_inventory = sorted(inventory)
+inventory.sort()
+print(inventory)
