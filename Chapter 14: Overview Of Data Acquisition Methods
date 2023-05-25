@@ -1,0 +1,375 @@
+Harvard Dataverse
+Data can be acquired from many different sources. 
+One such data repository is the Harvard Dataverse, an online hub for sharing research data. 
+Journals, organizations, and individual researchers alike can add their files and 
+datasets to this repository for better accessibility and visibility.
+
+This video will guide you through how to search for and download data from the Harvard Dataverse. 
+Pay attention to the different file types the data might come in. 
+For example, the ones you’ll see in the video are Python scripts, 
+but note that they can be in other file formats as well.
+
+
+
+Exploring Census variables
+Imagine you are curious about the average commute time to work in the U.S. and 
+want to compare it across different regions. Whenever you develop a new research question you want to investigate, 
+the very first thing you’ll need to do is collect the data!
+
+In this lesson, we will explore an example of acquiring secondary data using an API and 
+converting between different data formats. At the end, we will also look at how to simulate our own dataset.
+
+To answer our question about commute time to work, we will be using Census data, 
+specifically the American Community Survey (ACS) 5-year estimates. 
+There is a group of variables, B08303, that breaks down the population counts by travel time to work. 
+The full table of variables is accessible through the Census Data API and 
+a graphic showing the first portion of the table is available in the workspace. 
+Take a look to see what variables are available. Notice how for each measure, 
+there is the actual estimate itself (variable with suffix E), 
+optional notes for the estimate (variable with suffix EA), 
+the margin of error for the estimate (variable with suffix M), and 
+optional notes for the margin of error (variable with suffix MA).
+
+With larger data repositories like Census data, there are often other sites that arise 
+that help document information about the data, often in a more user-friendly manner. 
+For example, check out the B08303 variable group documentation provided by Social Explorer.
+
+Move on to the next section when you are ready to start requesting some data!
+
+Links:
+https://www.census.gov/data/developers/data-sets/acs-5year.html
+https://api.census.gov/data/2020/acs/acs5/groups/B08303.html
+https://www.socialexplorer.com/data/ACS2020_5yr/metadata/?ds=ACS20_5yr&table=B08303
+https://www.socialexplorer.com/
+
+
+
+Making API request from browser
+The Census Data API provides a fast and simple way to access its data. 
+To query the ACS 5-year data, a request should be made to https://api.census.gov/data/2020/acs/acs5 
+specifying the variables to fetch and the geographic level you want. 
+For example, an API call requesting the total population count of commuters (B08303_001E) 
+at the state level would look like this: 
+https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E&for=state:*.
+
+Visit this URL in a new tab on your browser to see how the data is returned. 
+A graphic of the API response is also included in the workspace.
+
+The part of the URL after ? contains the query parameters, each parameter is separated by &.
+
+The get parameter specifies a comma-separated list of variables we want to fetch
+NAME is the name of the geographic level
+B08303_001E is the number of commuters
+The for parameter specifies the geographic level
+we are requesting state-level data
+and we want all states, as indicated by the *.
+Looking through the data, you may have also noticed an extra column of data at the end. 
+This is automatically generated and is the code for geographic level of the data. 
+In this case, the last column contains the 2-digit FIPS state code.
+
+A final note about requesting variables is that you can choose to request an entire variable group as well. 
+For example, since we are looking at commute time, 
+if we wanted to request all variables in the Time to Work B08303 group at the state-level, 
+the API query would be:
+
+https://api.census.gov/data/2020/acs/acs5?get=NAME,group(B08303)&for=state:*.
+
+Note the differences with our original query:
+
+https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E&for=state:*
+
+Requesting by variable group will return all the variables in that group, annotations and 
+errors included, no matter how many there are.
+
+Code:
+API Call 1
+
+Using the browser in another tab on your web browser, make an API call to request state-level data containing:
+
+The NAME variable,
+The total number of commuters, and
+The count for commuters who travel less than 5 minutes.
+Find the appropriate variables to request in the B08303 variable group documentation.
+
+API Call 2
+
+This time, make an API call to request state-level data containing:
+
+The NAME variable,
+The total commuters count, and
+The count for commuters who travel 90 or more minutes.
+API Call 1 (Click to Toggle Correct Answers)
+Your query should look like this: 
+https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E,B08303_002E&for=state:*
+
+API Call 2
+Your query should look like this: 
+https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E,B08303_013E&for=state:*
+
+Census geographic levels
+The Census website documents all the supported geographic levels with examples. 
+As we’ve seen, using * specifies all data at that geographic level. 
+For example, to request state-level data for all states, the API call would be: 
+https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E&for=state:*. 
+You can review the output of this call by viewing the screenshot in the workspace
+
+We can also request specific geographic regions, like states, 
+by specifying them in a comma-separated format. 
+For example, to request data from California and Utah, 
+we specify their 2-digit FIPS state code (California is 06 and Utah is 49): 
+https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E&for=state:06,49.
+
+The for parameter can also be used in conjunction with in to specify data within a certain geographic area, 
+such as all unified school districts within specific states: 
+https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E&for=school%20district%20(unified):*&in=state:06,49.
+
+If you visit this URL in your browser, you can see that the NAME variable is the geographic level. 
+The returned data will also contain additional columns at the end depending on the requested geographic level. 
+In this case, there are 2 new columns added, 
+identifying the 2-digit FIPS state code and 5-digit school district code for each row of data.
+
+Instructions
+Using the browser, make an API call to request state-level data containing the `NAME` variable, 
+the total commuters count, and the count for commuters who travel 90 or more minutes 
+for only the state of New York. (Click to Toggle Correct Answers)
+Use the 2-digit FIPS state code to request data for a particular state.
+
+Your query should look like this: 
+https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E,B08303_013E&for=state:36.
+
+Make an API call to request the same 3 variables for all counties within the state of New York.
+Use the for parameter in conjunction with in to request specific geographic regions.
+
+Your query should look like this: 
+https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E,B08303_013E&for=county:*&in=state:36.
+
+Links:
+https://api.census.gov/data/2020/acs/acs5/examples.html
+https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code#FIPS_state_codes
+
+
+
+Making API request in Python
+Now that you have a pretty good idea of how the Census Data API works, 
+let’s take a look at how to pull the data in Python. 
+Begin by importing the requests library with this command:
+
+import requests
+Next, we can use the get() method to return the data from our desired URL:
+
+r = requests.get('https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E&for=state:*') 
+The result is a response object (just like in the last exercise), 
+but this time we stored it in a variable named r.
+
+We can look at that response data by using the .text attribute. 
+The text attribute turns the data into a string.
+
+We can also use the .json() method that can automatically decode JSON data into the appropriate Python object. 
+This is useful when working with JSON data, as in the case of the Census API, 
+to have the data in a more intuitive data structure.
+
+# Access data as JSON string
+print(r.text)
+ 
+# Access decoded JSON data as Python object
+print(r.json())
+Instructions
+1.Start by importing the requests module.
+
+Checkpoint 2 Passed
+
+2.Make a GET request to the Census API to request county-level data containing
+
+the NAME variable,
+the total commuters count, and
+the count for commuters who travel 90 or more minutes
+for all counties
+within the state of New York.
+(see the previous exercise for this URL)
+
+Store the response object in a variable called r.
+
+Checkpoint 3 Passed
+
+3.Use the .text attribute to access the returned string data and store it in a variable called r_text.
+
+Try printing r_text with the print(___) command.
+
+Checkpoint 4 Passed
+
+4.Use the .json() method to access the decoded JSON data and store it in a variable called r_json. 
+Try printing out r_json.
+
+Can you see the advantage working with r_json has over r_text?
+
+Code:
+
+import requests
+
+r = requests.get('https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E,B08303_013E&for=county:*&in=state:36')
+
+r_text = r.text
+
+print(r_text)
+
+r_json = r.json()
+
+print(r_json)
+
+
+
+Converting JSON to CSV
+If you haven’t written Python before, you can still do this exercise even though it might feel a little like magic. Follow along and it will become clearer later on (we promise it isn’t magic!).
+
+While JSON is a great universal format for data interchange, it might not be the ideal format in other aspects, such as readability. 
+Instead, having the data in a tabular format (like a CSV) can make it much more human-readable and accessible. Therefore, being able to convert between file types is essential.
+
+There are several libraries in Python to work with different data formats. For example, to convert the Census data from JSON to CSV, we can use the built-in csv library:
+
+import csv
+As a refresher, visit https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E&for=state:* in your browser to view the total commuters count for all states.
+
+The JSON data we got from the Census API is a list of lists in Python, where each inner list corresponds to a single row of data. To convert from JSON to CSV, 
+we want to write each sublist as a comma-separated row of data to file. This bit of code is a little complicated. We will use the writerows() method from the csv library:
+
+with open('census.csv', mode='w', newline='') as file:
+  writer = csv.writer(file)
+  writer.writerows(r.json())
+What is that code doing?
+We first make a variable and call it file. Then we use open() to open a file, since we are going to write that file, we open it with mode='w' for writing mode. The newline='' ensures that newlines are always interpreted correctly.
+
+Next, we use the writer() function from the csv library to make a writer object (don’t worry about what this is right now). We then use the writerows() method to write each row of data into comma-separated format.
+
+Instructions
+1.Start by importing the csv module.
+
+Checkpoint 2 Passed
+
+2.Use the .json() method to access the decoded JSON data and store it in a variable called r_json.
+
+Checkpoint 3 Passed
+
+
+3.We created an empty commute_data.csv file for you. Click on the tab above the code editor to see it.
+
+Now write the JSON data into a CSV file called commute_data.csv
+
+After you write the data to the file, click on the file again to see it filled with your data.
+
+Code:
+import requests
+import csv
+
+r = requests.get('https://api.census.gov/data/2020/acs/acs5?get=NAME,B08303_001E,B08303_013E&for=county:*&in=state:36')
+
+r_json = r.json()
+
+with open('commute_data.csv', mode = 'w', newline = '') as file:
+  writer = csv.writer(file)
+  
+  
+  
+Exploring data using pandas
+Now that we have our data saved into an easy-to-work-with format, let’s investigate it.
+
+We’ll use Python’s pandas library, which is designed for working with data (and will quickly become familiar to you). 
+Start by importing the library and using the read_csv() function to read the CSV data into a DataFrame object:
+
+import pandas
+ 
+census_df = pandas.read_csv("census.csv")
+By default, the first row of the CSV file is read in as the header row. We can use the .head() method to preview the first few rows of the DataFrame.
+
+Sometimes columns have ambiguous or confusing names (like Census codes). We might also want to rename those columns. 
+We can use the .columns attribute to rename the column headings if needed:
+
+# Preview DataFrame
+print(census_df.head())
+ 
+# Rename DataFrame columns
+census_df.columns = ['name', 'total_commuters', 'state']
+The pandas library offers a lot more functionality for exploring and manipulating tabular data, 
+but that is out of scope for this lesson. You can learn more in our Learn Data Analysis with Pandas course.
+
+Instructions
+1.Start by importing the pandas library.
+
+Checkpoint 2 Passed
+
+
+2.Create a variable called commute_df. Set your variable to be a pandas DataFrame from the commute_data.csv file you created in the last exercise.
+
+Checkpoint 3 Passed
+
+3.Preview the first few rows of commute_df using the .head() method and print out the output.
+
+Checkpoint 4 Passed
+
+4.Notice how the column headings for commute_df show the codes the Census uses. That’s not very intuitive!
+
+Rename the headings to more descriptive names, then print the first few rows of the DataFrame again to see the changes.
+
+Congratulations!!! Not only have you used Python to get data, but you’ve also modified a dataset programmatically!! 
+You are well on your way to becoming a Data Scientist!
+
+  
+Code:
+import pandas
+
+commute_df = pandas.read_csv("commute_data.csv")
+
+commute_df.columns = ['name', 'total_commuters', 'commuters_90_mins', 'state', 'county']
+
+#Preview DataFrame
+print(commute_df.head())
+
+
+
+Simulating binomial distribution
+Sometimes you want to simulate a lot of different scenarios. It would be very expensive to run thousands of tests, but it’s very cheap to generate thousands of results.
+
+In this exercise, we are going to simulate binomial data. Binomial distributions are very useful for modeling different types of data, from drug treatment effectiveness to stock price trends.
+
+Binomial events always have 2 possible outcomes, which we refer to as success and failure. The probability of a successful outcome is represented by the parameter p. For example, for the event of a coin toss using a fair coin, p would be 0.5.
+
+There are lots of ways to do this. We could flip a coin a bunch of times and write down the results or we could use the random.binomial() method from the numpy library in Python.
+
+To use the random.binomial() method, we have to tell it how many trials we want to simulate (n) and the probability of ‘success’ in a single trial (p), and how many experiments to run.
+
+In the example below, there was 1 flip per trial (n), the probability (p) of getting ‘success’ was .5 (the coin is fair), and we conducted the experiment 2,000 times (size).
+
+ 
+print(numpy.random.binomial(n = 1, p = 0.5, size=2000))
+The output from our simulation is a list of 0’s and 1’s. This is the number of successes in each experiment. In this case, since we are simulating a single trial, 1 would mean the outcome of the trial was a success and 0 would mean the outcome was a failure.
+
+If we wanted to do 10 flips per experiment, the result would be a list of numbers from 0 to 10 representing the number of successes in each experiment.
+
+print(numpy.random.binomial(n=10, p=0.5, size=2000))
+Binomial distributions are really cool – and you will definitely see them again in your Data Science journey. Let’s practice creating some now.
+
+Instructions
+1.Start by importing the numpy library.
+
+Checkpoint 2 Passed
+
+2.Call the random.binomial() method to simulate
+
+a single (1) coin toss
+using a biased coin that has a 0.8 probability of landing on heads. We’ll call heads successful.
+conducted 500 times.
+Checkpoint 3 Passed
+
+3.Now let’s increase the number of trials per experiment.
+
+Call the random.binomial() method to simulate
+
+100 tosses
+using a biased coin that has a 0.8 probability of landing on heads. We’ll call heads successful.
+conducted 500 times.
+
+Code:
+import numpy
+
+print(numpy.random.binomial(n=1, p = 0.8, size = 500))
+
+print(numpy.random.binomial(n=100, p = 0.8, size = 500))
