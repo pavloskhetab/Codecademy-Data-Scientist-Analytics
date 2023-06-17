@@ -210,3 +210,67 @@ plays["Respect"] = 94
 library = {"The Best Songs": plays, "Sunday Feelings": {}}
 
 print(library)
+
+
+
+Using Dictionaries
+Now that we know how to create a dictionary, we can start using already created dictionaries to solve problems.
+
+In this lesson, you’ll learn how to:
+
+Use a key to get a value from a dictionary
+Check for existence of keys
+Iterate through keys and values in dictionaries
+
+
+
+Get A Key
+Once you have a dictionary, you can access the values in it by providing the key. For example, let’s imagine we have a dictionary that maps buildings to their heights, in meters:
+
+building_heights = {"Burj Khalifa": 828, "Shanghai Tower": 632, "Abraj Al Bait": 601, "Ping An": 599, "Lotte World Tower": 554.5, "One World Trade": 541.3}
+Then we can access the data in it like this:
+
+>>> building_heights["Burj Khalifa"]
+828
+>>> building_heights["Ping An"]
+599
+
+Code:
+zodiac_elements = {"water": ["Cancer", "Scorpio", "Pisces"], "fire": ["Aries", "Leo", "Sagittarius"], "earth": ["Taurus", "Virgo", "Capricorn"], "air":["Gemini", "Libra", "Aquarius"]}
+
+print(zodiac_elements["earth"])
+
+print(zodiac_elements["fire"])
+
+
+
+Get an Invalid Key
+Let’s say we have our dictionary of building heights from the last exercise:
+
+building_heights = {"Burj Khalifa": 828, "Shanghai Tower": 632, "Abraj Al Bait": 601, "Ping An": 599, "Lotte World Tower": 554.5, "One World Trade": 541.3}
+What if we wanted to know the height of the Landmark 81 in Ho Chi Minh City? We could try:
+
+print(building_heights["Landmark 81"])
+But "Landmark 81" does not exist as a key in the building_heights dictionary! So this will throw a KeyError:
+
+KeyError: 'Landmark 81'
+One way to avoid this error is to first check if the key exists in the dictionary:
+
+key_to_check = "Landmark 81"
+ 
+if key_to_check in building_heights:
+  print(building_heights["Landmark 81"])
+This will not throw an error, because key_to_check in building_heights will return False, and so we never try to access the key.
+
+Code:
+zodiac_elements = {"water": ["Cancer", "Scorpio", "Pisces"], "fire": ["Aries", "Leo", "Sagittarius"], "earth": ["Taurus", "Virgo", "Capricorn"], "air":["Gemini", "Libra", "Aquarius"], "energy": "Not a Zodiac element"}
+
+key_to_check = "energy"
+if key_to_check in zodiac_elements:
+  print(zodiac_elements[key_to_check])
+
+
+
+
+
+
