@@ -74,12 +74,84 @@ print(updated_damages)
 # Create a Table
 
 # Create and view the hurricanes dictionary
+def create_hurricanes_dictionary(names, months, years, max_sustained_winds, areas_affected, damages, deaths):
+
+  hurricanes = {}
+  num_hurricanes = len(names)
+
+  for i in range(num_hurricanes):
+    hurricanes[names[i]] = {
+                          "Name": names[i],
+                          "Month": months[i],
+                          "Year": years[i],
+                          "Max Sustained Wind": max_sustained_winds[i],
+                          "Areas Affected": areas_affected[i],
+                          "Damage": damages[i],
+                          "Deaths": deaths[i]
+                          }
+  return hurricanes
+
+hurricanes = create_hurricanes_dictionary(names, months, years, max_sustained_winds, areas_affected, updated_damages, deaths)
+
+#print(hurricanes['Cuba I'])
+
 
 # 3
 # Organizing by Year
-
 # create a new dictionary of hurricanes with year and key
 
+#1st solution using a for loop
+"""def create_years_dictionary(names, months, years, max_sustained_winds, areas_affected, damages, deaths):
+    hurricanes_by_year = {}
+
+    for name, month, year, max_wind, area_affected, damage, death in zip(names, months, years, max_sustained_winds, areas_affected, damages, deaths):
+        current_cane = {
+            "Name": name,
+            "Month": month,
+            "Year": year,
+            "Max Sustained Wind": max_wind,
+            "Areas Affected": area_affected,
+            "Damage": damage,
+            "Deaths": death
+        }
+
+        if year in hurricanes_by_year:
+            hurricanes_by_year[year].append(current_cane)
+        else:
+            hurricanes_by_year[year] = [current_cane]
+
+    return hurricanes_by_year
+
+"""
+
+#2nd solution using a dictionary comprehension
+def create_years_dictionary(names, months, years, max_sustained_winds, areas_affected, damages, deaths):
+    hurricanes_by_year = {
+        year: [] for year in years
+    }
+
+    for name, month, year, max_wind, area_affected, damage, death in zip(names, months, years, max_sustained_winds, areas_affected, damages, deaths):
+        current_cane = {
+            "Name": name,
+            "Month": month,
+            "Year": year,
+            "Max Sustained Wind": max_wind,
+            "Areas Affected": area_affected,
+            "Damage": damage,
+            "Deaths": death
+        }
+        hurricanes_by_year[year].append(current_cane)
+
+    return hurricanes_by_year
+
+
+hurricanes_by_year = create_years_dictionary(names, months, years, max_sustained_winds, areas_affected, updated_damages, deaths)
+
+key_to_check = 1973
+if key_to_check in hurricanes_by_year:
+  print(hurricanes_by_year[key_to_check])
+else:
+  print("We do not have data for hurricanes in the year " + str(key_to_check) + ".")
 
 # 4
 # Counting Damaged Areas
