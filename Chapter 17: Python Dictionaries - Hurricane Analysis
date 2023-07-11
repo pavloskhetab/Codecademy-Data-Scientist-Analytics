@@ -155,8 +155,23 @@ else:
 
 # 4
 # Counting Damaged Areas
+# create dictionary of areas to store the number of hurricanes involved in the affected areas
 
-# create dictionary of areas to store the number of hurricanes involved in
+def count_areas(areas_affected):
+
+    count_areas = {}
+    
+    for area in areas_affected:
+      for place in area:
+        if place in count_areas:
+            count_areas[place] += 1
+        else:
+            count_areas[place] = 1
+    return count_areas
+
+area_count = count_areas(areas_affected)
+country = 'Florida'
+print(country + ": " + str(area_count[country]))
 
 
 # 5 
@@ -164,6 +179,26 @@ else:
 
 # find most frequently affected area and the number of hurricanes involved in
 
+def max_hurricane_count_by_area(areas_affected):
+    area_count = {}
+
+    for areas in areas_affected:
+        for area in areas:
+            if area in area_count:
+                area_count[area] += 1
+            else:
+                area_count[area] = 1
+
+    most_affected_area = max(area_count, key=area_count.get)
+    most_affected_count = area_count[most_affected_area]
+
+    return most_affected_area, most_affected_count
+
+most_affected_area = max_hurricane_count_by_area(areas_affected)
+
+#print(area_count)
+
+print(most_affected_area)
 
 # 6
 # Calculating the Deadliest Hurricane
