@@ -39,6 +39,7 @@ damages = ['Damages not recorded', '100M', 'Damages not recorded', '40M', '27.9M
 # deaths for each hurricane
 deaths = [90,4000,16,3103,179,184,408,682,5,1023,43,319,688,259,37,11,2068,269,318,107,65,19325,51,124,17,1836,125,87,45,133,603,138,3057,74]
 
+
 # 1
 # Update Recorded Damages
 conversion = {"M": 1000000,
@@ -69,6 +70,7 @@ def update_damage_values(list_of_damages):
 update_damage_values(damages)
 
 print(updated_damages)
+
 
 # 2 
 # Create a Table
@@ -153,6 +155,7 @@ if key_to_check in hurricanes_by_year:
 else:
   print("We do not have data for hurricanes in the year " + str(key_to_check) + ".")
 
+
 # 4
 # Counting Damaged Areas
 # create dictionary of areas to store the number of hurricanes involved in the affected areas
@@ -200,10 +203,22 @@ most_affected_area = max_hurricane_count_by_area(areas_affected)
 
 print(most_affected_area)
 
+
 # 6
 # Calculating the Deadliest Hurricane
 
 # find highest mortality hurricane and the number of deaths
+
+def find_max_deaths_hurricane(hurricanes):
+    max_deaths_hurricane = max(hurricanes.values(), key=lambda x: x["Deaths"])
+    return max_deaths_hurricane["Name"], max_deaths_hurricane["Deaths"]
+
+# Call the function with the hurricanes dictionary
+max_deaths_hurricane, max_deaths_count = find_max_deaths_hurricane(hurricanes)
+
+print("Hurricane with the maximum deaths:", max_deaths_hurricane)
+print("Maximum deaths:", max_deaths_count)
+
 
 # 7
 # Rating Hurricanes by Mortality
