@@ -269,7 +269,7 @@ def rate_hurricanes(hurricanes):
         deaths = hurricane_data["Deaths"]
         
         for rating in mortality_scale:
-            if deaths < mortality_scale[rating]:
+            if deaths <= mortality_scale[rating]:
                 rated_hurricanes[rating].append(hurricane_data)
                 break
     
