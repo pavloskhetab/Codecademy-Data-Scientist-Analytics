@@ -222,10 +222,68 @@ print("Maximum deaths:", max_deaths_count)
 
 # 7
 # Rating Hurricanes by Mortality
-
-
 # categorize hurricanes in new dictionary with mortality severity as key
 
+'''
+# Initial solution
+def rate_hurricanes(hurricanes):
+    rated_hurricanes = {0: [], 1: [], 2: [], 3: [], 4: [], 5: []}
+    
+    for hurricane_data in hurricanes.values():
+        deaths = hurricane_data["Deaths"]
+        
+        if deaths <= 0:
+            rating = 0
+        elif deaths <= 100:
+            rating = 1
+        elif deaths <= 500:
+            rating = 2
+        elif deaths <= 1000:
+            rating = 3
+        elif deaths <= 10000:
+            rating = 4
+        else:
+            rating = 5
+        
+        rated_hurricanes[rating].append(hurricane_data)
+    
+    return rated_hurricanes
+
+# Call the function with the hurricanes dictionary
+rated_hurricanes = rate_hurricanes(hurricanes)
+
+# Print the rated hurricanes
+for rating, hurricanes_list in rated_hurricanes.items():
+    print(f"Mortality Rating {rating}:")
+    for hurricane in hurricanes_list:
+        print(hurricane["Name"], "- Deaths:", hurricane["Deaths"])
+    print()
+'''
+
+# Optimised solution
+def rate_hurricanes(hurricanes):
+    mortality_scale = {0: 0, 1: 100, 2: 500, 3: 1000, 4: 10000, 5: float('inf')}
+    rated_hurricanes = {rating: [] for rating in mortality_scale}
+    
+    for hurricane_data in hurricanes.values():
+        deaths = hurricane_data["Deaths"]
+        
+        for rating in mortality_scale:
+            if deaths < mortality_scale[rating]:
+                rated_hurricanes[rating].append(hurricane_data)
+                break
+    
+    return rated_hurricanes
+
+# Call the function with the hurricanes dictionary
+rated_hurricanes = rate_hurricanes(hurricanes)
+
+# Print the rated hurricanes
+for rating, hurricanes_list in rated_hurricanes.items():
+    print(f"Mortality Rating {rating}:")
+    for hurricane in hurricanes_list:
+        print(hurricane["Name"], "- Deaths:", hurricane["Deaths"])
+    print()
 
 # 8 Calculating Hurricane Maximum Damage
 
