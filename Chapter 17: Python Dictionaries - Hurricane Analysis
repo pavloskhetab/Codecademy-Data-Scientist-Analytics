@@ -289,6 +289,28 @@ for rating, hurricanes_list in rated_hurricanes.items():
 
 # find highest damage inducing hurricane and its total cost
 
+def find_most_damaging_hurricane(hurricanes):
+    max_damage = 0
+    most_damaging_hurricane = None
+    
+    for hurricane_data in hurricanes.values():
+        damage = hurricane_data["Damage"]
+        
+        if damage != 'Damages not recorded':
+            damage = float(damage)
+            if damage > max_damage:
+                max_damage = damage
+                most_damaging_hurricane = hurricane_data["Name"]
+    
+    return most_damaging_hurricane, max_damage
+
+# Call the function with the hurricanes dictionary
+most_damaging_hurricane, max_damage = find_most_damaging_hurricane(hurricanes)
+
+# Print the result
+print("Most damaging hurricane:", most_damaging_hurricane)
+print("Damage cost:", max_damage, "USD")
+
 
 # 9
 # Rating Hurricanes by Damage
@@ -296,7 +318,32 @@ damage_scale = {0: 0,
                 1: 100000000,
                 2: 1000000000,
                 3: 10000000000,
-                4: 50000000000}
+                4: 50000000000,
+                5: float('inf')}
   
 # categorize hurricanes in new dictionary with damage severity as key
 
+def rate_hurricanes_by_damage(hurricanes):
+    damage_rated_hurricanes = {rating: [] for rating in damage_scale}
+    
+    for hurricane_data in hurricanes.values():
+        damage = hurricane_data["Damage"]
+        
+        if damage != 'Damages not recorded':
+            damage = float(damage)
+            for rating in damage_scale:
+                if damage <= damage_scale[rating]:
+                    damage_rated_hurricanes[rating].append(hurricane_data)
+                    break
+    
+    return damage_rated_hurricanes
+
+# Call the function with the hurricanes dictionary
+rated_hurricanes_by_damage = rate_hurricanes_by_damage(hurricanes)
+
+# Print the rated hurricanes
+for rating, hurricanes_list in rated_hurricanes_by_damage.items():
+    print(f"Damage Rating {rating}:")
+    for hurricane in hurricanes_list:
+        print(hurricane["Name"], "- Damage:", hurricane["Damage"], "USD")
+    print()
