@@ -340,3 +340,25 @@ Notice that when we call csv.DictReader we pass in the delimiter parameter, whic
 We then iterate through the CSV and print out each of the addresses.
 
 Code:
+
+import csv
+
+with open('books.csv') as books_csv:
+  books_reader = csv.DictReader(books_csv, delimiter = '@')
+
+  isbn_list = []
+  for book in books_reader:
+    isbn_list.append(book['ISBN'])
+  print(isbn_list)
+
+
+  #Using list comprehension
+  """
+  with open('books.csv') as books_csv:
+    books_reader = csv.DictReader(books_csv, delimiter='@')
+    isbn_list = [book['ISBN'] for book in books_reader]
+    print(isbn_list)
+  """
+
+
+
