@@ -426,3 +426,128 @@ with open('logger.csv', 'w') as logger_csv:
 with open('logger.csv', 'r') as logger_csv:
     for line in logger_csv:
         print(line.strip())  # Strip to remove leading/trailing whitespace and newline characters
+
+
+
+Reading a JSON File
+CSV isn’t the only file format that Python has a built-in library for. 
+We can also use Python’s file tools to read and write JSON. 
+JSON, an abbreviation of JavaScript Object Notation, 
+is a file format inspired by the programming language JavaScript. 
+The name, like CSV is a bit of a misnomer — 
+some JSON is not valid JavaScript (and plenty of JavaScript is not valid JSON).
+
+JSON’s format is endearingly similar to Python dictionary syntax, 
+and so JSON files might be easy to read from a Python developer standpoint. 
+Nonetheless, Python comes with a json package that will help us parse JSON files 
+into actual Python dictionaries. Suppose we have a JSON file like the following:
+
+purchase_14781239.json
+
+{
+  'user': 'ellen_greg',
+  'action': 'purchase',
+  'item_id': '14781239',
+}
+
+We would be able to read that in as a Python dictionary with the following code:
+
+json_reader.py
+
+import json
+
+with open('purchase_14781239.json') as purchase_json:
+  purchase_data = json.load(purchase_json)
+
+print(purchase_data['user'])
+# Prints 'ellen_greg'
+
+First we import the json package. We opened the file using our trusty open() command. 
+Since we’re opening it in read-mode we just need to pass the file name. 
+We save the file in the temporary variable purchase_json.
+
+We continue by parsing purchase_json using json.load(), creating a Python dictionary out of the file. 
+Saving the results into purchase_data means we can interact with it. 
+We print out one of the values of the JSON file by keying into the purchase_data object.
+
+Code:
+
+import json
+
+with open('message.json') as message_json:
+  message = json.load(message_json)
+
+print(message['text'])
+
+
+
+Writing a JSON File
+Naturally we can use the json library to translate Python objects to JSON as well. 
+This is especially useful in instances where you’re using a Python library to serve web pages, 
+you would also be able to serve JSON. Let’s say we had a Python dictionary we wanted to save as a JSON file:
+
+turn_to_json = {
+  'eventId': 674189,
+  'dateTime': '2015-02-12T09:23:17.511Z',
+  'chocolate': 'Semi-sweet Dark',
+  'isTomatoAFruit': True
+}
+
+We’d be able to create a JSON file with that information by doing the following:
+
+import json
+
+with open('output.json', 'w') as json_file:
+  json.dump(turn_to_json, json_file)
+
+We import the json module, open up a write-mode file under the variable json_file, 
+and then use the json.dump() method to write to the file. json.dump() takes two arguments: 
+first the data object, then the file object you want to save.
+
+Code:
+
+data_payload = [
+  {'interesting message': 'What is JSON? A web application\'s little pile of secrets.',
+   'follow up': 'But enough talk!'}
+]
+
+import json
+
+with open('data.json', 'w') as data_json:
+  json.dump(data_payload, data_json)
+
+with open('data.json', 'r') as data_json:
+  data = json.load(data_json)
+  print(data)
+
+
+
+Review
+Now you know all about files! You were able to:
+
+Open up file objects using open() and with.
+Read a file’s full contents using Python’s .read() method.
+Read a file line-by-line using .readline() and .readlines()
+Create new files by opening them in write-mode.
+Append to a file non-destructively by opening a file in append-mode.
+
+Apply all of the above to different types of data-carrying files including CSV and JSON!
+
+You have all the skills necessary to read, write, and update files programmatically, 
+a very useful skill in the Python universe!
+
+Code:
+
+import json
+
+data_payload = [
+  {'interesting message': 'What is JSON? A web application\'s little pile of secrets.',
+   'follow up': 'But enough talk!'}
+]
+
+with open('data.json', 'w') as data_json:
+  json.dump(data_payload, data_json)
+
+with open('data.json', 'r') as data_json:
+  data = json.load(data_json)
+  print(data)
