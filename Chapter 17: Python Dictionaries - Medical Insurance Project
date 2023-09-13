@@ -150,3 +150,18 @@ average_cost = total_cost/len(medical_costs)
 print(f"Average Insurance Cost: {average_cost}")
 
 
+names = ["Marina", "Vinay", "Connie", "Isaac", "Isaac", "Valentina"]
+
+ages = [27, 24, 43, 35, 52]
+
+zipped_ages = list(zip(names, ages))
+
+print(zipped_ages)
+
+# Using for loop to transform list into dictionary
+names_to_ages = {key: value for key, value in zipped_ages}
+
+# Using dict method to transform list comprehension into dictionary
+# names_to_ages = dict(zipped_ages)
+
+print(names_to_ages)
