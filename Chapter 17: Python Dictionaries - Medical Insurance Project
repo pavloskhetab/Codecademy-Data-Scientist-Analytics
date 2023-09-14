@@ -165,3 +165,89 @@ names_to_ages = {key: value for key, value in zipped_ages}
 # names_to_ages = dict(zipped_ages)
 
 print(names_to_ages)
+
+
+marina_age = names_to_ages.get("Marina")
+
+print(marina_age)
+
+medical_records = {}
+
+medical_records["Marina"] = {"Age": 27, "Sex": "Female", "BMI": 31.1, "Children": 2, "Smoker": "Non-smoker", "Insurance_cost": 6607.0}
+
+#print(medical_records)
+
+
+data_to_add = {
+"Vinay": {"Age": 24, "Sex": "Male", "BMI": 26.9, "Children": 0, "Smoker": "Non-smoker", "Insurance_cost": 3225.0},
+
+"Connie": {"Age": 43, "Sex": "Female", "BMI": 25.3, "Children": 3, "Smoker": "Non-smoker", "Insurance_cost": 8886.0},
+
+"Isaac":	{"Age": 35, "Sex": "Male", "BMI": 20.6, "Children": 4, "Smoker": "Smoker", "Insurance_cost": 16444.0},
+					
+"Valentina":	{"Age": 52, "Sex": "Female", "BMI": 18.7, "Children": 1, "Non-smoker": "Smoker", "Insurance_cost": 6420.0}
+}
+	
+medical_records.update(data_to_add)
+
+print(medical_records)
+
+
+connies_insurance = medical_records["Connie"].get("Insurance_cost")
+
+print(f"Connie's insurance cost is {connies_insurance} dollars.")
+
+
+medical_records.pop("Vinay")
+
+
+for name, record in medical_records.items():
+  age = record["Age"]
+  sex = record["Sex"]
+    
+  # Get the smoking status or set it to an empty string if not specified
+  smoker = record.get("Smoker")
+
+  bmi = record["BMI"]
+  insurance_cost = record["Insurance_cost"]
+  
+  # Print the formatted string
+  print(f"{name} is a {age} year old {sex} {smoker} with a BMI of {bmi} and insurance cost of {insurance_cost}")
+
+
+def update_medical_records(name, medical_data):
+  medical_records[name] = medical_data
+
+new_medical_data = {
+    "Age": 32,
+    "Sex": "Male",
+    "BMI": 22.4,
+    "Children": 0,
+    "Smoker": "Smoker",
+    "Insurance_cost": 5000.0
+}
+
+update_medical_records("Yakumis", new_medical_data)
+
+print(medical_records)
+
+
+def update_records(dictionary, dictionary_data):
+    dictionary.update(dictionary_data)
+
+video_games = {}
+
+video_games_data = {
+    "GTA: San Andreas": {
+        "Genre": "Action",
+        "Platform": "PC, PS2, Xbox 360"
+    },
+    "Max Payne 3": {
+        "Genre": "Action, Adventure",
+        "Platform": "PC, PS3, Xbox 360"
+    }
+}
+
+update_records(video_games, video_games_data)
+
+print(video_games)
