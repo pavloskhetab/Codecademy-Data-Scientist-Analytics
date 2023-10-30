@@ -167,14 +167,16 @@ print(df2)
 
 
 Comma Separated Variables (CSV)
-We now know how to create our own DataFrame. However, most of the time, we’ll be working with datasets that already exist. One of the most common formats for big datasets is the CSV.
+We now know how to create our own DataFrame. However, most of the time, 
+we’ll be working with datasets that already exist. One of the most common formats for big datasets is the CSV.
 
 CSV (comma separated values) is a text-only spreadsheet format. You can find CSVs in lots of places:
 
 Online datasets (here’s an example from data.gov)
 Export from Excel or Google Sheets
 Export from SQL
-The first row of a CSV contains column headings. All subsequent rows contain values. Each column heading and each variable is separated by a comma:
+The first row of a CSV contains column headings. All subsequent rows contain values. 
+Each column heading and each variable is separated by a comma:
 
 column1,column2,column3
 value1,value2,value3
@@ -295,3 +297,189 @@ print(type(clinic_north))
 
 
 
+Selecting Multiple Columns
+When you have a larger DataFrame, you might want to select just a few columns.
+
+For instance, let’s return to a DataFrame of orders from ShoeFly.com:
+
+id	first_name	last_name	email	shoe_type	shoe_material	shoe_color
+54791	Rebecca	Lindsay	RebeccaLindsay57@hotmail.com	clogs	faux-leather	black
+53450	Emily	Joyce	EmilyJoyce25@gmail.com	ballet flats	faux-leather	navy
+91987	Joyce	Waller	Joyce.Waller@gmail.com	sandals	fabric	black
+14437	Justin	Erickson	Justin.Erickson@outlook.com	clogs	faux-leather	red
+
+We might just be interested in the customer’s last_name and email. We want a DataFrame like this:
+
+last_name	email
+Lindsay	RebeccaLindsay57@hotmail.com
+Joyce	EmilyJoyce25@gmail.com
+Waller	Joyce.Waller@gmail.com
+Erickson	Justin.Erickson@outlook.com
+
+To select two or more columns from a DataFrame, we use a list of the column names. 
+To create the DataFrame shown above, we would use:
+
+new_df = orders[['last_name', 'email']]
+
+Note: Make sure that you have a double set of brackets ([[]]), or this command won’t work!
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.DataFrame([
+  ['January', 100, 100, 23, 100],
+  ['February', 51, 45, 145, 45],
+  ['March', 81, 96, 65, 96],
+  ['April', 80, 80, 54, 180],
+  ['May', 51, 54, 54, 154],
+  ['June', 112, 109, 79, 129]],
+  columns=['month', 'clinic_east',
+           'clinic_north', 'clinic_south',
+           'clinic_west']
+)
+
+clinic_north_south = df[['clinic_north', 'clinic_south']]
+
+print(type(clinic_north_south))
+
+
+
+Select Rows
+Let’s revisit our orders from ShoeFly.com:
+
+id	first_name	last_name	email	shoe_type	shoe_material	shoe_color
+54791	Rebecca	Lindsay	RebeccaLindsay57@hotmail.com	clogs	faux-leather	black
+53450	Emily	James	EmilyJames25@gmail.com	ballet flats	faux-leather	navy
+91987	Joyce	Waller	Joyce.Waller@gmail.com	sandals	fabric	black
+14437	Justin	Erickson	Justin.Erickson@outlook.com	clogs	faux-leather	red
+…						
+
+Maybe our Customer Service department has just received a message from Joyce Waller, 
+so we want to know exactly what she ordered. We want to select this single row of data.
+
+DataFrames are zero-indexed, meaning that we start with the 0th row and count up from there. 
+Joyce Waller’s order is the 2nd row.
+
+We select it using the following command:
+
+orders.iloc[2]
+
+When we select a single row, the result is a Series (just like when we select a single column).
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.DataFrame([
+  ['January', 100, 100, 23, 100],
+  ['February', 51, 45, 145, 45],
+  ['March', 81, 96, 65, 96],
+  ['April', 80, 80, 54, 180],
+  ['May', 51, 54, 54, 154],
+  ['June', 112, 109, 79, 129]],
+  columns=['month', 'clinic_east',
+           'clinic_north', 'clinic_south',
+           'clinic_west'])
+
+march = df.iloc[2]
+
+print(march)
+
+
+
+Selecting Multiple Rows
+You can also select multiple rows from a DataFrame.
+
+Here are a few more rows from ShoeFly.com’s orders DataFrame:
+
+id	first_name	last_name	email	shoe_type	shoe_material	shoe_color
+54791	Rebecca	Lindsay	RebeccaLindsay57@hotmail.com	clogs	faux-leather	black
+53450	Emily	Joyce	EmilyJoyce25@gmail.com	ballet flats	faux-leather	navy
+91987	Joyce	Waller	Joyce.Waller@gmail.com	sandals	fabric	black
+14437	Justin	Erickson	Justin.Erickson@outlook.com	clogs	faux-leather	red
+79357	Andrew	Banks	AB4318@gmail.com	boots	leather	brown
+52386	Julie	Marsh	JulieMarsh59@gmail.com	sandals	fabric	black
+20487	Thomas	Jensen	TJ5470@gmail.com	clogs	fabric	navy
+76971	Janice	Hicks	Janice.Hicks@gmail.com	clogs	faux-leather	navy
+21586	Gabriel	Porter	GabrielPorter24@gmail.com	clogs	leather	brown
+
+Here are some different ways of selecting multiple rows:
+
+orders.iloc[3:7] would select all rows starting at the 3rd row and 
+up to but not including the 7th row (i.e., the 3rd row, 4th row, 5th row, and 6th row)
+
+id	first_name	last_name	email	shoe_type	shoe_material	shoe_color
+14437	Justin	Erickson	Justin.Erickson@outlook.com	clogs	faux-leather	red
+79357	Andrew	Banks	AB4318@gmail.com	boots	leather	brown
+52386	Julie	Marsh	JulieMarsh59@gmail.com	sandals	fabric	black
+20487	Thomas	Jensen	TJ5470@gmail.com	clogs	fabric	navy
+
+orders.iloc[:4] would select all rows up to, but not including the 4th row 
+(i.e., the 0th, 1st, 2nd, and 3rd rows)
+
+id	first_name	last_name	email	shoe_type	shoe_material	shoe_color
+54791	Rebecca	Lindsay	RebeccaLindsay57@hotmail.com	clogs	faux-leather	black
+53450	Emily	Joyce	EmilyJoyce25@gmail.com	ballet flats	faux-leather	navy
+91987	Joyce	Waller	Joyce.Waller@gmail.com	sandals	fabric	black
+14437	Justin	Erickson	Justin.Erickson@outlook.com	clogs	faux-leather	red
+
+orders.iloc[-3:] would select the rows starting at the 3rd to last row and up to and including the final row
+
+id	first_name	last_name	email	shoe_type	shoe_material	shoe_color
+20487	Thomas	Jensen	TJ5470@gmail.com	clogs	fabric	navy
+76971	Janice	Hicks	Janice.Hicks@gmail.com	clogs	faux-leather	navy
+21586	Gabriel	Porter	GabrielPorter24@gmail.com	clogs	leather	brown
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.DataFrame([
+  ['January', 100, 100, 23, 100],
+  ['February', 51, 45, 145, 45],
+  ['March', 81, 96, 65, 96],
+  ['April', 80, 80, 54, 180],
+  ['May', 51, 54, 54, 154],
+  ['June', 112, 109, 79, 129]],
+  columns=['month', 'clinic_east',
+           'clinic_north', 'clinic_south',
+           'clinic_west']
+)
+
+april_may_june = df.iloc[3:]
+
+print(april_may_june)
+
+
+
+Select Rows with Logic I
+You can select a subset of a DataFrame by using logical statements:
+
+df[df.MyColumnName == desired_column_value]
+
+We have a large DataFrame with information about our customers. A few of the many rows look like this:
+
+name	address	phone	age
+Martha Jones	123 Main St.	234-567-8910	28
+Rose Tyler	456 Maple Ave.	212-867-5309	22
+Donna Noble	789 Broadway	949-123-4567	35
+Amy Pond	98 West End Ave.	646-555-1234	29
+Clara Oswald	54 Columbus Ave.	714-225-1957	31
+…	…	…	…
+
+Suppose we want to select all rows where the customer’s age is 30. We would use:
+
+df[df.age == 30]
+
+In Python, == is how we test if a value is exactly equal to another value.
+
+We can use other logical statements, such as:
+
+Greater Than, > — Here, we select all rows where the customer’s age is greater than 30:
+df[df.age > 30]
+
+Less Than, < — Here, we select all rows where the customer’s age is less than 30:
+df[df.age < 30]
+
+Not Equal, != — This snippet selects all rows where the customer’s name is not Clara Oswald:
