@@ -483,3 +483,220 @@ Less Than, < — Here, we select all rows where the customer’s age is less tha
 df[df.age < 30]
 
 Not Equal, != — This snippet selects all rows where the customer’s name is not Clara Oswald:
+df[df.name != 'Clara Oswald']
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.DataFrame([
+  ['January', 100, 100, 23, 100],
+  ['February', 51, 45, 145, 45],
+  ['March', 81, 96, 65, 96],
+  ['April', 80, 80, 54, 180],
+  ['May', 51, 54, 54, 154],
+  ['June', 112, 109, 79, 129]],
+  columns=['month', 'clinic_east',
+           'clinic_north', 'clinic_south',
+           'clinic_west'])
+
+january = df[df.month == 'January']
+
+print(january)
+
+
+
+Select Rows with Logic II
+You can also combine multiple logical statements, as long as each statement is in parentheses.
+
+For instance, suppose we wanted to select all rows where the customer’s age 
+was under 30 or the customer’s name was “Martha Jones”:
+
+name	address	phone	age
+Martha Jones	123 Main St.	234-567-8910	28
+Rose Tyler	456 Maple Ave.	212-867-5309	22
+Donna Noble	789 Broadway	949-123-4567	35
+Amy Pond	98 West End Ave.	646-555-1234	29
+Clara Oswald	54 Columbus Ave.	714-225-1957	31
+…			
+
+We could use the following code:
+
+df[(df.age < 30) |
+   (df.name == 'Martha Jones')]
+
+In Python, | means “or” and & means “and”.
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.DataFrame([
+  ['January', 100, 100, 23, 100],
+  ['February', 51, 45, 145, 45],
+  ['March', 81, 96, 65, 96],
+  ['April', 80, 80, 54, 180],
+  ['May', 51, 54, 54, 154],
+  ['June', 112, 109, 79, 129]],
+  columns=['month', 'clinic_east',
+           'clinic_north', 'clinic_south',
+           'clinic_west'])
+
+march_april = df[(df.month == 'March') | (df.month == 'April')]
+
+print(march_april)
+
+
+
+Select Rows with Logic III
+Suppose we want to select the rows where the customer’s name is either “Martha Jones”, 
+“Rose Tyler” or “Amy Pond”.
+
+name	address	phone	age
+Martha Jones	123 Main St.	234-567-8910	28
+Rose Tyler	456 Maple Ave.	212-867-5309	22
+Donna Noble	789 Broadway	949-123-4567	35
+Amy Pond	98 West End Ave.	646-555-1234	29
+Clara Oswald	54 Columbus Ave.	714-225-1957	31
+…	…	…	…
+
+We could use the isin command to check that df.name is one of a list of values:
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.DataFrame([
+  ['January', 100, 100, 23, 100],
+  ['February', 51, 45, 145, 45],
+  ['March', 81, 96, 65, 96],
+  ['April', 80, 80, 54, 180],
+  ['May', 51, 54, 54, 154],
+  ['June', 112, 109, 79, 129]],
+  columns=['month', 'clinic_east',
+           'clinic_north', 'clinic_south',
+           'clinic_west'])
+
+january_february_march = df[df.month.isin(['January', 'February', 'March'])]           
+
+print(january_february_march)
+
+
+
+Setting indices
+When we select a subset of a DataFrame using logic, we end up with non-consecutive indices. 
+This is inelegant and makes it hard to use .iloc().
+
+We can fix this using the method .reset_index(). 
+For example, here is a DataFrame called df with non-consecutive indices:
+
+First Name	Last Name
+0	John	Smith
+4	Jane	Doe
+7	Joe	Schmo
+
+If we use the command df.reset_index(), we get a new DataFrame with a new set of indices:
+
+index	First Name	Last Name
+0	0	John	Smith
+1	4	Jane	Doe
+2	7	Joe	Schmo
+
+Note that the old indices have been moved into a new column called 'index'. 
+Unless you need those values for something special, it’s probably better to use the keyword drop=True 
+so that you don’t end up with that extra column. If we run the command df.reset_index(drop=True), 
+we get a new DataFrame that looks like this:
+
+First Name	Last Name
+0	John	Smith
+1	Jane	Doe
+2	Joe	Schmo
+
+Using .reset_index() will return a new DataFrame, but we usually just want to modify our existing DataFrame. 
+If we use the keyword inplace=True we can just modify our existing DataFrame.
+
+Instructions
+Checkpoint 1 Enabled
+1.
+Examine the code in the workspace. Note that df2 is a subset of rows from df.
+
+Type the following and press “Run”:
+
+print(df2)
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.DataFrame([
+  ['January', 100, 100, 23, 100],
+  ['February', 51, 45, 145, 45],
+  ['March', 81, 96, 65, 96],
+  ['April', 80, 80, 54, 180],
+  ['May', 51, 54, 54, 154],
+  ['June', 112, 109, 79, 129]],
+  columns=['month', 'clinic_east',
+           'clinic_north', 'clinic_south',
+           'clinic_west']
+)
+
+df2 = df.loc[[1, 3, 5]]
+
+# print(df2)
+
+df3 = df2.reset_index()
+
+print(df3)
+
+df2.reset_index(inplace = True, drop = True)
+
+print(df2)
+
+
+
+Review
+You’ve completed the lesson! 
+You’ve just learned the basics of working with a single table in Pandas, including:
+
+Create a table from scratch
+Loading data from another file
+Selecting certain rows or columns of a table
+Let’s practice what you’ve learned.
+
+Instructions
+
+1. In this example, you’ll be the data analyst for ShoeFly.com, a fictional online shoe store. 
+You’ve seen this data; now it’s your turn to work with it!
+
+Load the data from shoefly.csv into the variable orders.
+
+
+2. Inspect the first 5 lines of the data.
+
+
+3. Your marketing department wants to send out an email blast to everyone who ordered shoes!
+Select all of the email addresses from the column email and save them to a variable called emails.
+
+
+4. Frances Palmer claims that her order was wrong. What did Frances Palmer order?
+Use logic to select that row of orders and save it to the variable frances_palmer.
+
+
+5. We need some customer reviews for our comfortable shoes. 
+Select all orders for shoe_type: clogs, boots, and ballet flats and save them to the variable comfy_shoes.
+
+Code: 
+import codecademylib3
+import pandas as pd
+
+orders = pd.read_csv('shoefly.csv')
+
+print(orders.head())
+
+emails = orders.email
+
+frances_palmer = orders[(orders.first_name == 'Frances') & (orders.last_name == 'Palmer')]
+
+comfy_shoes = orders[orders.shoe_type.isin(['clogs','boots', 'ballet flats'])]
+
+print(comfy_shoes)
