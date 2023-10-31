@@ -699,4 +699,4 @@ frances_palmer = orders[(orders.first_name == 'Frances') & (orders.last_name == 
 
 comfy_shoes = orders[orders.shoe_type.isin(['clogs','boots', 'ballet flats'])]
 
-print(comfy_shoes)
+print(comfy_shoes.reset_index(drop = True)
