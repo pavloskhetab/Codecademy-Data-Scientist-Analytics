@@ -1,0 +1,266 @@
+Modifying DataFrames
+In the previous lesson, you learned what a DataFrame is and how to select subsets of data from one.
+
+In this lesson, you’ll learn how to modify an existing DataFrame. Some of the skills you’ll learn include:
+
+Adding columns to a DataFrame
+Using lambda functions to calculate complex quantities
+Renaming columns
+Instructions
+Examine the Pandas code displayed to the right in a Jupyter Notebook. For now, don’t worry about understanding every line. 
+These are just some examples of what you’ll be able to do by the end of this lesson!
+
+When you’re ready, continue to the next exercise!
+
+Code:
+Modifying DataFrames in Pandas
+Once again, we'll be working with data from ShoeFly.com, a fictional online shoe store
+
+# Before we analyze anything, we need to import pandas
+# and load our data
+import pandas as pd
+
+df = pd.read_csv('shoefly_messy_orders.csv')
+Let's examine the first 10 rows of our data!
+
+df.head(10)
+id	first_name	last_name	email	shoe_type	shoe_material	shoe_color
+0	74970	Albert	Crane	ACrane1998@gmail.com	ballet flats	fabric	white
+1	28140	Lauren	Wise	LWise1972@gmail.com	Sandals	fabric	black
+2	16841	Bryan	Maldonado	Bryan.Maldonado@gmail.com	STILLETTOS	fabric	navy
+3	19695	Nancy	Talley	NTalley1988@gmail.com	wedges	fabric	black
+4	61287	Catherine	Brown	CBrown1981@gmail.com	Boots	faux-leather	white
+5	57141	Doris	Newton	DN6902@gmail.com	Sandals	fabric	navy
+6	52132	Billy	Mcintyre	BM6854@hotmail.com	wedges	faux-leather	navy
+7	25486	Sarah	Kaufman	SK8490@gmail.com	Sandals	leather	navy
+8	12421	Susan	Leblanc	SusanLeblanc40@outlook.com	CLOGS	fabric	red
+9	36234	Benjamin	Newton	BenjaminNewton59@aol.com	CLOGS	faux-leather	navy
+Oh no! It looks like our data entry was a little sloppy. Some of the shoe types are all caps, and others are all lower case. 
+This is messy, and we'd like to clean it up. We can do this by applying string.lower to the column shoe_type.
+
+import string
+
+df['shoe_type'] = df.shoe_type.apply(string.lower)
+
+df.head(10)
+id	first_name	last_name	email	shoe_type	shoe_material	shoe_color
+0	74970	Albert	Crane	ACrane1998@gmail.com	ballet flats	fabric	white
+1	28140	Lauren	Wise	LWise1972@gmail.com	sandals	fabric	black
+2	16841	Bryan	Maldonado	Bryan.Maldonado@gmail.com	stillettos	fabric	navy
+3	19695	Nancy	Talley	NTalley1988@gmail.com	wedges	fabric	black
+4	61287	Catherine	Brown	CBrown1981@gmail.com	boots	faux-leather	white
+5	57141	Doris	Newton	DN6902@gmail.com	sandals	fabric	navy
+6	52132	Billy	Mcintyre	BM6854@hotmail.com	wedges	faux-leather	navy
+7	25486	Sarah	Kaufman	SK8490@gmail.com	sandals	leather	navy
+8	12421	Susan	Leblanc	SusanLeblanc40@outlook.com	clogs	fabric	red
+9	36234	Benjamin	Newton	BenjaminNewton59@aol.com	clogs	faux-leather	navy
+Much better! Now all of the fields are lower case.
+
+Our factory says that they are not able to stock fabric shoes anymore. Let's add a column in_stock, 
+which is True for all non-fabric shoes and False for fabric shoes.
+
+df['in_stock'] = df.shoe_material.apply(lambda x: False if x == 'fabric' else True)
+
+df.head(10)
+id	first_name	last_name	email	shoe_type	shoe_material	shoe_color	in_stock
+0	74970	Albert	Crane	ACrane1998@gmail.com	ballet flats	fabric	white	False
+1	28140	Lauren	Wise	LWise1972@gmail.com	sandals	fabric	black	False
+2	16841	Bryan	Maldonado	Bryan.Maldonado@gmail.com	stillettos	fabric	navy	False
+3	19695	Nancy	Talley	NTalley1988@gmail.com	wedges	fabric	black	False
+4	61287	Catherine	Brown	CBrown1981@gmail.com	boots	faux-leather	white	True
+5	57141	Doris	Newton	DN6902@gmail.com	sandals	fabric	navy	False
+6	52132	Billy	Mcintyre	BM6854@hotmail.com	wedges	faux-leather	navy	True
+7	25486	Sarah	Kaufman	SK8490@gmail.com	sandals	leather	navy	True
+8	12421	Susan	Leblanc	SusanLeblanc40@outlook.com	clogs	fabric	red	False
+9	36234	Benjamin	Newton	BenjaminNewton59@aol.com	clogs	faux-leather	navy	True
+Our marketing department wants to announce some purchases on our Twitter feed.
+
+Let's add a description to each row that they can use. It will show up in a new column called "description".
+
+df['description'] = df.apply(lambda row: "{} {} bought {} {} {}"\
+    .format(row.first_name,
+            row.last_name,
+            row.shoe_color,
+            row.shoe_material,
+            row.shoe_type),
+    axis=1)
+df.head(10)
+id	first_name	last_name	email	shoe_type	shoe_material	shoe_color	in_stock	description
+0	74970	Albert	Crane	ACrane1998@gmail.com	ballet flats	fabric	white	False	Albert Crane bought white fabric ballet flats
+1	28140	Lauren	Wise	LWise1972@gmail.com	sandals	fabric	black	False	Lauren Wise bought black fabric sandals
+2	16841	Bryan	Maldonado	Bryan.Maldonado@gmail.com	stillettos	fabric	navy	False	Bryan Maldonado bought navy fabric stillettos
+3	19695	Nancy	Talley	NTalley1988@gmail.com	wedges	fabric	black	False	Nancy Talley bought black fabric wedges
+4	61287	Catherine	Brown	CBrown1981@gmail.com	boots	faux-leather	white	True	Catherine Brown bought white faux-leather boots
+5	57141	Doris	Newton	DN6902@gmail.com	sandals	fabric	navy	False	Doris Newton bought navy fabric sandals
+6	52132	Billy	Mcintyre	BM6854@hotmail.com	wedges	faux-leather	navy	True	Billy Mcintyre bought navy faux-leather wedges
+7	25486	Sarah	Kaufman	SK8490@gmail.com	sandals	leather	navy	True	Sarah Kaufman bought navy leather sandals
+8	12421	Susan	Leblanc	SusanLeblanc40@outlook.com	clogs	fabric	red	False	Susan Leblanc bought red fabric clogs
+9	36234	Benjamin	Newton	BenjaminNewton59@aol.com	clogs	faux-leather	navy	True	Benjamin Newton bought navy faux-leather clogs
+
+
+
+Adding a Column I
+Sometimes, we want to add a column to an existing DataFrame. We might want to add new information or perform a calculation based on the data that we already have.
+
+One way that we can add a new column is by giving a list of the same length as the existing DataFrame.
+
+Suppose we own a hardware store called The Handy Woman and have a DataFrame containing inventory information:
+
+Product ID	Product Description	Cost to Manufacture	Price
+1	3 inch screw	0.50	0.75
+2	2 inch nail	0.10	0.25
+3	hammer	3.00	5.50
+4	screwdriver	2.50	3.00
+
+It looks like the actual quantity of each product in our warehouse is missing!
+
+Let’s use the following code to add that information to our DataFrame.
+
+df['Quantity'] = [100, 150, 50, 35]
+
+Our new DataFrame looks like this:
+
+Product ID	Product Description	Cost to Manufacture	Price	Quantity
+1	3 inch screw	0.50	0.75	100
+2	2 inch nail	0.10	0.25	150
+3	hammer	3.00	5.50	50
+4	screwdriver	2.50	3.00	35
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.DataFrame([
+  [1, '3 inch screw', 0.5, 0.75],
+  [2, '2 inch nail', 0.10, 0.25],
+  [3, 'hammer', 3.00, 5.50],
+  [4, 'screwdriver', 2.50, 3.00]
+],
+  columns=['Product ID', 'Description', 'Cost to Manufacture', 'Price']
+)
+
+# Add columns here
+df['Sold in Bulk?'] = ['Yes', 'Yes', 'No', 'No']
+
+print(df)
+
+
+
+Adding a Column II
+We can also add a new column that is the same for all rows in the DataFrame. Let’s return to our inventory example:
+
+Product ID	Product Description	Cost to Manufacture	Price
+1	3 inch screw	0.50	0.75
+2	2 inch nail	0.10	0.25
+3	hammer	3.00	5.50
+4	screwdriver	2.50	3.00
+
+Suppose we know that all of our products are currently in-stock. We can add a column that says this:
+
+df['In Stock?'] = True
+
+Now all of the rows have a column called In Stock? with value True.
+
+Product ID	Product Description	Cost to Manufacture	Price	In Stock?
+1	3 inch screw	0.50	0.75	True
+2	2 inch nail	0.10	0.25	True
+3	hammer	3.00	5.50	True
+4	screwdriver	2.50	3.00	True
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.DataFrame([
+  [1, '3 inch screw', 0.5, 0.75],
+  [2, '2 inch nail', 0.10, 0.25],
+  [3, 'hammer', 3.00, 5.50],
+  [4, 'screwdriver', 2.50, 3.00]
+],
+  columns=['Product ID', 'Description', 'Cost to Manufacture', 'Price']
+)
+
+# Add columns here
+df['Is taxed?'] = 'Yes'
+
+print(df)
+
+
+
+Adding a Column III
+Finally, you can add a new column by performing a function on the existing columns.
+
+Maybe we want to add a column to our inventory table with the amount of sales tax that we need to charge for each item. The following code multiplies each Price by 0.075, the sales tax for our state:
+
+df['Sales Tax'] = df.Price * 0.075
+
+Now our table has a column called Sales Tax:
+
+Product ID	Product Description	Cost to Manufacture	Price	Sales Tax
+1	3 inch screw	0.50	0.75	0.06
+2	2 inch nail	0.10	0.25	0.02
+3	hammer	3.00	5.50	0.41
+4	screwdriver	2.50	3.00	0.22
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.DataFrame([
+  [1, '3 inch screw', 0.5, 0.75],
+  [2, '2 inch nail', 0.10, 0.25],
+  [3, 'hammer', 3.00, 5.50],
+  [4, 'screwdriver', 2.50, 3.00]
+],
+  columns=['Product ID', 'Description', 'Cost to Manufacture', 'Price']
+)
+
+# Add column here
+df['Margin'] = df['Price'] - df['Cost to Manufacture']
+
+print(df)
+
+
+
+Performing Column Operations
+In the previous exercise, we learned how to add columns to a DataFrame.
+
+Often, the column that we want to add is related to existing columns, but requires a calculation more complex than multiplication or addition.
+
+For example, imagine that we have the following table of customers.
+
+Name	Email
+JOHN SMITH	john.smith@gmail.com
+Jane Doe	jdoe@yahoo.com
+joe schmo	joeschmo@hotmail.com
+It’s a little annoying that the capitalization is different for each row. Perhaps we’d like to make it more consistent by making all of the letters uppercase.
+
+We can use the apply function to apply a function to every value in a particular column. For example, this code overwrites the existing 'Name' columns by applying the function upper to every row in 'Name'.
+
+df['Name'] = df.Name.apply(str.upper)
+
+The result:
+
+Name	Email
+JOHN SMITH	john.smith@gmail.com
+JANE DOE	jdoe@yahoo.com
+JOE SCHMO	joeschmo@hotmail.com
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.DataFrame([
+  ['JOHN SMITH', 'john.smith@gmail.com'],
+  ['Jane Doe', 'jdoe@yahoo.com'],
+  ['joe schmo', 'joeschmo@hotmail.com']
+],
+columns=['Name', 'Email'])
+
+# Add columns here
+df['Lowercase Name'] = df.Name.apply(str.lower)
+
+print(df)
+
+
+
