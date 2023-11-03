@@ -264,3 +264,110 @@ print(df)
 
 
 
+Reviewing Lambda Function
+A lambda function is a way of defining a function in a single line of code. Usually, we would assign them to a variable.
+
+For example, the following lambda function multiplies a number by 2 and then adds 3:
+
+mylambda = lambda x: (x * 2) + 3
+print(mylambda(5))
+
+The output:
+
+> 13
+
+Lambda functions work with all types of variables, not just integers! 
+Here is an example that takes in a string, assigns it to the temporary variable x, and then converts it into lowercase:
+
+stringlambda = lambda x: x.lower()
+print(stringlambda("Oh Hi Mark!"))
+
+The output:
+
+> "oh hi mark!"
+
+Learn more about lambda functions in this article!
+
+Instructions
+Checkpoint 1 Passed
+1.
+Create a lambda function mylambda that returns the first and last letters of a string, 
+assuming the string is at least 2 characters long. For example,
+
+print(mylambda('This is a string'))
+
+should produce:
+
+'Tg'
+
+Code:
+
+mylambda = lambda x: x[0] + x[-1] if len(x) >= 2 else None
+
+print(mylambda('This is a string'))
+
+
+
+Reviewing Lambda Function: If Statements
+We can make our lambdas more complex by using a modified form of an if statement.
+
+Suppose we want to pay workers time-and-a-half for overtime (any work above 40 hours per week). The following function will convert the number of hours into time-and-a-half hours using an if statement:
+
+def myfunction(x):
+    if x > 40:
+        return 40 + (x - 40) * 1.50
+    else:
+        return x
+
+Below is a lambda function that does the same thing:
+
+myfunction = lambda x: 40 + (x - 40) * 1.50 if x > 40 else x
+
+In general, the syntax for an if function in a lambda function is:
+
+lambda x: [OUTCOME IF TRUE] if [CONDITIONAL] else [OUTCOME IF FALSE]
+
+Code:
+import codecademylib3
+
+mylambda = lambda x: print('Welcome to BattleCity!') if x >= 13 else print('You must be 13 or older')
+
+mylambda(14)
+
+
+
+Applying a Lambda to a Column
+In Pandas, we often use lambda functions to perform complex operations on columns. For example, suppose that we want to create a column containing the email provider for each email address in the following table:
+
+Name	Email
+JOHN SMITH	john.smith@gmail.com
+Jane Doe	jdoe@yahoo.com
+joe schmo	joeschmo@hotmail.com
+We could use the following code with a lambda function and the string method .split():
+
+df['Email Provider'] = df.Email.apply(
+    lambda x: x.split('@')[-1]
+    )
+
+The result would be:
+
+Name	Email	Email Provider
+JOHN SMITH	john.smith@gmail.com	gmail.com
+Jane Doe	jdoe@yahoo.com	yahoo.com
+joe schmo	joeschmo@hotmail.com	hotmail.com
+
+Code:
+import codecademylib3
+import pandas as pd
+
+df = pd.read_csv('employees.csv')
+
+# Add columns here
+get_last_name = lambda x: x.split()[-1]
+
+df['last_name'] = df.name.apply(get_last_name)
+
+print(df)
+
+
+
