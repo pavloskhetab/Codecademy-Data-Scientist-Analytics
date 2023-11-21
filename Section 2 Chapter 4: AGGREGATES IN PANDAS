@@ -225,3 +225,129 @@ print(cheap_shoes)
 
 
 
+Calculating Aggregate Functions IV
+Sometimes, we want to group by more than one column. We can easily do this by passing a list of column names into the groupby method.
+
+Imagine that we run a chain of stores and have data about the number of sales at different locations on different days:
+
+Location	Date	Day of Week	Total Sales
+West Village	February 1	W	400
+West Village	February 2	Th	450
+Chelsea	February 1	W	375
+Chelsea	February 2	Th	390
+We suspect that sales are different at different locations on different days of the week. In order to test this hypothesis, we could calculate the average sales for each store on each day of the week across multiple months. The code would look like this:
+
+df.groupby(['Location', 'Day of Week'])['Total Sales'].mean().reset_index()
+
+The results might look something like this:
+
+Location	Day of Week	Total Sales
+Chelsea	M	402.50
+Chelsea	Tu	422.75
+Chelsea	W	452.00
+…		
+West Village	M	390
+West Village	Tu	400
+…
+
+Code:
+import codecademylib3
+import numpy as np
+import pandas as pd
+
+orders = pd.read_csv('orders.csv')
+
+shoe_counts = orders.groupby(['shoe_type', 'shoe_color']).id.count().reset_index()
+
+print(shoe_counts)
+
+
+
+Pivot Tables
+When we perform a groupby across multiple columns, we often want to change how our data is stored. For instance, recall the example where we are running a chain of stores and have data about the number of sales at different locations on different days:
+
+Location	Date	Day of Week	Total Sales
+West Village	February 1	W	400
+West Village	February 2	Th	450
+Chelsea	February 1	W	375
+Chelsea	February 2	Th	390
+We suspected that there might be different sales on different days of the week at different stores, so we performed a `groupby` across two different columns (`Location` and `Day of Week`). This gave us results that looked like this:
+Location	Day of Week	Total Sales
+Chelsea	M	300
+Chelsea	Tu	310
+Chelsea	W	375
+Chelsea	Th	390
+…		
+West Village	Th	450
+West Village	F	390
+West Village	Sa	250
+…		
+In order to test our hypothesis, it would be more useful if the table was formatted like this:
+Location	M	Tu	W	Th	F	Sa	Su
+Chelsea	300	310	375	390	300	150	175
+West Village	300	310	400	450	390	250	200
+…							
+Reorganizing a table in this way is called pivoting. The new table is called a pivot table.
+
+In Pandas, the command for pivot is:
+
+df.pivot(columns='ColumnToPivot',
+         index='ColumnToBeRows',
+         values='ColumnToBeValues')
+
+For our specific example, we would write the command like this:
+
+# First use the groupby statement:
+unpivoted = df.groupby(['Location', 'Day of Week'])['Total Sales'].mean().reset_index()
+# Now pivot the table
+pivoted = unpivoted.pivot(
+    columns='Day of Week',
+    index='Location',
+    values='Total Sales')
+
+Just like with groupby, the output of a pivot command is a new DataFrame, but the indexing tends to be “weird”, so we usually follow up with .reset_index().
+
+For more on the pivot function, see the pandas documentation.[https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html]
+
+Code:
+import codecademylib3
+import numpy as np
+import pandas as pd
+
+orders = pd.read_csv('orders.csv')
+
+shoe_counts = orders.groupby(['shoe_type', 'shoe_color']).id.count().reset_index()
+
+print(shoe_counts)
+
+shoe_counts_pivot = shoe_counts.pivot(columns = 'shoe_color', index = 'shoe_type', values = 'id').reset_index()
+
+print(shoe_counts_pivot)
+
+
+
+Review
+This lesson introduced you to aggregates in Pandas. You learned:
+
+How to perform aggregate statistics over individual rows with the same value using groupby.
+How to rearrange a DataFrame into a pivot table, a great way to compare data across two dimensions.
+
+Code:
+import codecademylib3
+import pandas as pd
+
+user_visits = pd.read_csv('page_visits.csv')
+
+print(user_visits.head())
+
+click_source = user_visits.groupby('utm_source').id.count().reset_index()
+
+print(click_source)
+
+click_source_by_month = user_visits.groupby(['utm_source', 'month']).id.count().reset_index()
+
+print(click_source_by_month)
+
+click_source_by_month_pivot = click_source_by_month.pivot(columns = 'month', index = 'utm_source', values = 'id').reset_index()
+
+print(click_source_by_month_pivot)
