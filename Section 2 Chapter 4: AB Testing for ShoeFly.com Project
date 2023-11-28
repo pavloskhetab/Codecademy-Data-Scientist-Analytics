@@ -100,3 +100,13 @@ print(experimental_groups_is_click_grouped_pivot)
 experimental_groups_is_click_grouped_pivot['percent_clicked'] = (experimental_groups_is_click_grouped_pivot[True] / (experimental_groups_is_click_grouped_pivot[True] + experimental_groups_is_click_grouped_pivot[False])) * 100
 
 print(experimental_groups_is_click_grouped_pivot)
+
+# Task 9)
+
+a_clicks = ad_clicks[ad_clicks['experimental_group'] == 'A']
+
+print(a_clicks)
+
+b_clicks = ad_clicks[ad_clicks['experimental_group'] == 'B']
+
+print(b_clicks)
