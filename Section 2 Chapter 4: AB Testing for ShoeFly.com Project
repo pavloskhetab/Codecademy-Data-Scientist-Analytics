@@ -62,33 +62,40 @@ import pandas as pd
 
 ad_clicks = pd.read_csv('ad_clicks.csv')
 
+# Task 1)
 print(ad_clicks.head())
 
+# Task 2)
 utm_source_views = ad_clicks.groupby('utm_source').user_id.count().reset_index()
 
 print(utm_source_views)
 
+# Task 3)
 ad_clicks['is_click'] = ad_clicks['ad_click_timestamp'].notnull()
 
 print(ad_clicks)
 
+# Task 4)
 clicks_by_source = ad_clicks.groupby(['utm_source', 'is_click']).user_id.count().reset_index()
 
 print(clicks_by_source)
 
+# Task 5)
 clicks_pivot = clicks_by_source.pivot(columns = 'is_click', index = 'utm_source', values = 'user_id')
 
 print(clicks_pivot)
 
+# Task 6)
 clicks_pivot['percent_clicked'] = (clicks_pivot[True] / (clicks_pivot[True] + clicks_pivot[False])) * 100
 
 print(clicks_pivot)
 
-
+# Task 7)
 experimental_groups_grouped = ad_clicks.groupby('experimental_group').user_id.count().reset_index()
 
 print(experimental_groups_grouped)
 
+# Task 8)
 experimental_groups_is_click_grouped = ad_clicks.groupby(['experimental_group', 'is_click']).user_id.count().reset_index()
 
 print(experimental_groups_is_click_grouped)
@@ -102,7 +109,6 @@ experimental_groups_is_click_grouped_pivot['percent_clicked'] = (experimental_gr
 print(experimental_groups_is_click_grouped_pivot)
 
 # Task 9)
-
 a_clicks = ad_clicks[ad_clicks['experimental_group'] == 'A']
 
 print(a_clicks)
@@ -110,3 +116,21 @@ print(a_clicks)
 b_clicks = ad_clicks[ad_clicks['experimental_group'] == 'B']
 
 print(b_clicks)
+
+# Task 10)
+# Calculate the total number of users and users who clicked for each day in group A
+a_clicks_by_day = a_clicks.groupby('day').agg(total_users=('user_id', 'count'), clicks=('is_click', 'sum')).reset_index()
+
+b_clicks_by_day = b_clicks.groupby('day').agg(total_users=('user_id', 'count'), clicks=('is_click', 'sum')).reset_index()
+
+
+# Calculate the percentage of users who clicked for each day in group A
+a_clicks_by_day['percent_clicked'] = (a_clicks_by_day['clicks'] / a_clicks_by_day['total_users']) * 100
+
+b_clicks_by_day['percent_clicked'] = (b_clicks_by_day['clicks'] / b_clicks_by_day['total_users']) * 100
+
+print(a_clicks_by_day)
+print(b_clicks_by_day)
+
+# Task 11)
+# I recommend using Ad A as there's more % of ads clicked.
