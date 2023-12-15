@@ -369,3 +369,117 @@ print(store_a_b_outer)
 
 
 
+Left and Right Merge
+Let’s return to the merge of Company A and Company B.
+
+Left Merge
+Suppose we want to identify which customers are missing phone information. We would want a list of all customers who have email, but don’t have phone.
+
+We could get this by performing a Left Merge. A Left Merge includes all rows from the first (left) table, but only rows from the second (right) table that match the first table.
+
+For this command, the order of the arguments matters. If the first DataFrame is company_a and we do a left join, we’ll only end up with rows that appear in company_a.
+
+By listing company_a first, we get all customers from Company A, and only customers from Company B who are also customers of Company A.
+
+pd.merge(company_a, company_b, how='left')
+
+The result would look like this:
+
+name	email	phone
+Sally Sparrow	sally.sparrow@gmail.com	None
+Peter Grant	pgrant@yahoo.com	212-345-6789
+Leslie May	leslie_may@gmail.com	626-987-6543
+Now let’s say we want a list of all customers who have phone but no email. We can do this by performing a Right Merge.
+
+Right Merge
+Right merge is the exact opposite of left merge. Here, the merged table will include all rows from the second (right) table, but only rows from the first (left) table that match the second table.
+
+By listing company_a first and company_b second, we get all customers from Company B, and only customers from Company A who are also customers of Company B.
+
+pd.merge(company_a, company_b, how="right")
+
+The result would look like this:
+
+name	email	phone
+Peter Grant	pgrant@yahoo.com	212-345-6789
+Leslie May	leslie_may@gmail.com	626-987-6543
+Aaron Burr	None	303-456-7891
+
+Code:
+import codecademylib3
+import pandas as pd
+
+store_a = pd.read_csv('store_a.csv')
+print(store_a)
+
+store_b = pd.read_csv('store_b.csv')
+print(store_b)
+
+
+store_a_b_left = pd.merge(store_a, store_b, how = 'left')
+
+store_b_a_left = pd.merge(store_b, store_a, how = 'left')
+
+print(store_a_b_left)
+print(store_b_a_left)
+
+
+
+Concatenate DataFrames
+Sometimes, a dataset is broken into multiple tables. For instance, data is often split into multiple CSV files so that each download is smaller.
+
+When we need to reconstruct a single DataFrame from multiple smaller DataFrames, we can use the method pd.concat([df1, df2, df3, ...]). This method only works if all of the columns are the same in all of the DataFrames.
+
+For instance, suppose that we have two DataFrames:
+
+df1
+name	email
+Katja Obinger	k.obinger@gmail.com
+Alison Hendrix	alisonH@yahoo.com
+Cosima Niehaus	cosi.niehaus@gmail.com
+Rachel Duncan	rachelduncan@hotmail.com
+df2
+name	email
+Jean Gray	jgray@netscape.net
+Scott Summers	ssummers@gmail.com
+Kitty Pryde	kitkat@gmail.com
+Charles Xavier	cxavier@hotmail.com
+If we want to combine these two DataFrames, we can use the following command:
+
+pd.concat([df1, df2])
+
+That would result in the following DataFrame:
+
+name	email
+Katja Obinger	k.obinger@gmail.com
+Alison Hendrix	alisonH@yahoo.com
+Cosima Niehaus	cosi.niehaus@gmail.com
+Rachel Duncan	rachelduncan@hotmail.com
+Jean Gray	jgray@netscape.net
+Scott Summers	ssummers@gmail.com
+Kitty Pryde	kitkat@gmail.com
+Charles Xavier	cxavier@hotmail.com
+
+Code:
+import codecademylib3
+import pandas as pd
+
+bakery = pd.read_csv('bakery.csv')
+print(bakery)
+
+ice_cream = pd.read_csv('ice_cream.csv')
+print(ice_cream)
+
+menu = pd.concat([bakery, ice_cream])
+
+print(menu)
+
+
+
+Review
+This lesson introduced some methods for combining multiple DataFrames:
+
+Creating a DataFrame made by matching the common columns of two DataFrames is called a merge
+We can specify which columns should be matches by using the keyword arguments left_on and right_on
+We can combine DataFrames whose rows don’t all match using left, right, and outer merges and the how keyword argument
+We can stack or concatenate DataFrames with the same columns using pd.concat
