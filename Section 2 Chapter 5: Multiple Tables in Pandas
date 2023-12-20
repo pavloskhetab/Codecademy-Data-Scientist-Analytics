@@ -483,3 +483,24 @@ Creating a DataFrame made by matching the common columns of two DataFrames is ca
 We can specify which columns should be matches by using the keyword arguments left_on and right_on
 We can combine DataFrames whose rows don’t all match using left, right, and outer merges and the how keyword argument
 We can stack or concatenate DataFrames with the same columns using pd.concat
+
+Code:
+import codecademylib3
+import pandas as pd
+
+visits = pd.read_csv('visits.csv',
+                        parse_dates=[1])
+checkouts = pd.read_csv('checkouts.csv',
+                        parse_dates=[1])
+              
+# Part 1: print to inspect each DataFrame
+print(visits.head(10))
+print(checkouts.head(10))
+
+# Part 2: merge visits and checkouts
+v_to_c = pd.merge(visits, checkouts)
+
+# Part 3: define the column time to be the different between checkout time and visit time
+v_to_c['time'] = v_to_c.checkout_time - v_to_c.visit_time
+
+print(v_to_c.time.mean())
