@@ -97,3 +97,83 @@ null_count_cart_time = visits_cart_left_merge['cart_time'].isnull().sum()
 # null_count_cart_time = visits_cart_left_merge[visits_cart_left_merge['cart_time'].isnull()]
 
 print(null_count_cart_time)
+
+
+# Part 5: Find pecentage of users who visited but did not place a t-shirt in their cart
+percentage_visitors_not_place_order = float(null_count_cart_time)/len(visits_cart_left_merge) * 100
+
+print(percentage_visitors_not_place_order)
+
+print(f"The percentage of users who visited but did not place a t-shirt in their cart is: {percentage_visitors_not_place_order:.2f}%")
+
+
+# Part 6: Left merge count and checkout and count null values. What percentage of users put items in their cart but did not proceed to checkout?
+
+cart_left_merge_checkout = pd.merge(cart, checkout, how = 'left')
+
+print(cart_left_merge_checkout)
+
+print(len(cart_left_merge_checkout))
+
+null_count_cart_checkout_time = cart_left_merge_checkout['checkout_time'].isnull().sum()
+
+percentage_visitors_not_place_order_cart_checkout = float(null_count_cart_checkout_time)/len(cart_left_merge_checkout) * 100
+
+print(percentage_visitors_not_place_order_cart_checkout)
+
+print(f"The percentage of users who placed a t-shirt in their cart but did not proceed with checkout is: {percentage_visitors_not_place_order_cart_checkout:.2f}%")
+
+
+# Part 7: Merge all stages using a series of left merges to a variable called 'all_data'
+
+all_data = pd.merge(visits, cart, how='left', on='user_id').merge(checkout, how = 'left').merge(purchase, how = 'left')
+
+print(all_data.head())
+
+
+# Part 8: What percentage of users proceeded to checkout, but did not purchase a t-shirt?
+print(len(all_data))
+
+null_count_checkout_purchase_time = all_data['purchase_time'].isnull().sum()
+
+percentage_visitors_checkout_no_purchase = float(null_count_checkout_purchase_time)/len(all_data) * 100
+
+print(percentage_visitors_checkout_no_purchase)
+
+print(f"The percentage of users who checked out a t-shirt in their cart but did not proceed with a purchase is: {percentage_visitors_checkout_no_purchase:.2f}%")
+
+
+
+'''
+The weakest step in the funnel is the one with the highest percentage of users not completing it. In this case, it's the step where users checked out a t-shirt in their cart but did not proceed with a purchase, with a percentage of 79.05%. This suggests that a significant portion of users who reached the checkout stage did not complete the purchase.
+
+Strategies to Improve Checkout Conversion:
+
+Optimize Checkout Process: Streamline and simplify the steps.
+
+Offer Incentives: Provide discounts, free shipping, or promotions.
+
+Retargeting and Email Campaigns: Remind users with retargeting and use email campaigns.
+
+Improve Trust and Security: Display trust badges and security seals.
+
+Address Common Objections: Provide solutions to common concerns.
+
+Enhance Mobile Experience: Optimize for seamless mobile usage.
+'''
+
+
+# Part 10: Using the giant merged DataFrame all_data that you created, let’s calculate the average time from initial visit to final purchase. Add a column that is the difference between purchase_time and visit_time.
+
+all_data['time_to_purchase'] = all_data.purchase_time - all_data.visit_time
+
+
+# Part 11: Print time to purchase results
+print(all_data.time_to_purchase)
+
+
+# Part 12: Calculate the average time to purchase by applying the .mean() function to your new column.
+
+average_time_to_purchase = all_data.time_to_purchase.mean()
+
+print(average_time_to_purchase)
