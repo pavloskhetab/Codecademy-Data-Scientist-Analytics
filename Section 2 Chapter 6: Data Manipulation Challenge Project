@@ -1,0 +1,165 @@
+This Is Jeopardy!
+Overview
+This project is slightly different than others you have encountered thus far on Codecademy. Instead of a step-by-step tutorial, this project contains a series of open-ended requirements which describe the project you’ll be building. There are many possible ways to correctly fulfill all of these requirements, and you should expect to use the internet, Codecademy, and other resources when you encounter a problem that you cannot easily solve.
+
+Project Goals
+You will work to write several functions that investigate a dataset of Jeopardy! questions and answers. Filter the dataset for topics that you’re interested in, compute the average difficulty of those questions, and train to become the next Jeopardy champion!
+
+
+Prerequisites
+1. In order to complete this project, you should have completed the Pandas lessons in the Analyze Data with Python Skill Path. You can also find those lessons in the Data Analysis with Pandas course or the Data Scientist Career Path.
+
+Finally, the Practical Data Cleaning course may also be helpful.
+
+
+Project Requirements
+2. We’ve provided a csv file containing data about the game show Jeopardy! in a file named jeopardy.csv. Load the data into a DataFrame and investigate its contents. Try to print out specific columns.
+
+Note that in order to make this project as “real-world” as possible, we haven’t modified the data at all — we’re giving it to you exactly how we found it. As a result, this data isn’t as “clean” as the datasets you normally find on Codecademy. More specifically, there’s something odd about the column names. After you figure out the problem with the column names, you may want to rename them to make your life easier the rest of the project.
+
+In order to display the full contents of a column, we’ve added this line of code to the top of your file:
+
+pd.set_option('display.max_colwidth', -1)
+
+
+3. Write a function that filters the dataset for questions that contains all of the words in a list of words. For example, when the list ["King", "England"] was passed to our function, the function returned a DataFrame of 152 rows. Every row had the strings "King" and "England" somewhere in its " Question".
+
+Note that in this example, we found 152 rows by filtering the entire dataset. You can download the entire dataset at the start or end of this project. The dataset used on Codecademy is only a fraction of the dataset so you won’t find as many rows.
+
+Test your function by printing out the column containing the question of each row of the dataset.
+
+
+4. Test your original function with a few different sets of words to try to find some ways your function breaks. Edit your function so it is more robust.
+
+For example, think about capitalization. We probably want to find questions that contain the word "King" or "king".
+
+You may also want to check to make sure you don’t find rows that contain substrings of your given words. For example, our function found a question that didn’t contain the word "king", however it did contain the word "viking" — it found the "king" inside "viking". Note that this also comes with some drawbacks — you would no longer find questions that contained words like "England's".
+
+
+5. We may want to eventually compute aggregate statistics, like .mean() on the " Value" column. But right now, the values in that column are strings. Convert the " Value" column to floats. If you’d like to, you can create a new column with the float values.
+
+Now that you can filter the dataset of question, use your new column that contains the float values of each question to find the “difficulty” of certain topics. For example, what is the average value of questions that contain the word "King"?
+
+Make sure to use the dataset that contains the float values as the dataset you use in your filtering function.
+
+
+6. Write a function that returns the count of the unique answers to all of the questions in a dataset. For example, after filtering the entire dataset to only questions containing the word "King", we could then find all of the unique answers to those questions. The answer “Henry VIII” appeared 3 times and was the most common answer.
+
+
+7. Explore from here! This is an incredibly rich dataset, and there are so many interesting things to discover. There are a few columns that we haven’t even started looking at yet. Here are some ideas on ways to continue working with this data:
+
+Investigate the ways in which questions change over time by filtering by the date. How many questions from the 90s use the word "Computer" compared to questions from the 2000s?
+Is there a connection between the round and the category? Are you more likely to find certain categories, like "Literature" in Single Jeopardy or Double Jeopardy?
+Build a system to quiz yourself. Grab random questions, and use the input function to get a response from the user. Check to see if that response was right or wrong. Note that you can’t do this on the Codecademy platform — to do this, download the data, and write and run the code on your own computer!
+
+Solution
+8. Compare your program to our sample solution code - remember, that your program might look different from ours (and probably will) and that’s okay!
+
+Solution
+9. Great work! Visit our forums to compare your project to our sample solution code. You can also learn how to host your own solution on GitHub so you can share it with other learners! Your solution might look different from ours, and that’s okay! 
+There are multiple ways to solve these projects, and you’ll learn more by seeing others’ code.
+
+Code:
+import numpy as np
+import pandas as pd
+pd.set_option('display.max_colwidth', -1)
+
+# Part 2
+jeopardy = pd.read_csv('jeopardy.csv')
+
+print(jeopardy.head())
+
+jeopardy_renamed = jeopardy.rename(columns = { 'Show Number' : 'show_number', ' Air Date' : 'air_date', ' Round' : 'round', ' Category' :  'category', ' Value' : 'value', ' Question' : 'question', ' Answer' : 'answer'})
+
+# Make sure 'air_date' is in datetime format
+jeopardy_renamed['air_date'] = pd.to_datetime(jeopardy_renamed['air_date'])
+
+# After renaming the columnns
+print(jeopardy_renamed.columns)
+
+# Part 3
+def filter_questions(words_list, df):
+  # Convert the list of words to lowercase for case-insensitive matching
+  words_list_lower = [word.lower() for word in words_list]
+  
+  # Use a lambda function with all() to check if all elements are in the question
+  filter_condition = lambda x: all(word in x.lower() for word in words_list_lower)
+    
+  # Apply the lambda function to filter the DataFrame
+  filtered_df = df[df['question'].apply(filter_condition)]
+    
+  return filtered_df
+
+# Example usage with the list ["King", "England"]
+filtered_df_example = filter_questions(["King", "England"], jeopardy_renamed)
+
+# Display the questions from the filtered DataFrame
+print(filtered_df_example['question'])
+
+# Part 4
+filtered_df_example2 = filter_questions(["England's"], jeopardy_renamed)
+
+print(filtered_df_example2['question'])
+
+# Part 5
+print(jeopardy_renamed["value"].head())
+
+# Remove dollar sign, replace 'None' with NaN, and convert 'value' column to float
+jeopardy_renamed["float_values"] = pd.to_numeric(jeopardy_renamed["value"].replace('[\$,]', '', regex=True).replace('None', np.nan), errors='coerce')
+
+# Display the DataFrame
+print(jeopardy_renamed[['value', 'float_values']])
+
+# Part 6
+filtered_df_king = filter_questions(["King"], jeopardy_renamed)
+
+def filter_and_count_unique_answers(words_list, df):
+    # Reuse the existing filter_questions function
+    filtered_df = filter_questions(words_list, df)
+    
+    # Count unique answers in the filtered DataFrame
+    unique_answers_counts = filtered_df['answer'].value_counts()
+    
+    return filtered_df, unique_answers_counts
+
+filtered_df_king, unique_answers_count_king = filter_and_count_unique_answers(["King"], jeopardy_renamed)
+
+# Display the filtered DataFrame and unique answers count
+print("Filtered DataFrame:")
+print(filtered_df_king[['question', 'answer']])
+
+print("\nUnique Answers Count:")
+print(unique_answers_count_king)
+
+# Part 7:
+# Investigate changes over time
+# Questions with the word "Computer" in the 90s vs. 2000s:
+
+print(jeopardy_renamed['air_date'])
+
+def filter_questions_by_date_range(df, start_date, end_date):
+    # Convert start_date and end_date to datetime objects
+    start_date = pd.to_datetime(start_date)
+    end_date = pd.to_datetime(end_date)
+
+    # Filter the DataFrame based on the date range
+    filtered_df = df[df['air_date'].between(start_date, end_date)]
+
+    return filtered_df
+
+# Filter questions based on the date range
+filtered_questions_90s = filter_questions_by_date_range(jeopardy_renamed, '1990-01-01', '1999-12-31')
+filtered_questions_2000s = filter_questions_by_date_range(jeopardy_renamed, '2000-01-01', '2009-12-31')
+
+# Further filter based on the word "Computer"
+filtered_computer_questions_90s = filter_questions(["Computer"], filtered_questions_90s)
+filtered_computer_questions_2000s = filter_questions(["Computer"], filtered_questions_2000s)
+
+# Count the number of questions for each decade
+count_computer_questions_90s = len(filtered_computer_questions_90s)
+count_computer_questions_2000s = len(filtered_computer_questions_2000s)
+
+# Display the results
+print("Number of questions with the word 'Computer' in the 90s:", count_computer_questions_90s)
+
+print("Number of questions with the word 'Computer' in the 2000s:", count_computer_questions_2000s)
