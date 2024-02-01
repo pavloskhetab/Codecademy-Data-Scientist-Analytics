@@ -142,3 +142,24 @@ The id field may also cause confusion. It’s a number, but it’s not a count o
 Rather, ‘id’ is a categorical variable since it is describing each observation in the same way that the name is.
 
 Let’s go over our Netflix dataset to get a little more practice working with categorical variables.
+
+Code:
+import codecademylib3
+
+# Import pandas with alias
+import pandas as pd
+
+# Import dataset as a Pandas dataframe
+movies = pd.read_csv("netflix_movies.csv")
+
+# View the first five rows of the dataframe
+print(movies.head())
+
+# Print the unique values in the country column
+print(movies.country.unique())
+
+# Set the correct value for country_variable_type
+country_variable_type = 'nominal'
+
+
+
