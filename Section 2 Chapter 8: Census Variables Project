@@ -110,5 +110,10 @@ census['birth_year'] = census['birth_year'].astype(int)
 print(census.dtypes)
 
 # 7. Find and print the average birth year of the respondent to the cesnus
-print(census['birth_year'].mean())
+print('Mean Birth Year: ' + str(census['birth_year'].mean()))
+
+# 8. Convert the higher_tax variable to the 'category' data type with the following order strongly disagree < disagree < neutral < agree < strongly agree. Print the new order using the .unique method.
+census['higher_tax'] = pd.Categorical(census['higher_tax'], ['strongly disagree', 'disagree', 'neutral',  'agree', 'strongly agree'], ordered = True)
+
+print(census['higher_tax'].unique())
 
