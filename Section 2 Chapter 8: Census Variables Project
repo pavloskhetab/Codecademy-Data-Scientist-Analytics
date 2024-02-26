@@ -117,3 +117,8 @@ census['higher_tax'] = pd.Categorical(census['higher_tax'], ['strongly disagree'
 
 print(census['higher_tax'].unique())
 
+# 9. Find the median value for the higher_tax variable
+census['higher_tax'] = census['higher_tax'].cat.codes
+
+print(census['higher_tax'].median())
+
