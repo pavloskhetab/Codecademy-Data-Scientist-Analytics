@@ -113,12 +113,21 @@ print(census.dtypes)
 print('Mean Birth Year: ' + str(census['birth_year'].mean()))
 
 # 8. Convert the higher_tax variable to the 'category' data type with the following order strongly disagree < disagree < neutral < agree < strongly agree. Print the new order using the .unique method.
-census['higher_tax'] = pd.Categorical(census['higher_tax'], ['strongly disagree', 'disagree', 'neutral',  'agree', 'strongly agree'], ordered = True)
+higher_tax_categories = ['strongly disagree', 'disagree', 'neutral',  'agree', 'strongly agree']
+
+census['higher_tax'] = pd.Categorical(census['higher_tax'], higher_tax_categories, ordered = True)
 
 print(census['higher_tax'].unique())
 
 # 9. Find the median value for the higher_tax variable
 census['higher_tax'] = census['higher_tax'].cat.codes
 
-print(census['higher_tax'].median())
+median_index = census['higher_tax'].median()
+
+print(higher_tax_categories[int(median_index)])
+
+# 10  Use One-Hot Encode on marital status to create binary variables of each category. Print the first five rows of the new dataframe.
+marital_status = pd.get_dummies(data = census, columns = ['marital_status'])
+
+print(marital_status.head())
 
