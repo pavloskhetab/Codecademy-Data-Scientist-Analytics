@@ -81,8 +81,9 @@ the wealthy should pay higher taxes based on their age group.
 Code:
 import codecademylib3
 
-# Import pandas with alias
+# Import pandas and numpy with aliases
 import pandas as pd
+import numpy as np
 
 # Read in the census dataframe
 census = pd.read_csv('census_data.csv', index_col = 0)
@@ -127,7 +128,34 @@ median_index = census['higher_tax'].median()
 print(higher_tax_categories[int(median_index)])
 
 # 10  Use One-Hot Encode on marital status to create binary variables of each category. Print the first five rows of the new dataframe.
-marital_status = pd.get_dummies(data = census, columns = ['marital_status'])
+marital_codes = pd.get_dummies(data = census, columns = ['marital_status'])
 
-print(marital_status.head())
+print(marital_codes.head())
 
+# 11. Calculate age_group based on birth year and groups should be in 5 year increments. Then label encode the age_group variable
+current_year = 2024
+census['age'] = current_year - census['birth_year']
+
+# Define the age bins
+min_age = min(census['age']) - 4 
+
+# Set the minimum age as 4 years less than the minimum observed age
+max_age = 100  # Set the maximum age as 100
+bin_width = 5  # Set the width of each age bin as 5 years
+
+# Generate age bins using arange
+age_bins = np.arange(min_age, max_age, bin_width)
+
+# Create age groups using pd.cut
+census['age_group'] = pd.cut(census['age'], bins=age_bins)
+
+# One-hot encode the age_group variable
+age_dummies = pd.get_dummies(census['age_group'], prefix='age_group')
+
+# Concatenate the original DataFrame with the one-hot encoded columns
+census = pd.concat([census, age_dummies], axis = 1)
+
+# Sort the DataFrame by 'age_group'
+census = census.sort_values(by='age_group')
+
+print(census.head())
