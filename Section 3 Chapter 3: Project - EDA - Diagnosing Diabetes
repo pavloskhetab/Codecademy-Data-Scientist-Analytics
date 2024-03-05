@@ -22,6 +22,77 @@ You have two options of completing this assignment. Either here, within Codecade
 in case you’re more comfortable using a Jupyter notebook.If you choose to do this project on your computer instead of Codecademy, 
 you can download what you’ll need by clicking the “Download” button below. If you need help setting up your computer, be sure to check out our setup guides:
 
+
+1. **Initial Inspection:**
+   - Familiarize yourself with the dataset here.
+   - Look at each of the nine columns in the documentation.
+   - What do you expect each data type to be?
+
+2. **Loading Data:**
+   - Load the diabetes data to start exploring.
+   - Load the data in a variable called diabetes_data and print the first few rows.
+   - Note: The data is stored in a file called diabetes.csv.
+
+3. **Number of Columns:**
+   - How many columns (features) does the data contain?
+
+4. **Number of Rows:**
+   - How many rows (observations) does the data contain?
+
+5. **Further Inspection:**
+   - Inspect diabetes_data further.
+   - Do any of the columns in the data contain null (missing) values?
+
+6. **Assumptions and Summary Statistics:**
+   - If you answered no to the question above, not so fast!
+   - Calculate summary statistics on diabetes_data using the .describe() method.
+
+7. **Oddities in Summary Statistics:**
+   - Looking at the summary statistics, do you notice anything odd about the following columns?
+     - Glucose
+     - BloodPressure
+     - SkinThickness
+     - Insulin
+     - BMI
+
+8. **Identifying Outliers:**
+   - Do you spot any other outliers in the data?
+
+9. **Replacing 0 with NaN:**
+   - Let’s see if we can get a more accurate view of the missing values in the data.
+   - Use the following code to replace the instances of 0 with NaN in the five columns mentioned:
+     ```
+     diabetes_data[['Glucose','BloodPressure','SkinThickness','Insulin','BMI']] = diabetes_data[['Glucose','BloodPressure','SkinThickness','Insulin','BMI']].replace(0,np.nan)
+     ```
+
+10. **Checking Missing Values Again:**
+    - Next, check for missing (null) values in all of the columns just like you did in Step 5.
+    - Now how many missing values are there?
+
+11. **Printing Rows with Missing Values:**
+    - Let’s take a closer look at these rows to get a better idea of why some data might be missing.
+    - Print out all of the rows that contain missing (null) values.
+
+12. **Patterns in Missing Data:**
+    - Go through the rows with missing data. Do you notice any patterns or overlaps between the missing data?
+
+13. **Data Types Inspection:**
+    - Next, take a closer look at the data types of each column in diabetes_data.
+    - Does the result match what you would expect?
+
+14. **Outcome Column Data Type:**
+    - To figure out why the Outcome column is of type object (string) instead of type int64, print out the unique values in the Outcome column.
+
+15. **Resolving Outcome Column Issue:**
+    - How might you resolve this issue?
+
+16. **Next Steps:**
+    - Congratulations! In this project, you saw how EDA can help with the initial data inspection and cleaning process. This is an important step as it helps to keep your datasets clean and reliable.
+    - Here are some ways you might extend this project if you’d like:
+      - Use .value_counts() to more fully explore the values in each column.
+      - Investigate other outliers in the data that may be easily overlooked.
+      - Instead of changing the 0 values in the five columns to NaN, try replacing the values with the median or mean of each column.
+
 Code:
 import codecademylib3
 import pandas as pd
