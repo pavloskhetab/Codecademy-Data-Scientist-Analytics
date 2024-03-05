@@ -71,3 +71,20 @@ Outcome
 Class variable (0 or 1) 268 of 768 are 1, the others are 0
 Expected Data type: bool
 '''
+
+# 2. Load data in variable 'diabetes_data' and print first few rows.
+diabetes_data = pd.read_csv('diabetes.csv')
+
+print(diabetes_data.head())
+
+# 3. How many columns(features) does the data contain?
+print(len(diabetes_data.columns))
+
+# 4. How many rows(observations) does the data contain?
+print(len(diabetes_data))
+
+# 5. Do any of the columns in the data contain null(missing) values?
+print(diabetes_data.isnull().sum())
+
+# 6. While the .isnull().sum() indicates none of the columns have null values, it does not mean that the data isn't missing any values. To investigate further, calculate summary statistics on diabetes_data using the .describe() method.
+print(diabetes_data.describe())
