@@ -159,3 +159,44 @@ print(diabetes_data.isnull().sum())
 
 # 6. While the .isnull().sum() indicates none of the columns have null values, it does not mean that the data isn't missing any values. To investigate further, calculate summary statistics on diabetes_data using the .describe() method.
 print(diabetes_data.describe())
+
+# 7. Looking at summary statistics is there anything odd about the following features: Glucose, BloodPressure, SkinThickness, Insulin, BMI?
+# The minimum values for these five columns, are all 0.
+
+# 8. Do you see any other outliers?
+# The maximum value of the Insulin column is 846, which is abnormally high.
+# The maximum value of the Pregnancies column is 17. While having 17 pregnancies is not impossible, this case might be something to look further into to determine its accuracy.
+
+# 9. Replace all the instances of 0 with NaN in those 5 columns.
+diabetes_data[['Glucose','BloodPressure','SkinThickness','Insulin','BMI']] = diabetes_data[['Glucose','BloodPressure','SkinThickness','Insulin','BMI']].replace(0,np.nan)
+
+# 10. Check the columns again if they contain any null(missing) values?
+print(diabetes_data.isnull().sum())
+
+# 11. Lets take a closer look at the missing data
+null_diabetes_data = diabetes_data[diabetes_data.isnull().any(axis=1)]
+
+print(null_diabetes_data)
+
+# 12. Go through the missing data. Do you see any pattern between the missing data?
+# Nearly all of the missing data is missing the insuling value.
+
+# 13. Check the data types of each column of diabetes_data daframe.
+print(diabetes_data.dtypes)
+# It looks like the Outcome column is of type object (string) even though in our initial inspection we expected it to be of type int64.
+
+# 14. Investigate why 'Outcome' column is object and not int64 by printing out the unique values in the 'Outcome' column.
+print(diabetes_data['Outcome'].unique())
+
+#15. How would you resolve the misentry of O to 0?
+diabetes_data['Outcome'] = diabetes_data['Outcome'].replace('O', '0')
+
+diabetes_data['Outcome'] = diabetes_data['Outcome'].astype('int64')
+
+print(diabetes_data['Outcome'].unique())
+
+# 16. a) Use .value_counts() to more fully explore the values in each column.
+
+# b) Investigate other outliers in the data that may be easily overlooked.
+
+# c) Instead of changing the 0 values in the five columns to NaN, try replacing the values with the median or mean of each column.
