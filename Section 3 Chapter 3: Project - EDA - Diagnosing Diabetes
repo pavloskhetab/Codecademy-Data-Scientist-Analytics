@@ -97,6 +97,7 @@ Code:
 import codecademylib3
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # code goes here
 # 1. What do you expect each data type to be for the columns?
@@ -196,7 +197,45 @@ diabetes_data['Outcome'] = diabetes_data['Outcome'].astype('int64')
 print(diabetes_data['Outcome'].unique())
 
 # 16. a) Use .value_counts() to more fully explore the values in each column.
+print(diabetes_data['BloodPressure'].value_counts(dropna = False))
 
 # b) Investigate other outliers in the data that may be easily overlooked.
+feature = 'SkinThickness'
+data = diabetes_data[feature]
 
-# c) Instead of changing the 0 values in the five columns to NaN, try replacing the values with the median or mean of each column.
+# Fill NaN values with a specific value (e.g., 0)
+data_filled = data.fillna(0)
+
+bin_width = 2 * (np.percentile(data_filled, 75) - np.percentile(data_filled, 25)) / (len(data) ** (1/3))
+num_bins = int((max(data_filled) - min(data_filled)) / bin_width)
+
+# Plot the histogram
+plt.hist(data_filled, bins=num_bins, edgecolor='black')
+
+plt.title('Histogram For ' + feature +  ' Observations')
+plt.xlabel('Values')
+plt.ylabel('Frequency')
+
+plt.show()
+
+# c) Instead of changing the 0 values in the five columns to NaN, try replacing the values with the median or mean of each column. Use mean when distribution is relatively normal and median for skewed
+# Mean = Glucose, BloodPressure, BMI
+# Median = SkinThickness, Insulin, 
+glucose_mean = diabetes_data['Glucose'].mean()
+blood_pressure_mean = diabetes_data['BloodPressure'].mean()
+bmi_mean =diabetes_data['BMI'].mean()
+skin_thickness_median = diabetes_data['SkinThickness'].median()
+insulin_median = diabetes_data['Insulin'].median()
+
+# Replacing NaN with mean or median
+diabetes_data['Glucose'].replace(np.nan, glucose_mean, inplace=True)
+
+diabetes_data['BloodPressure'].replace(np.nan, blood_pressure_mean, inplace=True)
+
+diabetes_data['SkinThickness'].replace(np.nan, skin_thickness_median, inplace=True)
+
+diabetes_data['Insulin'].replace(np.nan, insulin_median, inplace=True)
+
+diabetes_data['BMI'].replace(np.nan, bmi_mean, inplace=True)
+
+print(diabetes_data['SkinThickness'].value_counts(dropna = False))
