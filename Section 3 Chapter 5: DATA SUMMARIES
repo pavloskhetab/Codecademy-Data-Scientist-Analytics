@@ -52,3 +52,17 @@ statistics are displayed depending on the variable type. In the rest of the less
 at the common ways to summarize and visualize quantitative and categorical variables.
 
 Code:
+import codecademylib3
+import pandas as pd
+
+movies = pd.read_csv('movies.csv')
+
+# Print the first 5 rows 
+print(movies.head())
+# Quantitarive features: production_budget, domestic_gross, worldwide_gross
+# Categorical features: movie, mpaa_rating, genre
+
+# Print the summary statistics for all columns
+print(movies.describe(include = 'all'))
+# Quantitative metrics: mean, std, min, 25%, 50%, 75%, max
+# Categorical metrics: unique, top, freq
