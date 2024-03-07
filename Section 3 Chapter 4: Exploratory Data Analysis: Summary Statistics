@@ -169,4 +169,7 @@ Automatic        217         212                19
 Manual           777        3032                83
 
 Conclusion
-In this article, we’ve summarized some of the important considerations for choosing a summary statistic based on the question a data analyst wants to answer and the type of data that is available. When it comes to choosing summary statistics, there’s no one right answer, but exploring data holistically and systematically is an important component of EDA.
+In this article, we’ve summarized some of the important considerations for choosing a summary statistic based 
+on the question a data analyst wants to answer and the type of data that is available. When it comes to 
+choosing summary statistics, there’s no one right answer, but exploring data holistically and systematically is 
+an important component of EDA.
