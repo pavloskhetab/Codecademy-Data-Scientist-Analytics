@@ -66,3 +66,9 @@ print(movies.head())
 print(movies.describe(include = 'all'))
 # Quantitative metrics: mean, std, min, 25%, 50%, 75%, max
 # Categorical metrics: unique, top, freq
+
+'''
+Summary statistics like mean, standard deviation, and percentiles are well-suited for describing 
+quantitative variables, while categorical variables can be summarized by the count and 
+frequency of their distinct categorical values.
+'''
