@@ -1,0 +1,25 @@
+Central Tendency for Quantitative Data
+For quantitative variables, we often want to describe the central tendency, or 
+the “typical” value of a variable. For example, what is the typical cost of rent in New York City?
+
+There are several common measures of central tendency:
+
+Mean: The average value of the variable, calculated as the sum of all values divided by the number of values.
+Median: The middle value of the variable when sorted.
+Mode: The most frequent value of the variable.
+Trimmed mean: The mean excluding x percent of the lowest and highest data points.
+For our rentals DataFrame with a column named rent that contains rental prices, 
+we can calculate the central tendency statistics listed above as follows:
+
+# Mean
+rentals.rent.mean()
+
+# Median
+rentals.rent.median()
+
+# Mode
+rentals.rent.mode()
+
+# Trimmed mean
+from scipy.stats import trim_mean
+trim_mean(rentals.rent, proportiontocut=0.1)  # trim extreme 10%
