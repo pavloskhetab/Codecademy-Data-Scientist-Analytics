@@ -116,3 +116,34 @@ print(mad_budget)
 
 
 
+Visualizing Quantitative Variables
+While summary statistics are certainly helpful for exploring and quantifying a feature, 
+we might find it hard to wrap our minds around a bunch of numbers. This is why data visualization is such 
+a powerful element of EDA.
+
+For quantitative variables, boxplots and histograms are two common visualizations. 
+These plots are useful because they simultaneously communicate information about minimum and maximum values, 
+central location, and spread. Histograms can additionally illuminate patterns that can impact 
+an analysis (e.g., skew or multimodality).
+
+Python’s seaborn library, built on top of matplotlib, offers the boxplot() and histplot() functions 
+to easily plot data from a pandas DataFrame:
+
+import matplotlib.pyplot as plt 
+import seaborn as sns
+
+# Boxplot for rent
+sns.boxplot(x='rent', data=rentals)
+plt.show()
+plt.close()
+
+boxplot of rent
+
+# Histogram for rent
+sns.histplot(x='rent', data=rentals)
+plt.show()
+plt.close()
+
+histogram of rent
+
+Code:
