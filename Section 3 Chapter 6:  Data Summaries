@@ -190,3 +190,16 @@ By default, it returns the results sorted in descending order by count, where th
 the most frequently appearing value. In this case, the mode is Manhattan with 3,539 rental listings.
 
 Code:
+import pandas as pd
+
+movies = pd.read_csv('movies.csv')
+
+# Save the counts to genre_counts
+
+genre_counts = movies.genre.value_counts()
+
+print(genre_counts)
+
+
+
+
