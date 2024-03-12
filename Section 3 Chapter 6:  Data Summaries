@@ -225,3 +225,44 @@ Alternatively, we could also obtain the proportions by specifying normalize=True
 df.borough.value_counts(normalize=True)
 
 Code:
+import pandas as pd
+
+movies = pd.read_csv('movies.csv')
+
+# Save the proportions to genre_props
+genre_props = movies.genre.value_counts() / len(movies.genre)
+
+print(genre_props)
+
+
+
+Visualizing Categorical Variables
+For categorical variables, bar charts and pie charts are common options for visualizing the count 
+(or proportion) of values in each category. They can also convey the relative frequencies of each category.
+
+Python’s seaborn library offers several functions that can create bar charts. The simplest for plotting 
+the counts is countplot():
+
+# Bar chart for borough
+sns.countplot(x='borough', data=rentals)
+plt.show()
+plt.close()
+
+Bar chart of borough
+
+There are currently no functions in the seaborn library for creating a pie chart, but the pandas 
+library provides a convenient wrapper function around matplotlib‘s pie() function that can generate 
+a pie chart from any column in a DataFrame:
+
+# Pie chart for borough
+rentals.borough.value_counts().plot.pie()
+plt.show()
+plt.close()
+
+Pie chart of borough
+
+In general, many data analysts avoid pie charts because people are better at visually comparing areas of 
+rectangles than wedges of a pie. For a variable with a small number of categories (i.e., fewer than three), 
+a pie chart is a reasonable choice; however, for more complex data, a bar chart is usually preferable.
+
+Code:
