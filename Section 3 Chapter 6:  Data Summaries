@@ -202,4 +202,26 @@ print(genre_counts)
 
 
 
+Value Proportions for Categorical Data
+A counts table is one approach for exploring categorical variables, but sometimes it is useful to also 
+look at the proportion of values in each category. For example, knowing that there are 3,539 rental listings 
+in Manhattan is hard to interpret without any context about the counts in the other categories. 
+On the other hand, knowing that Manhattan listings make up 71% of all New York City listings tells us 
+a lot more about the relative frequency of this category.
 
+We can calculate the proportion for each category by dividing its count by the total number of values 
+for that variable:
+
+# Proportions of rental listings in each borough
+rentals.borough.value_counts() / len(rentals.borough)
+
+Output:
+
+Manhattan    0.7078
+Brooklyn     0.2026
+Queens       0.0896
+Alternatively, we could also obtain the proportions by specifying normalize=True to the .value_counts() method:
+
+df.borough.value_counts(normalize=True)
+
+Code:
