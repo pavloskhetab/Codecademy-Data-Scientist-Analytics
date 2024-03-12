@@ -54,3 +54,34 @@ print(trmean_budget)
 
 
 
+Spread for Quantitative Data
+The spread of a quantitative variable describes the amount of variability. This is important because it provides context for measures of central tendency. For example, if there is a lot of variability in New York City rent prices, we can be less certain that the mean or median price is representative of what the typical rent is.
+
+There are several common measures of spread:
+
+Range: The difference between the maximum and minimum values of a variable.
+Interquartile range (IQR): The difference between the 75th and 25th percentile values.
+Variance: The average of the squared distance from each data point to the mean.
+Standard deviation (SD): The square root of the variance.
+Mean absolute deviation (MAD): The mean absolute value of the distance between each data point and the mean.
+For our rentals DataFrame, we can calculate the spread for the rent column as follows:
+
+# Range
+rentals.rent.max() - rentals.rent.min()
+
+# Interquartile range
+rentals.rent.quantile(0.75) - rentals.rent.quantile(0.25)
+
+from scipy.stats import iqr
+iqr(rentals.rent)  # alternative way
+
+# Variance
+rentals.rent.var()
+
+# Standard deviation
+rentals.rent.std()
+
+# Mean absolute deviation
+rentals.rent.mad()
+
+Code:
