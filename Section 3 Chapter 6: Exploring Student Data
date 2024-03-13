@@ -126,3 +126,42 @@ print(students.describe(include = 'all'))
 '''
 Looking at the summary statistics table, more students live in urban locations as we can see from the top variable i.e. the mode.
 '''
+
+# Calculate mean for math_grade
+mean_math_grade = students.math_grade.mean()
+
+print('The mean math grade is: ' + str(mean_math_grade))
+
+# Calculate median for math_grade
+median_math_grade = students.math_grade.median()
+
+print('The median math grade is: ' + str(median_math_grade))
+'''
+The median math grade is larger than the mean by about 0.58
+'''
+
+# Calculate mode for math_grade
+mode_math_grade = students.math_grade.mode()[0]
+
+print('The mode for math grade is: ' + str(mode_math_grade))
+'''
+The mode is lower than both the mean and median.
+'''
+
+# Calculate range
+math_grade_range = students.math_grade.max() - students.math_grade.min()
+
+print('Range for math grade is: ' + str(math_grade_range))
+
+# Calculate standard deviation
+std_math_grade = students.math_grade.std()
+
+print('Standard Deviation for math grade is: ' + str(std_math_grade))
+
+
+# Calculate MAD
+mad_math_grade = students.math_grade.mad()
+
+print('Mean Absolute Deviation for math grade is: ' + str(mad_math_grade))
+
+
