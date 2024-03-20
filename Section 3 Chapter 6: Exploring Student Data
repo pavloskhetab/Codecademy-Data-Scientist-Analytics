@@ -178,3 +178,10 @@ sns.boxplot(x = 'math_grade', data = students)
 plt.show()
 plt.clf()
 
+
+print(students.Mjob.value_counts()
+)
+'''
+As we can see the 'other' category is the most common Mjob.
+'''
+
