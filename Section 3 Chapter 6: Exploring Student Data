@@ -198,3 +198,16 @@ Alternatively we can also use students.Mjob.value_counts(normalize=True) to see 
 '''
 
 
+# Create bar chart of Mjob
+sns.countplot(x = 'Mjob', data = students)
+
+plt.show()
+plt.clf()
+
+
+# Create pie chart of Mjob
+mjob_counts.plot.pie()
+
+plt.show()
+plt.close()
+
