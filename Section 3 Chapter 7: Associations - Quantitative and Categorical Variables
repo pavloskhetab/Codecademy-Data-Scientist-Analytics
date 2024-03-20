@@ -1,0 +1,26 @@
+Associations: Quantitative and Categorical Variables
+
+Introduction
+Examining the relationship between variables can give us key insight into our data. 
+In this lesson, we will cover ways of assessing the association between a quantitative variable 
+and a categorical variable.
+
+In the next few exercises, we’ll explore a dataset that contains the following information about 
+students at two portuguese schools:
+
+school: the school each student attends, Gabriel Periera ('GP') or Mousinho da Silveria ('MS')
+address: the location of the student’s home ('U' for urban and 'R' for rural)
+absences: the number of times the student was absent during the school year
+Mjob: the student’s mother’s job industry
+Fjob: the student’s father’s job industry
+G3: the student’s score on a math assessment, ranging from 0 to 20
+Suppose we want to know: Is a student’s score (G3) associated with their school (school)? 
+If so, then knowing what school a student attends gives us information about what their score is likely to be. 
+For example, maybe students at one of the schools consistently score higher than students at the other school.
+
+To start answering this question, it is useful to save scores from each school in two separate lists:
+
+scores_GP = students.G3[students.school == 'GP']
+scores_MS = students.G3[students.school == 'MS']
+
+Code:
