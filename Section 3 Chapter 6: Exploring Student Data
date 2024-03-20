@@ -211,3 +211,43 @@ mjob_counts.plot.pie()
 plt.show()
 plt.close()
 
+
+# Calculate number of students with fathers in each job category
+fjob_counts = students.Fjob.value_counts()
+
+print(fjob_counts)
+
+
+# Create bar chart of Fjob
+sns.countplot(x = 'Fjob', data = students)
+
+plt.show()
+plt.close()
+
+
+# Create pie chart of Fjob
+fjob_counts.plot.pie()
+
+plt.show()
+plt.close()
+
+# Calculate number of students with each address category
+address_counts = students.address.value_counts()
+
+print(address_counts)
+
+
+# Create bar chart of address
+sns.countplot(x = 'address', data = students)
+
+plt.show()
+plt.close()
+
+
+# Create pie chart of address
+address_counts.plot.pie()
+
+plt.show()
+plt.close()
+
+
