@@ -295,3 +295,15 @@ print(iqr_absences)
 # MAD
 
 
+# Create a histogram of absences
+sns.histplot(x = 'absences', data = students)
+
+plt.show()
+plt.close()
+
+
+# Create a box plot of absences
+sns.boxplot(x = 'absences', data = students)
+
+plt.show()
+plt.close()
