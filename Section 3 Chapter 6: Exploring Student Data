@@ -165,3 +165,9 @@ mad_math_grade = students.math_grade.mad()
 print('Mean Absolute Deviation for math grade is: ' + str(mad_math_grade))
 
 
+# Create a histogram of math grades
+sns.histplot(x = 'math_grade', data = students)
+
+plt.show()
+plt.clf()
+
