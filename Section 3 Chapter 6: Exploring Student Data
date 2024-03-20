@@ -179,9 +179,22 @@ plt.show()
 plt.clf()
 
 
-print(students.Mjob.value_counts()
-)
+# Calculate number of students with mothers in each job category
+mjob_counts = students.Mjob.value_counts()
+
+print(mjob_counts)
 '''
 As we can see the 'other' category is the most common Mjob.
 '''
+
+
+# Calculate proportion of students with mothers in each job category
+mjob_proportion = mjob_counts / len(students.Mjob)
+
+print(mjob_proportion)
+
+'''
+Alternatively we can also use students.Mjob.value_counts(normalize=True) to see the proportions of Mjob.
+'''
+
 
