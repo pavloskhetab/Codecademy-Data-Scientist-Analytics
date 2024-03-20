@@ -251,23 +251,47 @@ plt.show()
 plt.close()
 
 
+
 # Calculate the central tendency for absences feature
 
 # Mean
 mean_absences = students.absences.mean()
+
 print('The mean for absences is: ' + str(mean_absences))
 
 # Median
 med_absences = students.absences.median()
+
 print('The median for absences is: ' + str(med_absences))
 
 # Mode
 mode_absences = students.absences.mode()
+
 print('The mode for absences is: ' + str(mode_absences[0]))
 
 # Trimmed mean
 from scipy.stats import trim_mean
 trmean_absences = trim_mean(students.absences, proportiontocut = 0.1)
+
 print('Trimmed mean for absences is: ' + str(trmean_absences))
+
+
+# Calculate the spread statistics for absences
+
+# Range
+range_absences = students.absences.max() - students.absences.min() 
+
+print(range_absences)
+
+# IQR
+iqr_absences = students.absences.quantile(0.75) - students.absences.quantile(0.25)
+
+print(iqr_absences)
+
+# Variance
+
+# Standard Deviation
+
+# MAD
 
 
