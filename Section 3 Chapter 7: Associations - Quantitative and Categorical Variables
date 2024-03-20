@@ -37,3 +37,34 @@ print(students.head())
 scores_urban = students.G3[students.address == 'U']
 
 scores_rural = students.G3[students.address == 'R']
+
+
+
+Mean and Median Differences
+Recall that in the last exercise, we began investigating whether or not there is an association between math 
+scores and the school a student attends. We can begin quantifying this association by using 
+two common summary statistics, mean and median differences. 
+To calculate the difference in mean G3 scores for the two schools, 
+we can start by finding the mean math score for students at each school. 
+We can then find the difference between them:
+
+mean_GP = np.mean(scores_GP)
+mean_MS = np.mean(scores_MS)
+print(mean_GP) #output: 10.49
+print(mean_MS) #output: 9.85
+print(mean_GP - mean_MS) #Output: 0.64
+
+We see that the mean math score for students at GP is 10.49, while the mean score for students at MS is 9.85. 
+The mean difference is 0.64. We can follow a similar process to calculate a median difference:
+
+median_GP = np.median(scores_GP)
+median_MS = np.median(scores_MS)
+print(median_GP) #Output: 11.0
+print(median_MS) #Output: 10.0
+print(median_GP-median_MS) #Output: 1.0
+
+GP students also have a higher median score, by one point. Highly associated variables tend to have 
+a large mean or median difference. Since “large” could have different meanings depending on the variable, 
+we will go into more detail in the next exercise.
+
+Code:
