@@ -151,6 +151,7 @@ students = pd.read_csv('students.csv')
 sns.boxplot(data = students, x = 'address', y = 'G3')
 
 plt.show()
+plt.close()
 
 
 
