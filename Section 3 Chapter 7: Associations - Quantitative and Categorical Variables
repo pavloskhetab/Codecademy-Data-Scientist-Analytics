@@ -203,6 +203,7 @@ plt.hist(scores_urban, color = 'blue', label = 'Urban', normed = True, alpha = 0
 plt.hist(scores_rural, color = 'red', label = 'Rural', normed = True, alpha = 0.5)
 plt.legend()
 plt.show()
+plt.close()
 
 
 
@@ -233,3 +234,17 @@ If there are ANY pairwise differences, we can say that the variables are associa
 however, it is more useful to specifically report which groups are different.
 
 Code:
+import pandas as pd
+import matplotlib.pyplot as plt 
+import seaborn as sns
+import codecademylib3
+
+students = pd.read_csv('students.csv')
+
+#create the box-plot here:
+sns.boxplot(data = students, x ='Fjob', y = 'G3')
+plt.show()
+ply.close()
+
+
+
