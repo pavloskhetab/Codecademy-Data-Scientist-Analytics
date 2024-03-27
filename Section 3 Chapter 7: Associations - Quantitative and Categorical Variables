@@ -206,3 +206,30 @@ plt.show()
 
 
 
+Exploring Non-Binary Categorical Variables
+In each of the previous exercises, we assessed whether there was an association between 
+a quantitative variable (math scores) and a BINARY categorical variable (school). 
+The categorical variable is considered binary because there are only two available options, either MS or GP. 
+However, sometimes we are interested in an association between a quantitative variable and non-binary 
+categorical variable. Non-binary categorical variables have more than two categories.
+
+When looking at an association between a quantitative variable and a non-binary categorical variable, 
+we must examine all pair-wise differences. For example, suppose we want to know whether or not an association 
+exists between math scores (G3) and (Mjob), a categorical variable representing the mother’s job. 
+This variable has five possible categories: at_home, health, services, teacher, or other. 
+There are actually 10 different comparisons that we can make. For example, we can compare scores for students 
+whose mothers work at_home or in health; at_home or other; at home or `services; etc.. 
+The easiest way to quickly visualize these comparisons is with side-by-side box plots:
+
+sns.boxplot(data = df, x = 'Mjob', y = 'G3')
+plt.show()
+
+title
+
+Visually, we need to compare each box to every other box. While most of these boxes overlap with each other, 
+there are some pairs for which there are some apparent differences. For example, scores appear to be higher 
+among students with mothers working in health than among students with mothers working at home or in an “other” job. 
+If there are ANY pairwise differences, we can say that the variables are associated; 
+however, it is more useful to specifically report which groups are different.
+
+Code:
