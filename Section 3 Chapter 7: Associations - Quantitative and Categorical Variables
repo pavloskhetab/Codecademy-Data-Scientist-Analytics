@@ -291,3 +291,43 @@ do the mean/median differences seem relatively small or large?
 code before you try to make a histogram). Does this provide any additional information?
 
 Code:
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt 
+import seaborn as sns
+import codecademylib3
+
+titanic = pd.read_csv('titanic.csv')
+
+print(titanic.head())
+
+# Calculate fare survived and died
+fare_survived = titanic.Fare[titanic.Survived == 1]
+fare_died = titanic.Fare[titanic.Survived == 0]
+
+# Calculate the Means for survived and died
+mean_fare_survived = np.mean(fare_survived)
+print(f'Mean fare for those who survived: {mean_fare_survived}')
+
+mean_fare_died = np.mean(fare_died)
+print(f'Mean fare for those who died: {mean_fare_died}')
+# As we can see those who survived had a higher average fare with a mean of 37.8.
+
+
+# Calculate Mean difference
+mean_difference_fare_survived_died = mean_fare_survived - mean_fare_died
+
+print(f'Mean difference in fare for between those who survived and those who died: {mean_difference_fare_survived_died}')
+
+# Calculate the Medians for survived and died
+median_fare_survived = np.median(fare_survived)
+print(f'Median fare for those who survived: {median_fare_survived}')
+
+median_fare_died = np.median(fare_died)
+print(f'Median fare for those who died: {median_fare_died}')
+
+
+# Calculate Median difference
+median_difference_fare_survived_died = median_fare_survived - median_fare_died
+
+print(f'Median difference in fare for between those who survived and those who died: {median_difference_fare_survived_died}')
