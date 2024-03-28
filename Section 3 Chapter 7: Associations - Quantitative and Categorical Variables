@@ -337,4 +337,5 @@ print(f'Median difference in fare for between those who survived and those who d
 # Create side-by-side box plots of fare by survival
 sns.boxplot(data = titanic, x = 'Survived', y = 'Fare')
 plt.show()
+plt.close()
 
