@@ -331,3 +331,10 @@ print(f'Median fare for those who died: {median_fare_died}')
 median_difference_fare_survived_died = median_fare_survived - median_fare_died
 
 print(f'Median difference in fare for between those who survived and those who died: {median_difference_fare_survived_died}')
+
+
+
+# Create side-by-side box plots of fare by survival
+sns.boxplot(data = titanic, x = 'Survived', y = 'Fare')
+plt.show()
+
