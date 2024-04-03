@@ -333,9 +333,16 @@ median_difference_fare_survived_died = median_fare_survived - median_fare_died
 print(f'Median difference in fare for between those who survived and those who died: {median_difference_fare_survived_died}')
 
 
-
 # Create side-by-side box plots of fare by survival
 sns.boxplot(data = titanic, x = 'Survived', y = 'Fare')
 plt.show()
 plt.close()
 
+
+# Create overlapping histograms of fares by survival
+plt.hist(fare_survived, color = 'blue', label = 'Survived', normed = True, alpha = 0.5)
+plt.hist(fare_died, color = 'red', label = 'Died', normed = True, alpha = 0.5)
+
+plt.legend()
+plt.show()
+plt.close()
