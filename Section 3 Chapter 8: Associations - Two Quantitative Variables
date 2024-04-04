@@ -19,3 +19,46 @@ Except for type, all of these variables are quantitative. Which pairs of variabl
 For example, does knowing something about price give you any information about square footage?
 
 Code:
+import pandas as pd
+import codecademylib3
+
+
+housing = pd.read_csv('housing_sample.csv')
+
+#print the first 10 rows of data:
+print(housing.head(10))
+
+
+
+Scatter Plots
+One of the best ways to quickly visualize the relationship between quantitative variables is to 
+plot them against each other in a scatter plot. This makes it easy to look for patterns or trends in the data. 
+Let’s start by plotting the area of a rental against its monthly price to see if we can spot any patterns.
+
+plt.scatter(x = housing.price, y = housing.sqfeet)
+plt.xlabel('Rental Price (USD)')
+plt.ylabel('Area (Square Feet)')
+plt.show()
+
+This image shows a scatter plot with price on the x-axis and area on the y-axis. 
+There is a clear linear relationship; rentals that cost more tend to have larger area.
+
+While there’s a lot of variation in the data, it seems like more expensive housing tends to come with slightly
+more space. This suggests an association between these two variables.
+
+It’s important to note that different kinds of associations can lead to different patterns in a scatter plot. 
+For example, the following plot shows the relationship between the age of a child in months and their weight in pounds. 
+We can see that older children tend to weigh more but that the growth rate starts leveling off after 36 months:
+
+Plot showing the relationship between the age of a child in months and their weight in pounds. 
+We can see that older children tend to weigh more but that the growth rate starts leveling off after 36 months
+
+If we don’t see any patterns in a scatter plot, we can probably guess that the variables are not associated. 
+For example, a scatter plot like this would suggest no association:
+
+Scatter plot with no apparent pattern; the points appear randomly distributed.
+
+Code:
+
+
+
