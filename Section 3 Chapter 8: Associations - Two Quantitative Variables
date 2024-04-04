@@ -59,6 +59,52 @@ For example, a scatter plot like this would suggest no association:
 Scatter plot with no apparent pattern; the points appear randomly distributed.
 
 Code:
+import pandas as pd
+import matplotlib.pyplot as plt 
+import codecademylib3
+
+housing = pd.read_csv('housing_sample.csv')
+
+print(housing.head())
+
+#create your scatter plot here:
+plt.scatter(x = housing.beds, y = housing.sqfeet)
+plt.xlabel('Number of beds')
+plt.ylabel('Area (Square Feet)')
+plt.show()
+plt.close()
 
 
 
+Exploring Covariance
+Beyond visualizing relationships, we can also use summary statistics to quantify the strength of certain associations. 
+Covariance is a summary statistic that describes the strength of a linear relationship. 
+A linear relationship is one where a straight line would best describe the pattern of points in a scatter plot.
+
+Covariance can range from negative infinity to positive infinity. A positive covariance indicates that 
+a larger value of one variable is associated with a larger value of the other. 
+A negative covariance indicates a larger value of one variable is associated with a smaller value of the other. 
+A covariance of 0 indicates no linear relationship. Here are some examples:
+
+This figure shows three different plots. In the first, the points are almost exactly along a line with 
+a positive slope and the label is "large positive covariance". In the middle plot, the points are randomly 
+scattered and the label is "covariance of zero". In the last plot, the points are almost exactly on 
+a negatively sloping line and the label is "large negative covariance"
+
+To calculate covariance, we can use the cov() function from NumPy, which produces a covariance matrix 
+for two or more variables. A covariance matrix for two variables looks something like this:
+
+variable 1	variable 2
+variable 1	variance(variable 1)	covariance
+variable 2	covariance	variance(variable 2)
+In python, we can calculate this matrix as follows:
+
+cov_mat_price_sqfeet = np.cov(housing.price, housing.sqfeet)
+print(cov_mat_price_sqfeet)
+#output: 
+[[184332.9  57336.2]
+ [ 57336.2 122045.2]]
+
+Notice that the covariance appears twice in this matrix and is equal to 57336.2.
+
+Code:
