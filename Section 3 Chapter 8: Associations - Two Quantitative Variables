@@ -156,4 +156,11 @@ corr_sqfeet_beds, p = pearsonr(housing.sqfeet, housing.beds)
 print(corr_sqfeet_beds)
 
 # create the scatter plot here:
+plt.scatter(x = housing.beds, y = housing.sqfeet)
+plt.xlabel('Number of Beds')
+plt.ylabel('Area (Square Feet)')
+plt.show()
+plt.close
+
+
 
