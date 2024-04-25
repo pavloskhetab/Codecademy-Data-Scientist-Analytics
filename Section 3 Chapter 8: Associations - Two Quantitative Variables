@@ -164,3 +164,18 @@ plt.close
 
 
 
+Correlation Part 2
+It’s important to note that there are some limitations to using correlation or covariance as a way of assessing 
+whether there is an association between two variables. Because correlation and covariance both measure 
+the strength of linear relationships with non-zero slopes, but not other kinds of relationships, correlation can be misleading.
+
+For example, the four scatter plots below all show pairs of variables with near-zero correlations. 
+The bottom left image shows an example of a perfect linear association where the slope is zero (the line is horizontal). 
+Meanwhile, the other three plots show non-linear relationships — if we drew a line through any of these sets of points, 
+that line would need to be curved, not straight!
+
+This figure shows four different scatter plots where the correlation is equal to zero in every case. 
+The bottom left image shows an example of a perfect linear association where the slope is zero (the line is horizontal). 
+Meanwhile, the other three plots show non-linear relationships, where the points follow a curved pattern.
+
+Code:
