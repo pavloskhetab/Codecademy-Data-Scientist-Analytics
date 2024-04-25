@@ -144,3 +144,16 @@ Generally, a correlation larger than about .3 indicates a linear association.
 A correlation greater than about .6 suggestions a strong linear association.
 
 Code:
+import pandas as pd
+import matplotlib.pyplot as plt 
+import codecademylib3
+from scipy.stats import pearsonr
+
+housing = pd.read_csv('housing_sample.csv')
+
+# calculate corr_sqfeet_beds and print it out:
+corr_sqfeet_beds, p = pearsonr(housing.sqfeet, housing.beds)
+print(corr_sqfeet_beds)
+
+# create the scatter plot here:
+
