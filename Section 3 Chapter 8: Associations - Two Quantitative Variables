@@ -179,3 +179,27 @@ The bottom left image shows an example of a perfect linear association where the
 Meanwhile, the other three plots show non-linear relationships, where the points follow a curved pattern.
 
 Code:
+import pandas as pd
+import matplotlib.pyplot as plt 
+import codecademylib3
+from scipy.stats import pearsonr
+
+sleep = pd.read_csv('sleep_performance.csv')
+
+print(sleep.head())
+
+# create your scatter plot here:
+x = sleep.hours_sleep
+y = sleep.performance
+plt.scatter(x, y)
+plt.xlabel('Hours slept')
+plt.ylabel('Performance on task')
+plt.show()
+plt.close()
+
+# calculate the correlation for `hours_sleep` and `performance`:
+corr_sleep_performance, p = pearsonr(x,y)
+print(corr_sleep_performance)
+
+
+
