@@ -18,3 +18,11 @@ As you might guess, responses to some of these questions are associated.
 For example, if we know whether someone views themself as a good leader, 
 we may also find that they’re more likely to like having authority. 
 In this lesson we’ll learn how to assess whether an association exists between any two of these variables.
+
+Code:
+import pandas as pd
+import codecademylib3
+
+npi = pd.read_csv("npi_sample.csv")
+
+print(npi.head())
