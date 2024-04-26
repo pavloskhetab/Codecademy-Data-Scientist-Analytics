@@ -224,3 +224,37 @@ Calculate the correlation for these two variables. Does this number make sense g
 Solution code is available to you in solution.py if you want to compare your work.
 
 Code:
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt 
+import seaborn as sns
+import codecademylib3
+from scipy.stats import pearsonr
+np.set_printoptions(suppress=True, precision = 1) 
+
+penguins = pd.read_csv('penguins.csv')
+
+# 1. Inspect penguins data
+print(penguins.head())
+
+# 2. Plot a scatter plot of penguins' flipper length and body mass
+x = penguins.flipper_length_mm
+y = penguins.body_mass_g
+
+plt.scatter(x, y)
+plt.xlabel('Flipper Length in mm')
+plt.ylabel('Body mass in g')
+plt.show()
+plt.close()
+
+# Based on the above scatter plot, I can see a positive linear relationshop between the body mass of penguins and their flipper length. A high body mass appears to be associated with a longer flipper length among the penguins.
+
+# 3. Calculate the covariance of penguins' flipper length and body mass
+cov_mat_flipper_length_body_mass = np.cov(x,y)
+print(cov_mat_flipper_length_body_mass)
+
+# 4. Calculate correlation of penguins' flipper length and body mass
+cor_mat_flipper_length_body_mass, p = pearsonr(x,y)
+print(cor_mat_flipper_length_body_mass)
+
+# The pearson value of 0.87 shows us that these two variables are stronlgy associated with each other.
