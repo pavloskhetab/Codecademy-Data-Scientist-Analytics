@@ -26,3 +26,84 @@ import codecademylib3
 npi = pd.read_csv("npi_sample.csv")
 
 print(npi.head())
+
+
+
+Contingency Tables: Frequencies
+Contingency tables, also known as two-way tables or cross-tabulations, are useful for 
+summarizing two variables at the same time. For example, suppose we are interested in understanding whether 
+there is an association between influence (whether a person thinks they have a talent for influencing people) 
+and leader (whether they see themself as a leader). 
+
+We can use the crosstab function from pandas to create a contingency table:
+
+influence_leader_freq = pd.crosstab(npi.influence, npi.leader)
+print(influence_leader_freq)
+
+Output:
+
+leader       no   yes
+influence            
+no         3015  1293
+yes        2360  4429
+This table tells us the number of people who gave each possible combination of responses to these two questions. 
+For example, 2360 people said that they do not see themselves as a leader but have a talent for influencing people.
+
+To assess whether there is an association between these two variables, we need to ask whether information about 
+one variable gives us information about the other. In this example, we see that among people who 
+don’t see themselves as a leader (the first column), a larger number (3015) don’t think they have a talent 
+for influencing people. Meanwhile, among people who do see themselves as a leader (the second column), 
+a larger number (4429) do think they have a talent for influencing people.
+
+So, if we know how someone responded to the leadership question, we have some information about 
+how they are likely to respond to the influence question. This suggests that the variables are associated.
+
+Code:
+import pandas as pd
+import codecademylib3
+
+npi = pd.read_csv("npi_sample.csv")
+
+special_authority_freq = pd.crosstab(npi.special, npi.authority)
+
+print(special_authority_freq)
+
+
+
+Contingency Tables: Proportions
+In the previous exercise, we looked at an association between the influence and leader questions 
+using a contingency table of frequencies. However, sometimes it’s helpful to 
+convert those frequencies to proportions. We can accomplish this simply by dividing the all the frequencies 
+in a contingency table by the total number of observations (the sum of the frequencies):
+
+influence_leader_freq = pd.crosstab(npi.influence, npi.leader)
+influence_leader_prop = influence_leader_freq/len(npi)
+print(influence_leader_prop)
+
+Output:
+
+leader           no       yes
+influence                    
+no         0.271695  0.116518
+yes        0.212670  0.399117
+The resulting contingency table makes it slightly easier to compare the proportion of people in each category. 
+For example, we see that the two largest proportions in the table (.399 and .271) 
+are in the yes/yes and no/no cells of the table. We can also see that almost 40% of the surveyed population 
+(by far the largest proportion) both see themselves as leaders and think they have a talent for influencing people.
+
+Code:
+import pandas as pd
+import numpy as np
+
+npi = pd.read_csv("npi_sample.csv")
+
+special_authority_freq = pd.crosstab(npi.special, npi.authority)
+
+# save the table of proportions as special_authority_prop:
+special_authority_prop = special_authority_freq / len(npi)
+
+# print out special_authority_prop
+print(special_authority_prop)
+
+
+
