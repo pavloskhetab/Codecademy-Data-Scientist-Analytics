@@ -237,5 +237,16 @@ chi2, pval, dof, expected = chi2_contingency(special_authority_freq)
 print("expected contingency table (no association):")
 print(np.round(expected))
 
+Output:
+observed contingency table:
+authority    no   yes
+special              
+no         4069  1905
+yes        2229  2894
+
+expected contingency table (no association):
+[[3390. 2584.]
+ [2908. 2215.]]
+
 
 
