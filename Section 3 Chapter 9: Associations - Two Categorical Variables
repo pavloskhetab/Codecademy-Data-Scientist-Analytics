@@ -327,3 +327,123 @@ Which other pairs of questions might be associated (or not)?
 Use the workspace and your newfound skills to investigate for yourself!
 
 Code:
+import pandas as pd
+import numpy as np
+from scipy.stats import chi2_contingency
+import codecademylib3
+
+npi = pd.read_csv("npi_sample.csv")
+
+print(npi.head())
+
+# We have explored the variable combinations of special-authority, and influence-leader. Now we shall explore blend_in-leader and influence-special to check for associations.
+
+# 1. Explore the relationship of the variable for influence and special.
+
+# a) Create a contingency table for frequency
+influence_special_freq = pd.crosstab(npi.influence, npi.special)
+print(influence_special_freq)
+
+# b) Create a contingency table for proportions
+influence_special_prop = influence_special_freq/len(npi)
+print(influence_special_prop)
+
+# c) Find the marginal proportions
+# calculate and print influence_marginals
+influence_marginals = influence_special_prop.sum(axis = 0)
+print(influence_marginals)
+
+# calculate and print special_marginals
+special_marginals = influence_special_prop.sum(axis = 1)
+print(special_marginals)
+
+# d) Calculate the expected contingency tables and the Chi-Square statistic
+chi2, pval, dof, expected = chi2_contingency(influence_special_freq) 
+print("Chi-Square statistic: ")
+print(chi2)
+
+# print out the expected frequency table
+print("expected contingency table (no association):")
+print(np.round(expected))
+
+# Since the Chi-Square statistic is very large at 250. We can expect the variables of special and influence to be highly associated with each other.
+
+
+# 2. Explore the relationship of the variable for blend_in and leader.
+
+# a) Create a contingency table for frequency
+blend_in_leader_freq = pd.crosstab(npi.blend_in, npi.leader)
+print(blend_in_leader_freq)
+
+# b) Create a contingency table for proportions
+blend_in_leader_prop = blend_in_leader_freq/len(npi)
+print(blend_in_leader_prop)
+
+# c) Find the marginal proportions
+# calculate and print blend_in_marginals
+blend_in_marginals = blend_in_leader_prop.sum(axis = 0)
+print(blend_in_marginals)
+
+# calculate and print leader_marginals
+leader_marginals = blend_in_leader_prop.sum(axis = 1)
+print(leader_marginals)
+
+# d) Calculate the expected contingency tables and the Chi-Square statistic
+chi2, pval, dof, expected = chi2_contingency(blend_in_leader_freq) 
+print("Chi-Square statistic: ")
+print(chi2)
+
+# print out the expected frequency table
+print("expected contingency table (no association):")
+print(np.round(expected))
+# Since the Chi-Square statistic is very large at 462. We can expect the variables of blend_in and leader to be highly associated with each other.
+
+Output:
+influence blend_in special leader authority
+0        no      yes     yes    yes       yes
+1        no      yes      no     no        no
+2       yes       no     yes    yes       yes
+3       yes       no      no    yes       yes
+4       yes      yes      no    yes        no
+special      no   yes
+influence            
+no         2725  1583
+yes        3249  3540
+special          no       yes
+influence                    
+no         0.245562  0.142651
+yes        0.292782  0.319005
+special
+no     0.538344
+yes    0.461656
+dtype: float64
+influence
+no     0.388213
+yes    0.611787
+dtype: float64
+Chi-Square statistic: 
+250.80246206335414
+expected contingency table (no association):
+[[2319. 1989.]
+ [3655. 3134.]]
+leader      no   yes
+blend_in            
+no        1124  2275
+yes       4251  3447
+leader          no       yes
+blend_in                    
+no        0.101289  0.205010
+yes       0.383077  0.310624
+leader
+no     0.484365
+yes    0.515635
+dtype: float64
+blend_in
+no     0.306299
+yes    0.693701
+dtype: float64
+Chi-Square statistic: 
+462.44980106783
+expected contingency table (no association):
+[[1646. 1753.]
+ [3729. 3969.]]
