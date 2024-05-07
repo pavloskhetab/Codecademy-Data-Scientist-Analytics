@@ -250,3 +250,31 @@ expected contingency table (no association):
 
 
 
+The Chi-Square Statistic
+In the previous exercise, we calculated a contingency table of expected frequencies 
+if there were no association between the leader and influence questions. 
+We then compared this to the observed contingency table. Because the tables looked somewhat different, 
+we concluded that responses to these questions are probably associated.
+
+While we can inspect these tables visually, many data scientists use the Chi-Square statistic 
+to summarize how different these two tables are. To calculate the Chi Square statistic, 
+we simply find the squared difference between each value in the observed table and 
+its corresponding value in the expected table, and then divide that number by the value from the expected table; 
+finally add up those numbers:
+
+ChiSquare = ∑ (observed−expected)^2 / expected
+
+The Chi-Square statistic is also the first output of the SciPy function chi2_contingency():
+
+from scipy.stats import chi2_contingency
+chi2, pval, dof, expected = chi2_contingency(influence_leader_freq)
+print(chi2)
+output: 1307.88
+
+The interpretation of the Chi-Square statistic is dependent on the size of the contingency table. 
+For a 2x2 table (like the one we’ve been investigating), 
+a Chi-Square statistic larger than around 4 would strongly suggest an association between the variables. 
+In this example, our Chi-Square statistic is much larger than that — 1307.88! 
+This adds to our evidence that the variables are highly associated.
+
+Code:
