@@ -107,3 +107,46 @@ print(special_authority_prop)
 
 
 
+Marginal Proportions
+In the previous exercises, we looked at an association between the influence and leader questions 
+using a contingency table. We saw some evidence of an association between these questions.
+
+Now, let’s take a moment to think about what the tables would look like if there were no association 
+between the variables. Our first instinct may be that there would be .25 (25%) of the data in each of the 
+four cells of the table, but that is not the case. Let’s take another look at our contingency table.
+
+leader           no       yes
+influence                    
+no         0.271695  0.116518
+yes        0.212670  0.399117
+We might notice that the bottom row, which corresponds to people who think they have a talent for 
+influencing people, accounts for 0.213 + 0.399 = 0.612 (or 61.2%) of surveyed people — more than half! 
+This means that we can expect higher proportions in the bottom row, regardless of whether the questions 
+are associated.
+
+The proportion of respondents in each category of a single question is called a marginal proportion. 
+For example, the marginal proportion of the population that has a talent for influencing people is 0.612. 
+We can calculate all the marginal proportions from the contingency table of proportions 
+(saved as influence_leader_prop) using row and column sums as follows:
+
+leader_marginals = influence_leader_prop.sum(axis=0)
+print(leader_marginals)
+influence_marginals =  influence_leader_prop.sum(axis=1)
+print(influence_marginals)
+
+Output:
+
+leader
+no     0.484365
+yes    0.515635
+dtype: float64
+
+influence
+no     0.388213
+yes    0.611787
+dtype: float64
+
+While respondents are approximately split on whether they see themselves as a leader, 
+more people think they have a talent for influencing people than not.
+
+Code:
