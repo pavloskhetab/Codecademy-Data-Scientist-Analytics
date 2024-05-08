@@ -117,10 +117,17 @@ print(nba_2010.head())
 print(nba_2014.head())
 
 # 1. Compare the Knicks with the Nets for points earned in 2010
+
+# Filter for Knicks data in 2010
 knicks_pts_10 = nba_2010.pts[nba.fran_id == "Knicks"]
 
+# Filter for Nets data in 2010
 nets_pts_10 = nba_2010.pts[nba.fran_id == "Nets"]
 
+print("Knicks points in 2010")
 print(knicks_pts_10.head())
+
+print("Nets points in 2010")
 print(nets_pts_10.head())
+
 
