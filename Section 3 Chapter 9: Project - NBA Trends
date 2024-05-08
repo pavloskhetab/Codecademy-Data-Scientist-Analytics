@@ -181,3 +181,4 @@ plt.title('2014 Season')
 plt.show()
 plt.close()
 
+# The mean difference doesn't make sense since one distribution is bimodal and could indicate a non-linear relationship.
