@@ -115,3 +115,12 @@ nba_2014 = nba[nba.year_id == 2014]
 
 print(nba_2010.head())
 print(nba_2014.head())
+
+# 1. Compare the Knicks with the Nets for points earned in 2010
+knicks_pts_10 = nba_2010.pts[nba.fran_id == "Knicks"]
+
+nets_pts_10 = nba_2010.pts[nba.fran_id == "Nets"]
+
+print(knicks_pts_10.head())
+print(nets_pts_10.head())
+
