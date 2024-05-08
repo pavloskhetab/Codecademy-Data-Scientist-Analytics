@@ -119,26 +119,65 @@ print(nba_2014.head())
 # 1. Compare the Knicks with the Nets for points earned in 2010
 
 # Filter for Knicks data in 2010
-knicks_pts_10 = nba_2010.pts[nba.fran_id == "Knicks"]
+knicks_pts_2010 = nba_2010.pts[nba.fran_id == "Knicks"]
 
 # Filter for Nets data in 2010
-nets_pts_10 = nba_2010.pts[nba.fran_id == "Nets"]
+nets_pts_2010 = nba_2010.pts[nba.fran_id == "Nets"]
 
 print("Knicks points in 2010")
-print(knicks_pts_10.head())
+print(knicks_pts_2010.head())
 
 print("Nets points in 2010")
-print(nets_pts_10.head())
+print(nets_pts_2010.head())
+
+# 2. Calculate the difference between the two teams' average points and assess whether fran_id and points are associated. Why or why not?
+
+average_points_knicks_2010 = knicks_pts_2010.mean()
+average_points_nets_2010 = nets_pts_2010.mean()
+
+diff_means_2010 = average_points_knicks_2010 - average_points_nets_2010
+
+print(diff_means_2010)
 # I believe that the means are not likely to be associated due to the low value of 9 but more tests need to be carried out to verify the association.
 
 # 3. Create a set of overlapping histograms to compare the distributions. Do the distributions appear to be the same?
-plt.hist(knicks_pts_10, color = 'blue', label = 'Knicks', normed = True, alpha = 0.8)
+plt.hist(knicks_pts_2010, color = 'blue', label = 'Knicks', normed = True, alpha = 0.8)
 
-plt.hist(nets_pts_10, color = 'red', label = 'Nets', normed = True, alpha = 0.8)
+plt.hist(nets_pts_2010, color = 'red', label = 'Nets', normed = True, alpha = 0.8)
 plt.legend()
 plt.title("2010 Season")
 plt.show()
 plt.close()
 
 # The distributions appear to be similar.
+
+# 4. Now do the same for 2014 games
+# Filter for Knicks data in 2014
+knicks_pts_2014 = nba_2014.pts[nba.fran_id == "Knicks"]
+
+# Filter for Nets data in 2014
+nets_pts_2014 = nba_2014.pts[nba.fran_id == "Nets"]
+
+print("Knicks points in 2014")
+print(knicks_pts_2014.head())
+
+print("Nets points in 2014")
+print(nets_pts_2014.head())
+
+# Find average of knicks and nets in 2014 
+average_points_knicks_2014 = knicks_pts_2014.mean()
+average_points_nets_2014 = nets_pts_2014.mean()
+
+diff_means_2014 = average_points_knicks_2014 - average_points_nets_2014
+
+print(diff_means_2014)
+
+# The difference in points in 2014 is smaller than in 2010 going from 9.73 to 0.45.
+
+plt.hist(knicks_pts_2014, label = 'Knicks', normed = True, alpha = 0.8)
+plt.hist(nets_pts_2014, label = 'Nets', normed = True, alpha = 0.8)
+plt.legend()
+plt.title('2014 Season')
+plt.show()
+plt.close()
 
