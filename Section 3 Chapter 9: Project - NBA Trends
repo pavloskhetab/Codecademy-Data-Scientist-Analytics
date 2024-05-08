@@ -129,5 +129,16 @@ print(knicks_pts_10.head())
 
 print("Nets points in 2010")
 print(nets_pts_10.head())
+# I believe that the means are not likely to be associated due to the low value of 9 but more tests need to be carried out to verify the association.
 
+# 3. Create a set of overlapping histograms to compare the distributions. Do the distributions appear to be the same?
+plt.hist(knicks_pts_10, color = 'blue', label = 'Knicks', normed = True, alpha = 0.8)
+
+plt.hist(nets_pts_10, color = 'red', label = 'Nets', normed = True, alpha = 0.8)
+plt.legend()
+plt.title("2010 Season")
+plt.show()
+plt.close()
+
+# The distributions appear to be similar.
 
