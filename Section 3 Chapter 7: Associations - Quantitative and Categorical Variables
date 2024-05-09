@@ -346,3 +346,20 @@ plt.hist(fare_died, color = 'red', label = 'Died', normed = True, alpha = 0.5)
 plt.legend()
 plt.show()
 plt.close()
+
+# 5. For the rest of the project use data from 2010. 
+# Investigate the relationship between franchise and points scored per game.
+# Use side-by-side box plots to visualise the mean differences to understand if the mean difference is 'large' or 'small'.
+sns.boxplot(data = nba_2010, x = 'fran_id', y = 'pts')
+plt.show()
+plt.close()
+
+# Is there any overlap between the boxes? (View IQR) 
+# There exists an overlap in nearly all of the franchises.
+
+# Does this chart suggest that fran_id and pts are associated?
+# This chart doesn't really show that fran_id and pts are associated.
+
+# Which pairs of teams, if any, earn different average scores per game?
+# Knicks, Thunder, and Spurs against Celtics and Nets have different average.
+
