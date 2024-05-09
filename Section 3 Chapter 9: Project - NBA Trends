@@ -116,6 +116,7 @@ nba_2014 = nba[nba.year_id == 2014]
 print(nba_2010.head())
 print(nba_2014.head())
 
+
 # 1. Compare the Knicks with the Nets for points earned in 2010
 
 # Filter for Knicks data in 2010
@@ -130,6 +131,7 @@ print(knicks_pts_2010.head())
 print("Nets points in 2010")
 print(nets_pts_2010.head())
 
+
 # 2. Calculate the difference between the two teams' average points and assess whether fran_id and points are associated. Why or why not?
 
 average_points_knicks_2010 = knicks_pts_2010.mean()
@@ -139,6 +141,7 @@ diff_means_2010 = average_points_knicks_2010 - average_points_nets_2010
 
 print(diff_means_2010)
 # I believe that the means are not likely to be associated due to the low value of 9 but more tests need to be carried out to verify the association.
+
 
 # 3. Create a set of overlapping histograms to compare the distributions. Do the distributions appear to be the same?
 plt.hist(knicks_pts_2010, color = 'blue', label = 'Knicks', normed = True, alpha = 0.8)
@@ -150,6 +153,7 @@ plt.show()
 plt.close()
 
 # The distributions appear to be similar.
+
 
 # 4. Now do the same for 2014 games
 # Filter for Knicks data in 2014
@@ -182,3 +186,38 @@ plt.show()
 plt.close()
 
 # The mean difference doesn't make sense since one distribution is bimodal and could indicate a non-linear relationship.
+
+
+# 5. For the rest of the project use data from 2010. 
+# Investigate the relationship between franchise and points scored per game.
+# Use side-by-side box plots to visualise the mean differences to understand if the mean difference is 'large' or 'small'.
+sns.boxplot(data = nba_2010, x = 'fran_id', y = 'pts')
+plt.show()
+plt.close()
+
+# Is there any overlap between the boxes? (View IQR) 
+# There exists an overlap in nearly all of the franchises.
+
+# Does this chart suggest that fran_id and pts are associated?
+# This chart doesn't really show that fran_id and pts are associated.
+
+# Which pairs of teams, if any, earn different average scores per game?
+# Knicks, Thunder, and Spurs against Celtics and Nets have different average scores per game.
+
+
+# 6. Investigate if teams tend to win more games at home compared to away.
+# Calculate a contingency table of frequency to determine if these categorical variables are associated.
+location_result_freq = pd.crosstab(nba_2010.game_result, nba_2010.game_location)
+
+print(location_result_freq)
+# Based on this contingency table, it seems that the variables are associated since when the teams are away they tend to lose more and win less whereas when they are at home the tend to win more and lose less.
+
+
+# 7. Convert the table of frequencies into a table of proportions
+
+location_result_proportions = location_result_freq/len(nba_2010)
+
+print(location_result_proportions)
+
+
+# 8. Calculate the expected contingency table and the Chi-Square statistic to check for association between game_result and game_location.
