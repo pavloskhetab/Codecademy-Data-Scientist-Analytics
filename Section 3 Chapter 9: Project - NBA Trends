@@ -247,3 +247,17 @@ Expected table:
 # 9. Using nba_2010, calculate the covariance between forecast(538's projected win probability) and point_diff(the margin of victory/defeat) in the dataset. Call this point_diff_forecast_cov.
 point_diff_forecast_cov = np.cov(nba_2010.point_diff, nba_2010.forecast)
 print(point_diff_forecast_cov)
+# Covariance is 1.37
+
+# 10. Using nba_2010, calculate the correlation between forecast and point_diff. Call this point_diff_forecast_corr.
+point_diff_forecast_corr, p = pearsonr(nba_2010.point_diff, nba_2010.forecast)
+print(point_diff_forecast_corr)
+# Correlation is 0.44 and since this is greater than 0.3 it suggests a linear association.
+
+x = nba_2010.forecast
+y = nba_2010.point_diff
+plt.scatter(x, y)
+plt.xlabel("Projected win probability")
+plt.ylabel("The margin of victory/defeat")
+plt.show()
+plt.close()
