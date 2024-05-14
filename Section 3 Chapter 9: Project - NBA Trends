@@ -221,3 +221,26 @@ print(location_result_proportions)
 
 
 # 8. Calculate the expected contingency table and the Chi-Square statistic to check for association between game_result and game_location.
+chi2, pvalue, dof, expected = chi2_contingency(location_result_freq)
+
+print('Chi-Square statistic for Location and Game Result:')
+print(chi2)
+
+print('Expected table for Location and Game Result:')
+print(expected)
+# Chi-square statist is low
+'''
+The obeserved table show different values than expected.
+Chi-Square statistic is low(6.5), there is evidence to reject the null hypothesis of independence between location and game result. Meaning there is a high chance that the variables are associated.
+
+Observed table:
+game_location    A    H
+game_result            
+L              133  105
+W               92  120
+
+Expected table:
+ [119. 119.]
+ [106. 106.]
+'''
+
