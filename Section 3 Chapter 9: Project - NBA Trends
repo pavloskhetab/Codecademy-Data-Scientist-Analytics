@@ -244,3 +244,6 @@ Expected table:
  [106. 106.]
 '''
 
+# 9. Using nba_2010, calculate the covariance between forecast(538's projected win probability) and point_diff(the margin of victory/defeat) in the dataset. Call this point_diff_forecast_cov.
+point_diff_forecast_cov = np.cov(nba_2010.point_diff, nba_2010.forecast)
+print(point_diff_forecast_cov)
