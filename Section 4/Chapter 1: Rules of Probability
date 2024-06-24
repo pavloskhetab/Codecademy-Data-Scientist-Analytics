@@ -65,3 +65,22 @@ Effectiveness of vaccines
 The weather on a particular day
 Betting odds for professional sports games
 We will explore applications of this further in the lesson!
+
+
+
+Mutually Exclusive Events
+Two events are considered mutually exclusive if they cannot occur at the same time. 
+For example, consider a single coin flip: the events “tails” and “heads” are mutually exclusive because we cannot get both tails and heads on a single flip.
+
+We can visualize two mutually exclusive events as a pair of non-overlapping circles. 
+They do not overlap because there is no outcome for one event that is also in the sample space for the other:
+
+A Venn diagram that shows two non-overlapping circles, one that represents event A and one that represents event B. 
+Nothing is shaded in the Venn diagram.
+
+What about events that are not mutually exclusive? 
+If event A is rolling an odd number and event B is rolling a number greater than two, these events are not mutually exclusive. 
+They have an intersection of {3, 5}. Any events that have a non-empty intersection are not mutually exclusive.
+
+
+
