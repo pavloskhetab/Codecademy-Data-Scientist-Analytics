@@ -84,3 +84,62 @@ They have an intersection of {3, 5}. Any events that have a non-empty intersecti
 
 
 
+Addition Rule
+Now, it’s time to apply these concepts to calculate probabilities.
+
+Let’s go back to one of our first examples: event A is rolling an odd number on a six-sided die and event B is rolling a number greater than two. What if we want to find the probability of one or both events occurring? This is the probability of the union of A and B:
+
+𝑃
+(
+𝐴
+ or 
+𝐵
+)
+P(A or B)
+We can visualize this calculation as follows:
+
+This gif shows three sequential images of a Venn diagram that outline the formula for P(A or B). In the Venn Diagram, there are two overlapping circles: one that corresponds to event A and one that corresponds to event B. In the first image, the event A circle is shaded blue and P(A) is added to the formula. In the second image, the event B circle is shaded red and the formula now shows P(A) + P(B). In the final image, the overlap of event A and event B is shaded green and the formula now shows P(A) + P(B) - P(A and B).
+
+This animation gives a visual representation of the addition rule formula, which is:
+
+𝑃
+(
+𝐴
+ or 
+𝐵
+)
+=
+𝑃
+(
+𝐴
+)
++
+𝑃
+(
+𝐵
+)
+−
+𝑃
+(
+𝐴
+ and 
+𝐵
+)
+P(A or B)=P(A)+P(B)−P(A and B)
+We subtract the intersection of events A and B because it is included twice in the addition of P(A) and P(B).
+
+What if the events are mutually exclusive? On a single die roll, 
+if event A is that the roll is less than or equal to 2 and event B is that the roll is greater than or equal to 5, then events A and B cannot both happen.
+
+This gif shows two sequential images of a Venn diagram that outline the formula for P(A or B) for independent events. 
+In the Venn Diagram, there are two non-overlapping circles: one that corresponds to event A and one that corresponds to event B. 
+In the first image, the event A circle is shaded blue and P(A) is added to the formula. 
+In the second image, the event B circle is shaded red and the final formula now shows P(A) + P(B).
+
+For mutually exclusive events, the addition rule formula is:
+
+P(A or B)=P(A)+P(B)
+This is because the intersection is empty, so we don’t need to remove any overlap between the two events.
+
+
+
