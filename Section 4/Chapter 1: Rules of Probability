@@ -268,3 +268,62 @@ In the next exercise, we’ll explore how we can use our tree diagram to calcula
 
 
 
+Bayes' Theorem
+Imagine that you are a patient who has recently tested positive for strep throat. You may want to know the probability that you HAVE strep throat, given that you tested positive:
+
+P(ST∣+)
+To calculate this probability, we will use something called Bayes Theorem, which states the following:
+
+P(B∣A)= 
+
+P(A∣B)⋅P(B) / P(A)​
+ 
+Using Bayes’ theorem:
+P(ST∣+)= 
+P(+∣ST)⋅P(ST) / P(+)
+​
+ 
+We know:
+P(+∣ST)=0.85
+We also know:
+
+P(ST)=0.20
+What about P(+)? Is this something we know? Well, let’s think about this. There are four possible outcomes:
+
+Having strep throat and testing positive
+Having strep throat and testing negative
+Not having strep throat and testing positive
+Not having strep throat and testing negative
+We only care about the two outcomes where a patient tests positives for P(+). Therefore, we can say:
+
+P(+)=P(ST and +)+P(NO ST and +)
+P(+)=0.17+.016
+P(+)=0.186
+​
+ 
+Finally, if we plug all of these into the Bayes’ theorem formula, we get:
+P(ST∣+)= 
+0.186
+0.85⋅0.20
+​
+ =0.914
+There is a 91.4% chance that you actually have strep throat given you test positive. This is not obvious from the information outlined in our tree diagram, but with the power of Bayes theorem, we were able to calculate it!
+
+
+
+Review
+Congratulations, we have finished our exploration into the rules of probability! To recap, we have covered:
+
+The union and intersection of two events
+The complement of an event
+Independent and dependent events
+Mutually exclusive events
+How to calculate the union of two events using the addition rule
+What conditional probability is and how to calculate it
+How to calculate simultaneous events using the multiplication rule
+How to use tree diagrams to map out possible outcomes
+What Bayes’ theorem is and how to calculate it
+Application of conditional probability and Bayes’ theorem
+Marvel in all that we have covered! 
+
+
