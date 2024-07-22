@@ -229,3 +229,42 @@ Open the diagram if in a new window here if you would like to zoom in for a bett
 
 
 
+Conditional Probability Continued
+We have introduced conditional probability as a part of the multiplication rule for dependent events. However, let’s go a bit more in-depth with it as it is a powerful probability tool that has real-world applications.
+
+For this problem, we will follow along the tree diagram on the right.
+
+Suppose that the following is true (this is shown in the first set of branches in the diagram):
+
+20 percent of the population has strep throat.
+80 percent of the population does not have strep throat.
+Now suppose that we test a bunch of people for strep throat. The possible results of these tests are shown in the next set of branches:
+
+If a person has strep throat, there is an 85% chance their test will be positive and a 15% chance it will be negative. This is labeled as:
+P(+∣ST)=0.85
+and
+P(−∣ST)=0.15
+​
+ 
+If a person does not have strep throat, there is a 98% chance their test will be negative and a 2% chance it will be positive. This can be labeled as:
+P(−∣NO ST)=0.98
+and
+P(+∣NO ST)=0.02
+​
+ 
+Finally, let’s look at the four possible pairs of outcomes that form the terminal branches of our diagram:
+P(ST and +)=0.17
+P(ST and -)=0.03
+P(NO ST and +)=0.016
+P(NO ST and -)=0.784
+​
+ 
+Together, these add up to one since they capture all potential outcomes after patients are tested.
+
+It’s great that we have all this information. However, we are missing something. If someone gets a positive result, what is the probability that they have strep throat? Notationally, we can write this probability as:
+
+P(ST∣+)
+In the next exercise, we’ll explore how we can use our tree diagram to calculate this probability.
+
+
+
