@@ -1,0 +1,24 @@
+Random Variables
+A random variable is, in its simplest form, a function. In probability, we often use random variables to represent random events. For example, we could use a random variable to represent the outcome of a die roll: any number between one and six.
+
+Random variables must be numeric, meaning they always take on a number rather than a characteristic or quality. If we want to use a random variable to represent an event with non-numeric outcomes, we can choose numbers to represent those outcomes. For example, we could represent a coin flip as a random variable by assigning “heads” a value of 1 and “tails” a value of 0.
+
+In this lesson, we will use random.choice(a, size = size, replace = True/False) from the numpy library to simulate random variables in python. In this method:
+
+a is a list or other object that has values we are sampling from
+size is a number that represents how many values to choose
+replace can be equal to True or False, and determines whether we keep a value in a after drawing it (replace = True) or remove it from the pool (replace = False).
+The following code simulates the outcome of rolling a fair die twice using np.random.choice():
+
+import numpy as np
+
+# 7 is not included in the range function
+die_6 = range(1, 7)
+
+rolls = np.random.choice(die_6, size = 2, replace = True)
+
+print(rolls)
+
+Output:
+
+# [2, 5]
