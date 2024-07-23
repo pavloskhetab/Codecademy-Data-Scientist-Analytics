@@ -66,3 +66,19 @@ candy = 'discrete'
 
 
 
+Probability Mass Functions
+A probability mass function (PMF) is a type of probability distribution that defines the probability of observing a particular value of a discrete random variable. 
+For example, a PMF can be used to calculate the probability of rolling a three on a fair six-sided die.
+
+There are certain kinds of random variables (and associated probability distributions) that are relevant for many different kinds of problems. 
+These commonly used probability distributions have names and parameters that make them adaptable for different situations.
+
+For example, suppose that we flip a fair coin some number of times and count the number of heads. 
+The probability mass function that describes the likelihood of each possible outcome (eg., 0 heads, 1 head, 2 heads, etc.) is called the binomial distribution. The parameters for the binomial distribution are:
+
+n for the number of trials (eg., n=10 if we flip a coin 10 times)
+p for the probability of success in each trial (probability of observing a particular outcome in each trial. In this example, p= 0.5 because the probability of observing heads on a fair coin flip is 0.5)
+If we flip a fair coin 10 times, we say that the number of observed heads follows a Binomial(n=10, p=0.5) distribution. The graph below shows the probability mass function for this experiment. 
+The heights of the bars represent the probability of observing each possible outcome as calculated by the PMF.
+
+Code:
