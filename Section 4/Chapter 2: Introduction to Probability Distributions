@@ -60,4 +60,9 @@ For example, the temperature in Los Angeles on a randomly chosen day is a contin
 We can always be more precise about the temperature by expanding to another decimal place (96 degrees, 96.44 degrees, 96.437 degrees, etc.).
 
 Code:
+mile_time = 'continuous'
+
+candy = 'discrete'
+
+
 
