@@ -98,3 +98,26 @@ The sum of the heights of all the bars will always equal 1. So when x is larger,
 
 
 
+Calculating Probabilities using Python
+The binom.pmf() method from the scipy.stats library can be used to calculate the PMF of the binomial distribution at any value. This method takes 3 values:
+
+x: the value of interest
+n: the number of trials
+p: the probability of success
+For example, suppose we flip a fair coin 10 times and count the number of heads. 
+We can use the binom.pmf() function to calculate the probability of observing 6 heads as follows:
+
+# import necessary library
+import scipy.stats as stats
+
+# st.binom.pmf(x, n, p)
+print(stats.binom.pmf(6, 10, 0.5))
+
+Output:
+
+# 0.205078
+
+Notice that two of the three values that go into the stats.binomial.pmf() method are the parameters that define the binomial distribution: 
+n represents the number of trials and p represents the probability of success.
+
+Code:
