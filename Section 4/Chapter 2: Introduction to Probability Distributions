@@ -270,3 +270,63 @@ When looking at the graph of a CDF, each y-axis value is the sum of the probabil
 
 
 
+Cumulative Distribution Function continued
+We can use a cumulative distribution function to calculate the probability of a specific range by taking the difference between two values from the cumulative distribution function. 
+For example, to find the probability of observing between 3 and 6 heads, we can take the probability of observing 6 or fewer heads and subtracting the probability of observing 2 or fewer heads. 
+This leaves a remnant of between 3 and 6 heads.
+
+The visual to the right demonstrates how this works. It is important to note that to include the lower bound in the range, the value being subtracted should be one less than the lower bound. 
+In this example, we wanted to know the probability from 3 to 6, which includes 3. Mathematically, this looks like the following equation:
+
+P(3<=X<=6)=P(X<=6)−P(X<3)
+or
+P(3<=X<=6)=P(X<=6)−P(X<=2)
+​
+
+
+Using the Cumulative Distribution Function in Python
+We can use the binom.cdf() method from the scipy.stats library to calculate the cumulative distribution function. This method takes 3 values:
+
+x: the value of interest, looking for the probability of this value or less
+n: the sample size
+p: the probability of success
+Calculating the probability of observing 6 or fewer heads from 10 fair coin flips (0 to 6 heads) mathematically looks like the following:
+
+P(6orfewerheads)=P(0to6heads)
+In python, we use the following code:
+
+import scipy.stats as stats
+
+print(stats.binom.cdf(6, 10, 0.5))
+
+Output:
+
+0.828125
+
+Calculating the probability of observing between 4 and 8 heads from 10 fair coin flips can be thought of as taking the difference of the value of the cumulative distribution function 
+at 8 from the cumulative distribution function at 3:
+
+P(4to8Heads)=P(0to8Heads)−P(0to3Heads)
+In python, we use the following code:
+
+import scipy.stats as stats
+
+print(stats.binom.cdf(8, 10, 0.5) - stats.binom.cdf(3, 10, 0.5))
+
+Output:
+
+# 0.81738
+
+To calculate the probability of observing more than 6 heads from 10 fair coin flips we subtract the value of the cumulative distribution function at 6 from 1. Mathematically, this looks like the following:
+
+P(morethan6heads)=1−P(6orfewerheads)
+Note that “more than 6 heads” does not include 6. In python, we would calculate this probability using the following code:
+
+import scipy.stats as stats
+print(1 - stats.binom.cdf(6, 10, 0.5))
+
+Output:
+
+# 0.171875
+
+Code:
