@@ -230,3 +230,43 @@ Output:
 # 0.98926
 
 Code:
+import scipy.stats as stats
+
+## Checkpoint 1
+prob_1 = 0
+for x in range(4,7):
+  prob_1 += stats.binom.pmf(x, n = 10, p = 0.5)
+
+print(prob_1)
+
+## Checkpoint 2
+prob_2 = 0
+for x in range(0,3):
+  prob_2 += stats.binom.pmf(x, n = 10, p = 0.5)
+
+prob_2 = 1 - prob_2
+print(prob_2)
+
+
+
+Cumulative Distribution Function
+The cumulative distribution function for a discrete random variable can be derived from the probability mass function. 
+However, instead of the probability of observing a specific value, the cumulative distribution function gives the probability of observing a specific value OR LESS.
+
+As previously discussed, the probabilities for all possible values in a given probability distribution add up to 1. 
+The value of a cumulative distribution function at a given value is equal to the sum of the probabilities lower than it, with a value of 1 for the largest possible number.
+
+Cumulative distribution functions are constantly increasing, so for two different numbers that the random variable could take on, 
+the value of the function will always be greater for the larger number. Mathematically, this is represented as:
+
+If x_1 < x_2 , →CDF(x_1)<CDF(x_2)
+
+We showed how the probability mass function can be used to calculate the probability of observing less than 3 heads out of 10 coin flips by adding up the probabilities of observing 0, 1, and 2 heads. 
+The cumulative distribution function produces the same answer by evaluating the function at CDF(X=2). In this case, using the CDF is simpler than the PMF because it requires one calculation rather than three.
+
+The animation to the right shows the relationship between the probability mass function and the cumulative distribution function. 
+The top plot is the PMF, while the bottom plot is the corresponding CDF. 
+When looking at the graph of a CDF, each y-axis value is the sum of the probabilities less than or equal to it in the PMF.
+
+
+
