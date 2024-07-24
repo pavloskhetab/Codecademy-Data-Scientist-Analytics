@@ -141,3 +141,32 @@ print(prob_2)
 
 
 
+Using the Probability Mass Function Over a Range
+We have seen that we can calculate the probability of observing a specific value using a probability mass function. 
+What if we want to find the probability of observing a range of values for a discrete random variable? One way we could do this is by adding up the probability of each value.
+
+For example, let’s say we flip a fair coin 5 times, and want to know the probability of getting between 1 and 3 heads. We can visualize this scenario with the probability mass function:
+
+GIF of highlighting selected bars on a histogram
+
+We can calculate this using the following equation where P(x) is the probability of observing the number x successes (heads in this case):
+
+P(1to3heads)=P(1<=X<=3)
+P(1to3heads)=P(X=1)+P(X=2)+P(X=3)
+P(1to3heads)=0.1562+0.3125+0.3125
+P(1to3heads)=0.7812
+​
+ 
+Instructions
+Let’s visualize what it means to take the probability of a range.
+
+Try different ranges to see how the probabilities change for different values.
+
+We can calculate this using the following equation where P(x) is the probability of observing the number of heads in this case:
+
+P(1to3heads)=P(1<=X<=3)
+P(1to3heads)=P(X=1)+P(X=2)+P(X=3)
+P(1to3heads)=0.1562+0.3125+0.3125
+P(1to3heads)=0.7812
+​
+Code:
