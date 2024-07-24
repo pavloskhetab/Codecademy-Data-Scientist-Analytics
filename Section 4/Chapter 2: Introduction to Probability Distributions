@@ -169,4 +169,64 @@ P(1to3heads)=P(X=1)+P(X=2)+P(X=3)
 P(1to3heads)=0.1562+0.3125+0.3125
 P(1to3heads)=0.7812
 ​
+
+
+Probability Mass Function Over a Range using Python
+We can use the same binom.pmf() method from the scipy.stats library to calculate the probability of observing a range of values. 
+As mentioned in a previous exercise, the binom.pmf method takes 3 values:
+
+x: the value of interest
+n: the sample size
+p: the probability of success
+For example, we can calculate the probability of observing between 2 and 4 heads from 10 coin flips as follows:
+
+import scipy.stats as stats
+
+# calculating P(2-4 heads) = P(2 heads) + P(3 heads) + P(4 heads) for flipping a coin 10 times
+print(stats.binom.pmf(2, n=10, p=.5) + stats.binom.pmf(3, n=10, p=.5) + stats.binom.pmf(4, n=10, p=.5))
+
+Output:
+
+# 0.366211
+
+We can also calculate the probability of observing less than a certain value, let’s say 3 heads, by adding up the probabilities of the values below it:
+
+import scipy.stats as stats
+
+# calculating P(less than 3 heads) = P(0 heads) + P(1 head) + P(2 heads) for flipping a coin 10 times
+print(stats.binom.pmf(0, n=10, p=.5) + stats.binom.pmf(1, n=10, p=.5) + stats.binom.pmf(2, n=10, p=.5))
+
+Output:
+
+# 0.0546875
+
+Note that because our desired range is less than 3 heads, we do not include that value in the summation.
+
+When there are many possible values of interest, this task of adding up probabilities can be difficult. 
+If we want to know the probability of observing 8 or fewer heads from 10 coin flips, we need to add up the values from 0 to 8:
+
+import scipy.stats as stats
+
+stats.binom.pmf(0, n = 10, p = 0.5) + stats.binom.pmf(1, n = 10, p = 0.5) + stats.binom.pmf(2, n = 10, p = 0.5) + stats.binom.pmf(3, n = 10, p = 0.5) + stats.binom.pmf(4, n = 10, p = 0.5) + stats.binom.pmf(5, n = 10, p = 0.5) + stats.binom.pmf(6, n = 10, p = 0.5) + stats.binom.pmf(7, n = 10, p = 0.5) + stats.binom.pmf(8, n = 10, p = 0.5)
+
+Output:
+
+# 0.98926
+
+This involves a lot of repetitive code. Instead, we can also use the fact that the sum of the probabilities for all possible values is equal to 1:
+
+P(0to8heads)+P(9to10heads)=P(0to10heads)=1
+P(0to8heads)=1−P(9to10heads)
+​
+ 
+Now instead of summing up 9 values for the probabilities between 0 and 8 heads, we can do 1 minus the sum of two values and get the same result:
+
+import scipy.stats as stats
+# less than or equal to 8
+1 - (stats.binom.pmf(9, n=10, p=.5) + stats.binom.pmf(10, n=10, p=.5))
+
+Output:
+
+# 0.98926
+
 Code:
