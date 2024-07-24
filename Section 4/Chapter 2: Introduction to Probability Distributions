@@ -82,3 +82,19 @@ If we flip a fair coin 10 times, we say that the number of observed heads follow
 The heights of the bars represent the probability of observing each possible outcome as calculated by the PMF.
 
 Code:
+See how the shape of the binomial distribution changes as the sample size changes.
+
+The heights of the bars represent the probability of observing different values of heads from x number of fair coin flips. Taller bars represent more likely outcomes. For example, let’s say we flip a fair coin 5 times, and want to know the probability of getting between 1 and 3 heads. We can visualize this scenario with the probability mass function shown.
+
+We can calculate this using the following equation where P(x) is the probability of observing the number x successes (heads in this case):
+
+P(1to3heads)=P(1<=X<=3)
+P(1to3heads)=P(X=1)+P(X=2)+P(X=3)
+P(1to3heads)=0.1562+0.3125+0.3125
+P(1to3heads)=0.7812
+​
+ 
+The sum of the heights of all the bars will always equal 1. So when x is larger, the number of heads we can observe increases, and the probability needs to be divided between more values.
+
+
+
