@@ -1,0 +1,55 @@
+More on Probability Distributions
+
+Introduction to the Poisson Distribution
+There are numerous probability distributions used to represent almost any random event. 
+In the previous lesson, we learned about the binomial distribution to represent events like any number of coin flips 
+as well as the normal distribution to represent events such as the height of a randomly selected woman.
+
+The Poisson distribution is another common distribution, and it is used to describe the number of times a certain event occurs within a fixed time or space interval. 
+For example, the Poisson distribution can be used to describe the number of cars that pass through a specific intersection between 4pm and 5pm on a given day. 
+It can also be used to describe the number of calls received in an office between 1pm to 3pm on a certain day.
+
+The Poisson distribution is defined by the rate parameter, symbolized by the Greek letter lambda, λ.
+
+Lambda represents the expected value — or the average value — of the distribution. For example, if our expected number of customers between 1pm and 2pm is 7, 
+then we would set the parameter for the Poisson distribution to be 7. The PMF for the Poisson(7) distribution is as follows:
+
+This plot shows the PMF of the Poisson(7) distribution. The plot is centered around 7 
+
+
+What does the PMF of the Poisson distribution look like with different values in the lambda parameter?
+
+The plot shows a Poisson distribution with lambda equal to 3. The height of the bars represents the probability of observing the number along the x-axis.
+
+As the parameter lambda increases, the variance — or spread — of possible values increases as well.
+
+
+
+Calculating Probabilities of Exact Values Using the Probability Mass Function
+The Poisson distribution is a discrete probability distribution, so it can be described by a probability mass function and cumulative distribution function.
+
+We can use the poisson.pmf() method in the scipy.stats library to evaluate the probability of observing a specific number given the parameter (expected value) of a distribution. 
+For example, suppose that we expect it to rain 10 times in the next 30 days. The number of times it rains in the next 30 days is “Poisson distributed” with lambda = 10. 
+We can calculate the probability of exactly 6 times of rain as follows:
+
+import scipy.stats as stats
+# expected value = 10, probability of observing 6
+stats.poisson.pmf(6, 10)
+
+Output:
+
+0.06305545800345125
+
+Like previous probability mass functions of discrete random variables, individual probabilities can be summed together to find the probability of observing a value in a range.
+
+For example, if we expect it to rain 10 times in the next 30 days, the number of times it rains in the next 30 days is “Poisson distributed” with lambda = 10. 
+We can calculate the probability of 12-14 times of rain as follows:
+
+import scipy.stats as stats
+# expected value = 10, probability of observing 12-14
+stats.poisson.pmf(12, 10) + stats.poisson.pmf(13, 10) + stats.poisson.pmf(14, 10)
+
+Output:
+
+0.21976538076223123
+
