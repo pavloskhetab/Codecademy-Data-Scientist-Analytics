@@ -398,5 +398,50 @@ Output:
 
 # 0.1141
 
+Code:
+import scipy.stats as stats
 
+prob = stats.norm.cdf(175, 167.64, 8)
+print(prob)
+
+
+
+Probability Density Functions and Cumulative Distribution Function
+We can take the difference between two overlapping ranges to calculate the probability that a random selection will be within a range of values for continuous distributions. This is essentially the same process as calculating the probability of a range of values for discrete distributions.
+
+Gif with two overlapping densities, subtract one out to find the difference, and therefore the probability in that range
+
+Let’s say we wanted to calculate the probability of randomly observing a woman between 165 cm to 175 cm, assuming heights still follow the Normal(167.74, 8) distribution. We can calculate the probability of observing these values or less. The difference between these two probabilities will be the probability of randomly observing a woman in this given range. This can be done in python using the norm.cdf() method from the scipy.stats library. As mentioned before, this method takes on 3 values:
+
+x: the value of interest
+loc: the mean of the probability distribution
+scale: the standard deviation of the probability distribution
+import scipy.stats as stats
+# P(165 < X < 175) = P(X < 175) - P(X < 165)
+# stats.norm.cdf(x, loc, scale) - stats.norm.cdf(x, loc, scale)
+print(stats.norm.cdf(175, 167.74, 8) - stats.norm.cdf(165, 167.74, 8))
+
+Output:
+
+# 0.45194
+
+We can also calculate the probability of randomly observing a value or greater by subtracting the probability of observing less than the given value from 1. 
+This is possible because we know that the total area under the curve is 1, so the probability of observing something greater than a value is 1 minus the probability of observing something less than the given value.
+
+Let’s say we wanted to calculate the probability of observing a woman taller than 172 centimeters, assuming heights still follow the Normal(167.74, 8) distribution. 
+We can think of this as the opposite of observing a woman shorter than 172 centimeters. We can visualize it this way:
+
+Image showing how P(X > 172) = 1 - P(X < 172)
+
+We can use the following code to calculate the blue area by taking 1 minus the red area:
+
+import scipy.stats as stats
+
+# P(X > 172) = 1 - P(X < 172)
+# 1 - stats.norm.cdf(x, loc, scale)
+print(1 - stats.norm.cdf(172, 167.74, 8))
+
+Output:
+
+# 0.29718
 
