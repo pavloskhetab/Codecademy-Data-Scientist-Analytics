@@ -303,4 +303,149 @@ Using the equation, we can calculate:
 Expected(#rightanswers)=E(X)=20×0.25=5
 
 Code:
+## Checkpoint 1
+expected_baskets = .85  * 20
+print(expected_baskets)
 
+## Checkpoint 2
+expected_late = .02 * 180
+print(expected_late)
+
+
+
+Variance of the Binomial Distribution
+The variance of a binomial distribution is how much the expected value of success (from the previous exercise) may vary. 
+In other words, it is a measurement of the spread of the probabilities to the mean/expected value.
+
+Variance for the Binomial distribution is similarly calculated to the expected value using the n (# of trials) and p (probability of success) parameters. 
+Let’s use the 10 fair coin flips example to try to understand how variance is calculated. Each coin flip has a certain probability of landing as heads or tails: 0.5 and 0.5, respectively.
+
+The variance of a single coin flip will be the probability that the success happens times the probability that it does not happen: p·(1-p), or 0.5 x 0.5. 
+Because we have n = 10 number of coin flips, the variance of a single fair coin flip is multiplied by the number of flips. Thus we get the equation:
+
+Variance(#ofHeads)=Var(X)=n×p×(1−p)
+Variance(#ofHeads)=10×0.5×(1−0.5)=2.5
+​
+ 
+Let’s consider our 20 multiple choice quiz again. The variance around getting an individual question correct would be p·(1-p), or 0.25 x 0.75. 
+We then multiply this variance for all 20 questions in the quiz and get:
+
+Variance(#ofCorrectAnswers)&=20×0.25×(1−0.25)=3.75
+We would expect to get 5 correct answers, but the overall variance of the probability distribution is 3.75.
+
+Code:
+## Checkpoint 1
+variance_baskets = 20 * 0.85 * 0.15
+print(variance_baskets)
+
+## Checkpoint 2
+variance_late = 180 * 0.02 * 0.98
+print(variance_late)
+
+
+
+Properties of Expectation and Variance
+There are several properties of expectation and variance that are consistent through all distributions:
+
+Properties of Expectation
+The expected value of two independent random variables is the sum of each expected value separately:
+
+E(X+Y)=E(X)+E(Y)
+For example, if we wanted to count the total number of heads between 10 fair quarter flips and 6 fair nickel flips, 
+the expected value combined would be 5 heads (from the quarters) and 3 heads (from the nickels) so 8 heads overall.
+
+Multiplying a random variable by a constant a changes the expected value to be a times the expected value of the random variable:
+
+E(aX)=aE(X)
+For example, the expected number of heads from 10 fair coin flips is 5. If we wanted to calculate the number of heads from this event run 4 times (40 total coin flips), 
+the expected value would now be 4 times the original expected value, or 20.
+
+Adding a constant a to the distribution changes the expected value by the value a:
+
+E(X+a)=E(X)+a
+Let’s say that a test was given and graded, and the average grade was 78 out of 100 points. 
+If the teacher decided to curve the grade by adding 2 points to everyone’s grade, the average would now be 80 points.
+
+Properties of Variance
+Increasing the values in a distribution by a constant a does not change the variance:
+
+Var(X+a)=Var(X)
+This is because the variance of a constant is 0 (there is no range for a single number). 
+Adding a constant to a random variable does not add any additional variance. Let’s take the previous example with the teacher curving grades: 
+though the expected value (or average) of the test changes from 78 to 80, the spread and dispersion (or variance) of the test scores stays the same.
+
+Scaling the values of a random variable by a constant a scales the variance by the constant squared:
+
+Var(aX)=a^2 Var(X)
+The variance of the sum of two random variables is the sum of the individual variances:
+
+Var(X+Y)=Var(X)+Var(Y)
+This principle ONLY holds if the X and Y are independent random variables. Let’s say that X is the event getting a heads on a single fair coin flip, 
+and Y is the event rolling a 2 on a fair six-sided die:
+
+Var(X)=0.5∗(1−0.5)=0.25
+
+Var(Y)=0.167∗(1−0.167)=0.139
+
+Var(X+Y)=Var(X)+Var(Y)=0.25+0.139=0.389
+
+Code:import scipy.stats as stats
+import numpy as np
+
+## Checkpoint 1
+expected_bonus = 75000 * 0.08 
+
+
+## Checkpoint 2
+num_goals = stats.poisson.rvs(4, size=100)
+
+
+## Checkpoint 3
+print(np.var(num_goals))
+
+## Checkpoint 4
+num_goals_2 = num_goals * 2
+
+print(np.var(num_goals_2))
+
+
+
+Review
+Congrats! We have finished our second lesson on probability distributions! Let’s review some of the things we’ve learned:
+
+The Poisson distribution and its parameter lambda (λ)
+How the probability mass function of the Poisson distribution changes with different values of lambda (λ)
+Calculating probabilities of specific values and ranges of values from the Poisson distribution
+Calculating probabilities of ranges using the cumulative density function of the Poisson distribution
+Generating random values from a distribution
+Principles of expectation and variance of various distributions
+Universal properties of expectation and variance
+
+
+Instructions
+Let’s practice calculating different values from the Poisson distribution. Below are some questions you can try out using script.py. 
+If you get stuck, feel free to use solution.py, which contains the answer to each of these questions.
+
+1: You work at ambulance dispatch where the number of calls that come in daily follows the Poisson distribution with lambda equal to 9. 
+There’s a rule that a team can go on no more than 12 calls a day. But how often could this happen?
+
+Create a variable calls that is the probability of observing more than 12 calls on a given day. Then print calls.
+
+
+2: Let’s say that you have to call in a backup team if you have 10 or more calls in a given day. 
+But you don’t want to have to call in a backup team unless they really will be needed. But what is the probability that they will be called and not needed?
+
+Create and print a variable false_backup that is the probability of observing a minimum of 10 calls, but no more than 12. Then print false_backup.
+
+
+3: A certain tennis star has a first-serve rate of 62%. Let’s say they serve 80 times in a given match. 
+What is the expected value of the number of serves they make?
+
+Create and print a variable expected_serves that is the number of first-serves they are expected to make.
+
+
+4: At the same first-serve rate, what is the variance of this player’s first-serves?
+
+Create and print a variable variance_serves that is the variance of the player making their first serve.
+
+Code:
