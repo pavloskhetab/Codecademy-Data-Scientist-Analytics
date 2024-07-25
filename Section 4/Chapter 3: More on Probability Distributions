@@ -449,3 +449,21 @@ Create and print a variable expected_serves that is the number of first-serves t
 Create and print a variable variance_serves that is the variance of the player making their first serve.
 
 Code:
+import scipy.stats as stats
+
+
+## Practice Question 1
+calls = stats.poisson.pmf(9, 12)
+print(calls)
+
+## Practice Question 2
+false_backup = stats.poisson.pmf(9, 10) + stats.poisson.pmf(9, 11) + calls
+print(false_backup)
+
+## Practice Question 3
+expected_serves = 0.62 * 80
+print(expected_serves)
+
+## Practice Question 4
+variance_serves = expected_serves * 0.38
+print(variance_serves)
