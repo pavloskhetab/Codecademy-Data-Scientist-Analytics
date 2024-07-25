@@ -136,3 +136,171 @@ print(prob_17_to_21)
 
 
 
+Expectation of the Poisson Distribution
+Earlier, we mentioned that the parameter lambda (λ) is the expected value (or average value) of the Poisson distribution. But what does this mean?
+
+Let’s put this into context: let’s say we are salespeople, and after many weeks of work, we calculate our average to be 10 sales per week. If we take this value to be our expected value of a Poisson Distribution, the probability mass function will look as follows:
+
+This is a plot of the probability mass function for the Poisson distribution with the expected value equal to 10. The bar at 10 is colored red, and the rest of the bars are colored blue.
+
+The tallest bar represents the value with the highest probability of occurring. In this case, the tallest bar is at 10. This does not, however, mean that we will make 10 sales. It means that on average, across all weeks, we expect our average to equal about 10 sales per week.
+
+Let’s look at this another way. Let’s take a sample of 1000 random values from the Poisson distribution with the expected value of 10. We can use the poisson.rvs() method in the scipy.stats library to generate random values:
+
+import scipy.stats as stats
+
+# generate random variable
+# stats.poisson.rvs(lambda, size = num_values)
+rvs = stats.poisson.rvs(10, size = 1000)
+
+The histogram of this sampling looks like the following:
+
+This plot is a histogram of 1000 random samples from the Poisson(10) distribution
+
+We can see observations of as low as 2 but as high as 20. The tallest bars are at 9 and 10. If we took the average of the 1000 random samples, we would get:
+
+print(rvs.mean())
+
+Output:
+
+10.009
+
+This value is very close to 10, confirming that over the 1000 observations, the expected value (or average) is 10.
+
+When we talk about the expected value, we mean the average over many observations. 
+This relates to the Law of Large Numbers: 
+the more samples we have, the more likely samples will resemble the true population, and the mean of the samples will approach the expected value. 
+So even though the salesperson may make 3 sales one week, they may make 16 the next, and 11 the week after. 
+In the long run, after many weeks, the expected value (or average) would still be 10.
+
+Code:
+
+import scipy.stats as stats
+import codecademylib3
+
+from histogram_function import histogram_function
+
+## Checkpoint 1
+# lambda = 15, 1000 random draws 
+rand_vars = stats.poisson.rvs(15, size = 1000)
+
+## Checkpoint 2
+# print the mean of rand_vars
+print(rand_vars.mean())
+
+## Checkpoint 3
+histogram_function(rand_vars)
+
+
+
+Spread of the Poisson Distribution
+Probability distributions also have calculable variances. Variances are a way of measuring the spread or dispersion of values and probabilities in the distribution. 
+For the Poisson distribution, the variance is simply the value of lambda (λ), meaning that the expected value and variance are equivalent in Poisson distributions.
+
+We know that the Poisson distribution has a discrete random variable and must be greater than 0 (think, a salesperson cannot have less than 0 sales, a shop cannot have fewer than 0 customers), 
+so as the expected value increases, the number of possible values the distribution can take on would also increase.
+
+The first plot below shows a Poisson distribution with lambda equal to three, and the second plot shows a Poisson distribution with lambda equal to fifteen. 
+Notice that in the second plot, the spread of the distribution increases. Also, take note that the height of the bars in the second bar decrease since there are more possible values in the distribution.
+
+This image shows a Poisson distribution with lambda equal to three.
+
+This image shows a Poisson distribution with lambda equal to fifteen.
+
+As we can see, as the parameter lambda increases, the variance — or spread — of possible values increases as well.
+
+We can calculate the variance of a sample using the numpy.var() method:
+
+import scipy.stats as stats
+import numpy as np
+
+rand_vars = stats.poisson.rvs(4, size = 1000)
+print(np.var(rand_vars))
+
+Output:
+
+3.864559
+
+Because this is calculated from a sample, it is possible that the variance might not equal EXACTLY lambda. 
+However, we do expect it to be relatively close when the sample size is large, like in this example.
+
+Another way to view the increase in possible values is to take the range of a sample (the minimum and maximum values in a set). 
+The following code will take draw 1000 random variables from the Poisson distribution with lambda = 4 and then print the minimum and maximum values observed using the .min() and .max() Python functions:
+
+import scipy.stats as stats
+
+rand_vars = stats.poisson.rvs(4, size = 1000)
+
+print(min(rand_vars), max(rand_vars))
+
+Output:
+
+0 12
+
+If we increase the value of lambda to 10, let’s see how the minimum and maximum values change:
+
+import scipy.stats as stats
+
+rand_vars = stats.poisson.rvs(10, size = 1000)
+
+print(min(rand_vars), max(rand_vars))
+
+Output:
+
+1 22
+
+These values are spread wider, indicating a larger variance.
+
+Code:
+import scipy.stats as stats
+import numpy as np
+
+## For checkpoints 1 and 2
+# 5000 draws, lambda = 7
+rand_vars_7 = stats.poisson.rvs(7, size = 5000)
+
+## Checkpoint 1
+# print variance of rand_vars_7
+print(np.var(rand_vars_7))
+
+## Checkpoint 2
+# print minimum and maximum of rand_vars_7
+print(min(rand_vars_7), max(rand_vars_7))
+
+## For checkpoints 3 and 4
+# 5000 draws, lambda = 17
+rand_vars_17 = stats.poisson.rvs(17, size = 5000)
+
+## Checkpoint 3
+# print variance of rand_vars_17
+print(np.var(rand_vars_17))
+
+## Checkpoint 4
+# print minimum and maximum of rand_vars_17
+print(min(rand_vars_17), max(rand_vars_17))
+
+
+
+Expected Value of the Binomial Distribution
+Other types of distributions have expected values and variances based on the given parameters, just like the Poisson distribution. 
+Recall that the Binomial distribution has parameters n, representing the number of events and p, representing the probability of “success” (or the specific outcome we are looking for occurring).
+
+Consider the following scenario: we flip a fair coin 10 times and count the number of heads we observe. How many heads would you expect to see? 
+You might naturally think 5, and you would be right! What we are doing is calculating the expected value without even realizing it. 
+We take the 10 coin flips and multiply it by the chance of getting heads, or one-half, getting the answer of 5 heads. And that is exactly the equation for the expected value of the binomial distribution:
+
+Expected(#ofHeads)=E(X)=n×p
+Note that if we were counting the number of heads out of 5 fair coin flips, the expected value would be:
+
+5×0.5=2.5
+It is ok for the expected value to be a fraction or have decimal values, though it would be impossible to observe 2.5 heads.
+
+Let’s look at a different example. Let’s say we forgot to study, and we are going to guess B on all 20 questions of a multiple-choice quiz. 
+If we assume that every letter option (A, B, C, and D) has the same probability of being the right answer for each question, how many questions would we expect to get correct? 
+n would equal 20, because there are 20 questions, and p would equal 0.25, because there is a 1 in 4 chance that B will be the right answer. 
+Using the equation, we can calculate:
+
+Expected(#rightanswers)=E(X)=20×0.25=5
+
+Code:
+
