@@ -354,3 +354,49 @@ print(stats.binom.pmf(2, n=10, p=.5) + stats.binom.pmf(3, n=10, p=.5) + stats.bi
 
 
 
+Probability Density Functions
+Similar to how discrete random variables relate to probability mass functions, continuous random variables relate to probability density functions. 
+They define the probability distributions of continuous random variables and span across all possible values that the given random variable can take on.
+
+When graphed, a probability density function is a curve across all possible values the random variable can take on, and the total area under this curve adds up to 1.
+
+The following image shows a probability density function. The highlighted area represents the probability of observing a value within the highlighted range.
+
+GIF or visual of the area under the curve highlighted and showing the calculated area under the curve
+
+In a probability density function, we cannot calculate the probability at a single point. This is because the area of the curve underneath a single point is always zero. 
+The gif below showcases this.
+
+GIF or visual of the highlighted area under the curve getting smaller and smaller until the area equals 0
+
+As we can see from the visual above, as the interval becomes smaller, the width of the area under the curve becomes smaller as well. 
+When trying to evaluate the area under the curve at a specific point, the width of that area becomes 0, and therefore the probability equals 0.
+
+We can calculate the area under the curve using the cumulative distribution function for the given probability distribution.
+
+For example, heights fall under a type of probability distribution called a normal distribution. 
+The parameters for the normal distribution are the mean and the standard deviation, and we use the form Normal(mean, standard deviation) as shorthand.
+
+We know that women’s heights have a mean of 167.64 cm with a standard deviation of 8 cm, which makes them fall under the Normal(167.64, 8) distribution.
+
+Let’s say we want to know the probability that a randomly chosen woman is less than 158 cm tall. 
+We can use the cumulative distribution function to calculate the area under the probability density function curve from 0 to 158 to find that probability.
+
+Image to show the area under the curve highlighted from 0 to 158 cm
+
+We can calculate the area of the blue region in Python using the norm.cdf() method from the scipy.stats library. This method takes on 3 values:
+
+x: the value of interest
+loc: the mean of the probability distribution
+scale: the standard deviation of the probability distribution
+import scipy.stats as stats
+
+# stats.norm.cdf(x, loc, scale)
+print(stats.norm.cdf(158, 167.64, 8))
+
+Output:
+
+# 0.1141
+
+
+
