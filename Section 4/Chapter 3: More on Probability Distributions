@@ -72,3 +72,67 @@ print(prob_7_to_9)
 
 
 
+Calculating Probabilities of a Range using the Cumulative Density Function
+We can use the poisson.cdf() method in the scipy.stats library to evaluate the probability of observing a specific number or less given the expected value of a distribution. 
+For example, if we wanted to calculate the probability of observing 6 or fewer rain events in the next 30 days when we expected 10, we could do the following:
+
+import scipy.stats as stats
+# expected value = 10, probability of observing 6 or less
+stats.poisson.cdf(6, 10)
+
+Output:
+
+0.130141420882483
+
+This means that there is roughly a 13% chance that there will be 6 or fewer rainfalls in the month in question.
+
+We can also use this method to evaluate the probability of observing a specific number or more given the expected value of the distribution. 
+For example, if we wanted to calculate the probability of observing 12 or more rain events in the next 30 days when we expected 10, we could do the following:
+
+import scipy.stats as stats
+# expected value = 10, probability of observing 12 or more
+1 - stats.poisson.cdf(11, 10)
+
+Output:
+
+0.30322385369689386
+
+This means that there is roughly a 30% chance that there will be 12 or more rain events in the month in question.
+
+Note that we used 11 in the statement above even though 12 was the value given in the prompt. 
+We wanted to calculate the probability of observing 12 or more rains, which includes 12. stats.poisson.cdf(11, 10) evaluates the probability of observing 11 or fewer rains, 
+so 1 - stats.poisson.cdf(11, 10) would equal the probability of observing 12 or more rains.
+
+Summing individual probabilities over a wide range can be cumbersome. 
+It is often easier to calculate the probability of a range using the cumulative density function instead of the probability mass function. 
+We can do this by taking the difference between the CDF of the larger endpoint and the CDF of one less than the smaller endpoint of the range.
+
+For example, while still expecting 10 rainfalls in the next 30 days, we could use the following code to calculate the probability of observing between 12 and 18 rainfall events:
+
+import scipy.stats as stats
+# expected value = 10, probability of observing between 12 and 18
+stats.poisson.cdf(18, 10) - stats.poisson.cdf(11, 10)
+
+Output:
+
+0.29603734909303947
+
+Code:
+import scipy.stats as stats
+
+## Checkpoint 1
+# calculate prob_more_than_20
+prob_more_than_20 = 1 - stats.poisson.cdf(20, 15)
+
+# print prob_more_than_20
+print(prob_more_than_20)
+
+## Checkpoint 
+# calculate prob_17_to_21
+prob_17_to_21 = stats.poisson.cdf(21, 15) - stats.poisson.cdf(16, 15)
+
+# print prob_17_to_21
+print(prob_17_to_21)
+
+
+
