@@ -377,3 +377,53 @@ plt.clf()
 
 
 
+Calculating Probabilities
+Once we know the sampling distribution of the mean, we can also use it to estimate the probability of observing a particular range of sample means, 
+given some information (either known or assumed) about the population. To do this, we can use the Cumulative Distribution Function, or (CDF) of the normal distribution.
+
+Let’s work through this with our salmon fish example. Let’s say we are transporting the salmon and want to make sure the crate we carry the fish in will be strong enough to hold the weight.
+
+Suppose we estimate that the salmon population has an average weight of 60 lbs with a standard deviation of 40 lbs.
+We have a crate that supports 750 lbs, and we want to be able to transport 10 fish at a time.
+We want to calculate the probability that the average weight of those 10 fish is less than or equal to 75 (750/10).
+Using the CLT, we first estimate that the mean weight of 10 randomly sampled salmon from this population is normally distributed with mean = 60 and standard error = 40/10^.5. 
+Then, we can use this probability distribution to calculate the probability that 10 randomly sampled fish will have a mean weight less than or equal to 75.
+
+x = 75
+mean = 60
+std_dev = 40
+samp_size = 10
+standard_error = std_dev / (samp_size**.5)
+# remember that **.5 is raising to the power of one half, or taking the square root
+
+stats.norm.cdf(x,mean,standard_error)
+
+This returns 0.882, or a probability of 88.2% that the average weight of our sample of 10 fish will be less than or equal to 75.
+
+Code:
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+## Setting up our parameters
+x  = 30 # 750 / 25
+mean = 36
+std_dev = 20
+samp_size = 25
+
+standard_error = std_dev / (samp_size)**0.5
+
+cod_cdf = stats.norm.cdf(x, mean, standard_error)
+print(cod_cdf)
+
+
+
+Review
+Let’s recap what we’ve learned in this lesson:
+
+- A sampling distribution is obtained by taking a random sample of a certain size multiple times, taking a sample statistic, and plotting the distribution of this sample statistic.
+- The Central Limit Theorem establishes that the sampling distribution of the mean will be normally distributed (even if the original population was not normally distributed).
+- A statistic is called an unbiased estimator of a population parameter if the mean of the sampling distribution of the statistic is equal to the value of the statistic for the population. 
+The mean is an unbiased estimator.
+- We can use the Standard Error of our sample mean distribution in order to calculate probabilities of obtaining a sample with a certain statistic using the CDF.
+
