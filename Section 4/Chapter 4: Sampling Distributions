@@ -427,3 +427,19 @@ Let’s recap what we’ve learned in this lesson:
 The mean is an unbiased estimator.
 - We can use the Standard Error of our sample mean distribution in order to calculate probabilities of obtaining a sample with a certain statistic using the CDF.
 
+Tasks:
+In order to review, let’s consider an example from a restaurant serving quarter-pounder burgers. Their quarter-pounders weigh an average of 0.25 lbs with a standard deviation of 0.2 lbs.
+
+Let’s say we weigh all their burgers that they cook for dinner on a given night. 64 people order quarter-pounders. What is the probability that the mean will be 0.24 lbs or less?
+
+Set up the parameters at the top of the code by filling in values for x, population_mean, population_std_dev, and samp_size.
+
+Hit Run. The CDF is printed in the title of the 2nd plot. Take a mental note of the probability of 64 burgers having a mean of 0.24 lbs or less.
+
+On the next night, there’s a delicious special, and fewer people order the burger. Our sample size is now 10.
+
+Set the sample size in the simulator to 10 and consider the standard error. Has it changed in the direction you expected?
+
+Let’s say your family went to the restaurant and all 5 of you ordered the burger. What is the probability that you receive burgers with an average weight of 0.24 lbs or less?
+
+Code:
