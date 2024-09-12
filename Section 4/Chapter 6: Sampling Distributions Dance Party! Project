@@ -204,3 +204,31 @@ def sampling_distribution(population_data, samp_size, stat):
   plt.legend()
   plt.show()
   plt.clf()
+
+
+
+Code:
+from helper_functions import choose_statistic, population_distribution, sampling_distribution
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+import seaborn as sns
+import codecademylib3
+
+# task 1: load in the spotify dataset
+spotify_data = pd.read_csv('spotify_data.csv')
+
+# task 2: preview the dataset
+print(spotify_data.head())
+
+# task 3: select the relevant column
+song_tempos = spotify_data['tempo']
+
+print(song_tempos.head())
+# task 5: plot the population distribution with the mean labeled
+population_distribution(song_tempos)
+
+# task 6: sampling distribution of the sample mean
+sampling_distribution(song_tempos, 30, 'Mean')
+
