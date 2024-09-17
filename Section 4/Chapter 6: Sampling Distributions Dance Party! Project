@@ -168,9 +168,15 @@ def choose_statistic(x, sample_stat_text):
   elif sample_stat_text == "Variance":
     return np.var(x, ddof=1)
   # if you want to add an extra stat
-  # raise error if sample_stat_text is not "Mean", "Minimum", or "Variance"
+  elif sample_stat_text == "Maximum":
+    return np.max(x)
+  elif sample_stat_text == "Mode":
+    return stats.mode(x)[0][0]  # mode returns a tuple, first element is the mode
+  elif sample_stat_text == "Median":
+    return np.median(x)
+  # raise error if sample_stat_text is not valid
   else:
-    raise Exception('Make sure to input "Mean", "Minimum", or "Variance"')
+    raise Exception('Make sure to input "Mean", "Mode", "Median", "Minimum", "Maximum", or "Variance"')
 
 def population_distribution(population_data):
   # plot the population distribution
