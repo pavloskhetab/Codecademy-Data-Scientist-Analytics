@@ -1,0 +1,30 @@
+Introduction: Inferential Statistics
+Find out what you’ll learn in Inferential Statistics and why it’s important.
+
+Welcome to Inferential Statistics
+In this unit, we will cover a few hypothesis tests that can be used to make inferences about population(s). 
+We’ll cover ways of implementing these hypothesis tests in Python and simulate some hypothesis tests without pre-built functions.
+
+Why is this important?
+Descriptive statistics and inferential statistics are two subfields of statistics. 
+Descriptive statistics includes topics covered earlier in this path, including numerical and visual summaries of data. 
+Hypothesis testing, on the other hand, is a form of inferential statistics, which is used to draw inferences about a population using a smaller sample of data.
+
+This is important because descriptive statistics can tell us about the data that we have, but sometimes we can’t collect all of the data that we need to answer our questions. 
+For example, maybe we want to know whether people who get a vaccine are less likely to get a disease. 
+We can’t vaccinate every single person in the world to test this, so we’ll have to vaccinate a smaller sample of people instead. 
+Then, if the vaccine seems to work in our sample, we need to know whether that could have been a random fluke — or if it’s likely to be true for the rest of the population. 
+This is where hypothesis testing can help!
+
+What will you learn?
+At the end of this module, you will be able to:
+
+Implement a One-Sample T-Test using Python
+Understand how hypothesis tests work and simulate your own Binomial test
+Where can you get help and discuss the content?
+Learning is social. Whatever you’re working on, be sure to connect with the Codecademy community in the forums and Discord. 
+Remember to check in with the community regularly, including for things like asking for code reviews on your project work and providing code reviews to others in the projects category, 
+which can help to reinforce what you’ve learned.
+
+
+
