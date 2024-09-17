@@ -263,3 +263,49 @@ avg_tempo_greater_150bpm = 1 - stats.norm.cdf(150, population_mean, standard_err
 print("The probability that the sample mean of 30 songs is greater than 150 bpm is:", avg_tempo_greater_150bpm)
 
 # EXTRA task 17: 
+# Add other functions to helper_functions.py
+song_tempos_mode = choose_statistic(song_tempos, 'Median')
+print('Median of song tempos is:', song_tempos_mode)
+
+song_tempos_mode = choose_statistic(song_tempos, 'Mode')
+print('Mode of song tempos is:', song_tempos_mode)
+
+song_tempos_mode = choose_statistic(song_tempos, 'Maximum')
+print('Maximum of song tempos is:', song_tempos_mode)
+
+# Explore a different column of data
+song_danceability = spotify_data['danceability']
+
+print(song_danceability.head())
+
+song_danceability_mode = choose_statistic(song_danceability, 'Mean')
+print('Mean of song danceability is:', song_danceability_mode)
+
+song_danceability_mode = choose_statistic(song_danceability, 'Median')
+print('Median of song danceability is:', song_danceability_mode)
+
+song_danceability_mode = choose_statistic(song_danceability, 'Mode')
+print('Mode of song danceability is:', song_danceability_mode)
+
+song_danceability_mode = choose_statistic(song_danceability, 'Maximum')
+print('Maximum of song danceability is:', song_danceability_mode)
+
+song_danceability_mode = choose_statistic(song_danceability, 'Minimum')
+print('Minimum of song danceability is:', song_danceability_mode)
+
+song_danceability_mode = choose_statistic(song_danceability, 'Variance')
+print('Variance of song danceability is:', song_danceability_mode)
+
+# plot the population distribution with the mean labeled
+population_distribution(song_danceability)
+
+sampling_distribution(song_danceability, 30, 'Mean')
+
+# Use the sampling distribution of the sample minimum to estimate the probability of observing a specific sample minimum. For example, from the plot, what is the chance of getting a sample minimum that is less than 130bpm?
+
+sample_minimums = sampling_distribution(song_tempos, 30, 'Minimum')
+
+# Calculate the probability of observing a sample minimum less than 130 bpm
+probability_less_than_130 = np.mean(np.array(sample_minimums) < 130)
+
+print(f"The probability of observing a sample minimum less than 130 bpm is: {probability_less_than_130}")
