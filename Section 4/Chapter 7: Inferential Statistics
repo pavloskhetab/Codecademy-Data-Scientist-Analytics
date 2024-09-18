@@ -99,6 +99,8 @@ Answer Choices
 True
 False
 
+Answer: False = A random sample cannot be guaranteed to be a perfect representation of the population.
+
 
 Example: Customer Contacting
 Suppose you work at a sales company that is interested in testing two different customer contacting methods to see if one leads to a higher response rate than the other. 
@@ -126,6 +128,9 @@ True or False: Inferential statistics allow us to better understand the populati
 Answer Choices
 True
 False
+
+Answer: True = 
+Random samples may not perfectly reflect the population, but we can become better informed about the population with every sample.
 
 
 
