@@ -198,3 +198,17 @@ Suppose that a product manager wants online BuyPie orders to cost around 1000 Ru
 In the past day, 50 people made an online purchase and the average payment per order was less than 1000 Rupees. 
 Are people really spending less than 1000 Rupees on average? Or is this the result of chance and a small sample size?
 
+Code:
+import numpy as np
+
+prices = np.genfromtxt("prices.csv")
+
+# print prices:
+print(prices)
+
+# calculate prices_mean and print it out:
+prices_mean = np.mean(prices)
+print(prices_mean)
+
+
+
