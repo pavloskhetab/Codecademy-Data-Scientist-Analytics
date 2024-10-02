@@ -212,3 +212,19 @@ print(prices_mean)
 
 
 
+Implementing a One-Sample T-Test
+In the last exercise, we inspected a sample of 50 purchase prices at BuyPie and saw that the average was 980 Rupees. 
+Suppose that we want to run a one-sample t-test with the following null and alternative hypotheses:
+
+Null: The average cost of a BuyPie order is 1000 Rupees
+Alternative: The average cost of a BuyPie order is not 1000 Rupees.
+SciPy has a function called ttest_1samp(), which performs a one-sample t-test for you. ttest_1samp() requires two inputs, a sample distribution (eg. the list of the 50 observed purchase prices) 
+and a mean to test against (eg. 1000):
+
+tstat, pval = ttest_1samp(sample_distribution, expected_mean)
+
+The function uses your sample distribution to determine the sample size and estimate the amount of variation in the population — which are used to estimate the null distribution. 
+It returns two outputs: the t-statistic (which we won’t cover in this course), and the p-value.
+
+
+
