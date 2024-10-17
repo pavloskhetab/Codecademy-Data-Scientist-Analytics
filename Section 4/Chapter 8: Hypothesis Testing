@@ -371,7 +371,8 @@ for x in range(10):
 
 
 
-Simulating a Binomial Test
+--Simulating a Binomial Test--
+
 Introduction
 In this lesson, we will walk through a simulation of a binomial hypothesis test in Python. 
 Binomial tests are useful for comparing the frequency of some outcome in a sample to the expected probability of that outcome. 
@@ -387,5 +388,35 @@ there are a number of libraries and functions that allow a data scientist to run
 However, a data scientist will be much more likely to spot and fix potential errors and interpret results correctly 
 if they have a conceptual understanding of how these functions work. To that end, this lesson will help you build your own conceptual understanding!
 
+Code:
+import pandas as pd
+import codecademylib3
 
+monthly_report = pd.read_csv('monthly_report.csv')
+
+print(monthly_report.head())
+
+
+
+Summarizing the Sample
+The marketing department at Live-it-LIVE reports that, during this time of year, about 10% of visitors to Live-it-LIVE.com make a purchase.
+
+The monthly report shows every visitor to the site and whether or not they made a purchase. The checkout page had a small bug this month, 
+so the business department wants to know whether the purchase rate dipped below expectation. They’ve asked us to investigate this question.
+
+In order to run a hypothesis test to address this, we’ll first need to know two things from the data:
+
+The number of people who visited the website
+The number of people who made a purchase on the website
+Assuming each row of our dataset represents a unique site visitor, we can calculate the number of people who visited the website by finding the number of rows in the data frame. 
+We can then find the number who made a purchase by using a conditional statement to add up the total number of rows where a purchase was made.
+
+For example, suppose that the dataset candy contains a column named chocolate with 'yes' recorded for every candy that has chocolate in it and 'no' otherwise. 
+The following code calculates the sample size (the number of candies) and the number of those candies that contain chocolate:
+
+## sample size (number of rows): 
+samp_size = len(candy)
+ 
+## number with chocolate: 
+total_with_chocolate = np.sum(candy.chocolate == 'yes')
 
