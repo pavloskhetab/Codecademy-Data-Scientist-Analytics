@@ -299,5 +299,71 @@ Try any numbers that you want. How do your p-values change?
 
 Solution code can be found in solution.py
 
+Code:
+from scipy.stats import ttest_1samp, shapiro
+import numpy as np
+import matplotlib.pyplot as plt
 
+# Load daily prices data
+daily_prices = np.genfromtxt("daily_prices.csv", delimiter=",")
 
+# Print the prices for Day 1 to verify the data
+print('Prices for Day 1:', daily_prices[0])
+
+# Create a histogram to visualize values in the dataset for Day 1
+plt.hist(daily_prices[0], edgecolor='black', bins=20)
+plt.xlabel('Price')
+plt.ylabel('Frequency')
+plt.title('Histogram of Daily Prices for Day 1')
+plt.show()
+
+# Perform Shapiro-Wilk test for normality on each dataset
+for x in range(10):
+    stat, p_value = shapiro(daily_prices[x])
+    print(f'Day {x + 1}: Shapiro-Wilk Test Statistic = {stat}, p-value = {p_value}')
+
+    # Interpret the Shapiro-Wilk test results for each dataset
+    if p_value < 0.05:
+        print(f"Day {x + 1}: The data does not follow a normal distribution.\n")
+    else:
+        print(f"Day {x + 1}: The data appears to follow a normal distribution.\n")
+
+# Task 1 - Calculate and print p-value for day 1
+# H0: average price was 1000 rupees and 
+# Ha: average price != 1000 rupees.
+
+# Counting the sample size for day 1
+print('Sample Size for Day 1:', np.count_nonzero(daily_prices[0]))
+
+# Calculate the mean for day 1
+daily_prices_mean_day_1 = np.mean(daily_prices[0])
+print('Mean for Day 1:', daily_prices_mean_day_1)
+
+# Perform the one-sample t-test
+tstat, p_value = ttest_1samp(daily_prices[0], 1000)
+
+# Print the p-value
+print('P-value:', p_value)
+
+# Interpret the p-value result
+if p_value < 0.05:
+    print("The average daily price is significantly different from the population mean of 1000 Rupees.")
+else:
+    print("There is no significant difference in the average daily price compared to 1000 Rupees.")
+
+# Task 2: Run the same hypothesis tests for days 1-10 and print out the resulting p-values.
+p_values = []
+for x in range(10):
+    tstat, p_value = ttest_1samp(daily_prices[x], 1000)
+    p_values.append(p_value)
+    print(f"Day {x + 1}: p-value = {p_value}")
+
+# Find the smallest p-value among the 10 days
+min_p_value = min(p_values)
+print(f"The smallest p-value observed for days 1-10 is: {min_p_value}")
+
+# Task 3: Change the null hypothesis so that the expected population mean is different from 1000.
+print("Day 1-10 with a different null hypothesis (H0 = 1100):")
+for x in range(10):
+    tstat, pval = ttest_1samp(daily_prices[x], 1100)
+    print(f"Day {x + 1}: p-value = {pval}")  # Use pval instead of p_value
