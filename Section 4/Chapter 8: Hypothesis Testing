@@ -367,3 +367,25 @@ print("Day 1-10 with a different null hypothesis (H0 = 1100):")
 for x in range(10):
     tstat, pval = ttest_1samp(daily_prices[x], 1100)
     print(f"Day {x + 1}: p-value = {pval}")  # Use pval instead of p_value
+
+
+
+
+Simulating a Binomial Test
+Introduction
+In this lesson, we will walk through a simulation of a binomial hypothesis test in Python. 
+Binomial tests are useful for comparing the frequency of some outcome in a sample to the expected probability of that outcome. 
+For example, if we expect 90% of ticketed passengers to show up for their flight but only 80 of 100 ticketed passengers actually show up, 
+we could use a binomial test to understand whether 80 is significantly different from 90.
+
+Binomial tests are similar to one-sample t-tests in that they test a sample statistic against some population-level expectation. The difference is that:
+
+binomial tests are used for binary categorical data to compare a sample frequency to an expected population-level probability
+one-sample t-tests are used for quantitative data to compare a sample mean to an expected population mean.
+In Python, as in many other programming languages used for statistical computing, 
+there are a number of libraries and functions that allow a data scientist to run a hypothesis test in a single line of code. 
+However, a data scientist will be much more likely to spot and fix potential errors and interpret results correctly 
+if they have a conceptual understanding of how these functions work. To that end, this lesson will help you build your own conceptual understanding!
+
+
+
