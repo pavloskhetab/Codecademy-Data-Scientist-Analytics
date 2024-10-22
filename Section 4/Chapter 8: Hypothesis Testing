@@ -846,3 +846,43 @@ Then change the function so that it performs the appropriate one- or two-sided t
 Solution code is available to you in solution.py if interested.
 
 Code:
+import numpy as np
+from scipy.stats import binom_test
+
+def simulation_binomial_test(observed_successes, n, p, alternative_hypothesis):
+    # Validate the input for the alternative hypothesis
+    if alternative_hypothesis not in ['less', 'greater', 'not_equal']:
+        raise ValueError("Invalid input! Choose 'less', 'greater', or 'not_equal'.")
+
+    # Initialize null_outcomes
+    null_outcomes = []
+
+    # Generate the simulated null distribution
+    for i in range(10000):
+        simulated_monthly_visitors = np.random.choice(['y', 'n'], size=n, p=[p, 1-p])
+        num_purchased = np.sum(simulated_monthly_visitors == 'y')
+        null_outcomes.append(num_purchased)
+  
+    # Convert outcomes to a numpy array
+    null_outcomes = np.array(null_outcomes)
+
+    # Calculate p-value based on the alternative hypothesis
+    if alternative_hypothesis == 'less':
+        p_value = np.sum(null_outcomes <= observed_successes) / len(null_outcomes)
+    elif alternative_hypothesis == 'greater':
+        p_value = np.sum(null_outcomes >= observed_successes) / len(null_outcomes)
+    elif alternative_hypothesis == 'not_equal':
+        p_value = np.sum(
+          np.abs(null_outcomes - np.mean(null_outcomes)) >= np.abs(observed_successes - np.mean(null_outcomes))) / len(null_outcomes)
+
+    # Return the p-value
+    return p_value
+
+# Example usage (without input prompt):
+observed_successes = 41  # Number of observed purchases
+n = 500                  # Number of visitors
+p = 0.10                 # Hypothesized purchase rate (10%)
+alternative_hypothesis = 'less'  # Change this to 'less', 'greater', or 'not_equal'
+
+p_value = simulation_binomial_test(observed_successes, n, p, alternative_hypothesis)
+print(f"Calculated p-value: {p_value}")
