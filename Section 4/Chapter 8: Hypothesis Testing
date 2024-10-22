@@ -804,3 +804,45 @@ print(p_value) #output: 0.109
 This tells us that IF the true probability of heads is 0.5, the probability of observing 2 or fewer heads OR 8 or more heads is 0.109 (10.9%).
 
 Code:
+import numpy as np
+import pandas as pd
+from scipy.stats import binom_test
+
+# calculate p_value_2sided here:
+p_value_2sided = binom_test(41, n=500, p=0.1)
+print(p_value_2sided)
+
+# calculate p_value_1sided here:
+p_value_1sided = binom_test(41, n=500, p=0.1, alternative= 'less')
+print(p_value_1sided)
+
+
+
+Review
+Congratulations! You now know how to run a binomial hypothesis test using a SciPy function — or by simulating it yourself! 
+This will serve you well as a data scientist because it will enable you to investigate what’s going on if pre-written functions return surprising results. 
+You also now have a conceptual understanding of how a binomial test works and what questions it aims to answer. 
+
+To summarize, here are some of the things you’ve learned about hypothesis tests in general:
+
+All hypothesis tests start with a null and alternative hypothesis
+
+Outcomes of a hypothesis test that might be reported include:
+
+confidence intervals
+p-values
+A hypothesis test can be simulated by:
+
+taking repeated random samples where the null hypothesis is assumed to be true
+using those simulated samples to generate a null distribution
+comparing an observed sample statistic to that null distribution
+
+Instructions
+As a final exercise, the solution code for the previous exercise is available to you in script.py. 
+
+As a challenge, see if you can re-write the simulation-based binomial test function so that it has an input named alternative_hypothesis that can be equal to 'less', 'not_equal', or 'greater'. 
+
+Then change the function so that it performs the appropriate one- or two-sided test for the alternative hypothesis provided. 
+Solution code is available to you in solution.py if interested.
+
+Code:
