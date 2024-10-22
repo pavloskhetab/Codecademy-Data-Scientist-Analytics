@@ -752,5 +752,55 @@ The null probability of success (eg., 0.10 probability of a purchase)
 The function should return a p-value for a one-sided test where the alternative hypothesis is that the true probability of success is LESS THAN the null.
 
 Code:
+import numpy as np
+import pandas as pd
+from scipy.stats import binom_test
+
+def simulation_binomial_test(observed_successes, n, p):
+  #initialize null_outcomes
+  null_outcomes = []
+  
+  #generate the simulated null distribution
+  for i in range(10000):
+    simulated_monthly_visitors = np.random.choice(['y', 'n'], size=n, p=[p, 1-p])
+    num_purchased = np.sum(simulated_monthly_visitors == 'y')
+    null_outcomes.append(num_purchased)
+
+  #calculate a 1-sided p-value
+  null_outcomes = np.array(null_outcomes)
+  p_value = np.sum(null_outcomes <= observed_successes)/len(null_outcomes) 
+  
+  #return the p-value
+  return p_value
+
+#Test your function below by uncommenting the code below. You should see that your simulation function gives you a very similar answer to the binom_test function from scipy:
+
+p_value1 = simulation_binomial_test(45, 500, .1)
+print("simulation p-value: ", p_value1)
+
+p_value2 = binom_test(45, 500, .1, alternative = 'less')
+print("binom_test p-value: ", p_value2)
 
 
+
+Binomial Testing with SciPy
+Congratulations — if you’ve made it this far, you’ve now written your own function to simulate a binomial test!
+
+More formally, the binomial distribution describes the number of expected “successes” in an experiment with some number of “trials”. 
+In the example you just worked through, the experiment consisted of 500 people visiting Live-it-LIVE.com. For each of those trials (visitors), we expected a 10% chance of a purchase (success), 
+but observed only 41 successes (less than 10%).
+
+SciPy has a function called binom_test(), which performs a binomial test for you. The default alternative hypothesis for the binom_test() function is two-sided, 
+but this can be changed using the alternative parameter (eg., alternative = 'less' will run a one-sided lower tail test).
+
+binom_test() requires three inputs, the number of observed successes, the number of total trials, and an expected probability of success. 
+For example, with 10 flips of a fair coin (trials), the expected probability of heads is 0.5. Let’s imagine we get 2 heads (observed successes) in 10 flips. 
+Is the coin weighted? The function call for this binomial test would look like:
+
+from scipy import binom_test
+p_value = binom_test(2, n=10, p=0.5)
+print(p_value) #output: 0.109
+
+This tells us that IF the true probability of heads is 0.5, the probability of observing 2 or fewer heads OR 8 or more heads is 0.109 (10.9%).
+
+Code:
