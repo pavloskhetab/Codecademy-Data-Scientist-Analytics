@@ -133,6 +133,65 @@ print("Expected number of diabetic patients based on population data (8%):", exp
 # Task 9: Set up a hypothesis test to see if the rate of fbs > 120 in this sample is more than 8%
 # - Define null and alternative hypotheses for this test
 
+# Null: This sample was drawn from a population where 8% of people have fasting blood sugar > 120 mg/dl
+# Alternative: This sample was drawn from a population where more than 8% of people have fasting blood sugar > 120 mg/dl
+
+# Parameters for the binomial test
+p_null = 0.08  # 8% population rate
+observed_successes = num_highfbs_patients
+total_trials = num_patients
+
+# Perform the one-sided binomial test (alternative='greater' for more than 8%)
+p_value = binom_test(observed_successes, total_trials, p_null, alternative='greater')
+
 
 # Task 10: Run the hypothesis test, compare p-value to a significance threshold of 0.05, and interpret the result
 
+# Print the p-value to determine significance
+print("P-value for one-sided binomial test:", p_value)
+if p_value < 0.05:
+    print("We reject the null hypothesis: the rate of fbs > 120 mg/dl in this sample is significantly greater than 8%.")
+else:
+    print("We cannot reject the null hypothesis: the sample rate is not significantly greater than 8%.")
+
+
+# Error estimates
+# Parameters
+num_trials = 10000  # Number of simulations
+sample_size = 100  # Change this to the number of patients in your dataset
+true_rate = 0.08  # True population rate for Type I error simulation
+alternative_rate = 0.10  # Rate for Type II error simulation
+
+# Type I Error Simulation (null hypothesis true)
+type_i_errors = 0  # Count of Type I errors
+
+for _ in range(num_trials):
+    # Simulate a sample with true rate of 8%
+    sample = np.random.binomial(n=1, p=true_rate, size=sample_size)
+    # Perform the binomial test
+    p_value = binom_test(np.sum(sample), n=sample_size, p=true_rate, alternative='greater')
+    
+    # Check if we reject the null hypothesis
+    if p_value < 0.05:  # Significance level
+        type_i_errors += 1
+
+# Estimate Type I error rate
+type_i_error_rate = type_i_errors / num_trials
+print(f"Estimated Type I error rate: {type_i_error_rate:.4f}")
+
+# Type II Error Simulation (alternative hypothesis true)
+type_ii_errors = 0  # Count of Type II errors
+
+for _ in range(num_trials):
+    # Simulate a sample with true rate of 10% (for Type II error)
+    sample = np.random.binomial(n=1, p=alternative_rate, size=sample_size)
+    # Perform the binomial test
+    p_value = binom_test(np.sum(sample), n=sample_size, p=true_rate, alternative='greater')
+    
+    # Check if we fail to reject the null hypothesis
+    if p_value >= 0.05:  # Significance level
+        type_ii_errors += 1
+
+# Estimate Type II error rate
+type_ii_error_rate = type_ii_errors / num_trials
+print(f"Estimated Type II error rate: {type_ii_error_rate:.4f}")
