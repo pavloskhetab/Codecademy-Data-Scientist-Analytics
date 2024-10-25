@@ -1,4 +1,4 @@
-Introduction to Hypothesis Testing (Simulating a One-Sample T-Test)
+cIntroduction to Hypothesis Testing (Simulating a One-Sample T-Test)
 Learn about hypothesis testing by simulating a one-sample t-test
 
 What is hypothesis testing?
@@ -1052,3 +1052,57 @@ figure out how many hypothesis tests you need to run. When running multiple test
 for each test to reduce the probability of making a type I error.
 
 Code:
+import codecademylib3
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Set a significance threshold
+sig_threshold = 0.1
+
+# Define range of tests
+num_tests = np.array(range(50))
+
+# Calculate probability of at least one Type I error across multiple tests
+probabilities = 1 - ((1 - sig_threshold) ** num_tests)
+
+# Find the number of tests needed to reach a 50% Type I error rate
+num_tests_50percent = np.where(probabilities >= 0.5)[0][0]
+
+# Print the result to console
+print(f"Number of tests needed for 50% probability of at least one Type I error: {num_tests_50percent}")
+
+# Create the plot
+plt.plot(num_tests, probabilities, label='Type I Error Probability')
+
+# Add red dotted lines to indicate the 50% error rate intersection
+plt.axhline(0.5, color='red', linestyle='--', label='50% Error Rate')
+plt.axvline(num_tests_50percent, color='red', linestyle='--', label=f'{num_tests_50percent} Tests')
+
+# Edit title and axis labels
+plt.title('Type I Error Rate for Multiple Tests', fontsize=15)
+plt.ylabel('Probability of at Least One Type I Error', fontsize=12)
+plt.xlabel('Number of Tests', fontsize=12)
+
+# Add a legend
+plt.legend()
+
+# Show the plot                
+plt.show()
+
+
+
+Significance Thresholds Review
+Excellent work! In this lesson you have:
+
+Learned to interpret a p-value using a significance threshold
+Explored type I and type II errors in hypothesis testing
+Shown that the significance threshold for a hypothesis test is equal to the type I error rate
+Seen how multiple hypothesis tests lead to an increased probability of a type I error
+In the workspace, we’ve borrowed a comic strip from xkcd that describes (with a little humor!) the problem of multiple hypothesis tests. 
+The initial question asked in the comic is whether or not there is a link between jelly beans and acne. 
+At first, scientists find no link — but then they run 20 more hypothesis tests looking for a link between specific colors of jelly beans and acne. 
+One of those tests results in a significant p-value — and the final panel of the comic shows that this one test is the only test that gets published. 
+
+The comic perfectly describes how running multiple hypothesis tests and only reporting significant results is extremely problematic. 
+This has contributed to the reproducibility crisis in statistics. At a .05 significance level, approximately 5% of hypothesis tests will result in a false positive; 
+but if we only report those false positives, we end up with a lot of published results that can’t be replicated.
