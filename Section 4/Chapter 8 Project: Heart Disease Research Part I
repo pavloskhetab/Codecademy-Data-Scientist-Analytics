@@ -116,11 +116,18 @@ else:
 num_patients = len(heart)
 print('Total number of patients:', num_patients)
 
+
 # Task 7: Calculate the number of patients with fasting blood sugar over 120 mg/dl, save and print as 'num_highfbs_patients'
+num_highfbs_patients = (heart['fbs'] == 1).sum()  # Count where fbs is 1
+print('The number of patients with fasting blood sugar over 120 mg/dl:', num_highfbs_patients)
 
 
 # Task 8: Estimate how many patients should have high fasting blood sugar (fbs > 120) if representative of 8% U.S. diabetes rate in 1988
 # - Compare this value with the observed number of patients with high fasting blood sugar
+
+# Calculate the expected number of patients with diabetes (8% of the total dataset)
+expected_diabetes_patients = 0.08 * num_patients  # 8% of total
+print("Expected number of diabetic patients based on population data (8%):", expected_diabetes_patients)
 
 
 # Task 9: Set up a hypothesis test to see if the rate of fbs > 120 in this sample is more than 8%
