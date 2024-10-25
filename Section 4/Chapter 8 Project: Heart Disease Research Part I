@@ -113,7 +113,8 @@ else:
 
 # Fasting Blood Sugar Analysis
 # Task 6: Find and print the total number of patients in the full dataset, save as 'num_patients'
-
+num_patients = len(heart)
+print('Total number of patients:', num_patients)
 
 # Task 7: Calculate the number of patients with fasting blood sugar over 120 mg/dl, save and print as 'num_highfbs_patients'
 
