@@ -62,50 +62,69 @@ Null: This sample was drawn from a population where 8% of people have fasting bl
 Alternative: This sample was drawn from a population where more than 8% of people have fasting blood sugar > 120 mg/dl
 
 
-
-10.
-Run the hypothesis test indicated in task 9 and print out the p-value. Using a significance threshold of 0.05, 
+10. Run the hypothesis test indicated in task 9 and print out the p-value. Using a significance threshold of 0.05, 
 can you conclude that this sample was drawn from a population where the rate of fasting blood sugar > 120 mg/dl is significantly greater than 8%?
-# import libraries
+
+Code:
+# Import libraries
 import codecademylib3
 import pandas as pd
 import numpy as np
+from scipy.stats import ttest_1samp
 
-# load data
+# Load data
 heart = pd.read_csv('heart_disease.csv')
 yes_hd = heart[heart.heart_disease == 'presence']
 no_hd = heart[heart.heart_disease == 'absence']
 
-
 # Task 1: Extract cholesterol levels for patients with heart disease, save as 'chol_hd'
 chol_hd = yes_hd['chol']
-# print(chol_hd.head())
 
+# Task 2: Calculate and print the mean cholesterol level for heart disease patients
+print("Mean cholesterol level (heart disease):", chol_hd.mean())
 
-# Task 2: Calculate the mean cholesterol level for heart disease patients, print it to check if it's over 240 mg/dl
-print(chol_hd.mean())
+# Task 3: Set up and run a hypothesis test for cholesterol levels greater than 240 mg/dl in heart disease patients
+# - Null Hypothesis: Average cholesterol level for heart disease patients = 240 mg/dl
+# - Alternative Hypothesis: Average cholesterol level for heart disease patients > 240 mg/dl
+sig_threshold = 0.05
+t_stat_hd, p_value_hd = ttest_1samp(chol_hd, 240)
+p_value_hd_one_sided = p_value_hd / 2  # One-sided p-value
 
+# Task 4: Interpret the result for heart disease patients
+print("One-sided p-value (heart disease):", p_value_hd_one_sided)
+if p_value_hd_one_sided <= sig_threshold:
+    print("Reject the null hypothesis: average cholesterol level for heart disease patients is significantly greater than 240 mg/dl.")
+else:
+    print("Fail to reject the null hypothesis: no evidence that the average cholesterol level for heart disease patients is greater than 240 mg/dl.")
 
-# Task 3: Set up and run a hypothesis test to determine if the average cholesterol level for patients with heart disease is greater than 240 mg/dl
-# - Define null and alternative hypotheses
-# - Run a two-sided t-test and adjust the result to reflect a one-sided p-value
+# Task 5: Repeat tasks 1-4 for patients without heart disease
+chol_no_hd = no_hd['chol']
+print("\nMean cholesterol level (no heart disease):", chol_no_hd.mean())
+t_stat_no_hd, p_value_no_hd = ttest_1samp(chol_no_hd, 240)
+p_value_no_hd_one_sided = p_value_no_hd / 2  # One-sided p-value
 
-# Task 4: Compare the p-value to a significance threshold of 0.05, and print conclusions
+# Interpret the result for patients without heart disease
+print("One-sided p-value (no heart disease):", p_value_no_hd_one_sided)
+if p_value_no_hd_one_sided <= sig_threshold:
+    print("Reject the null hypothesis: average cholesterol level for patients without heart disease is significantly greater than 240 mg/dl.")
+else:
+    print("Fail to reject the null hypothesis: no evidence that the average cholesterol level for patients without heart disease is greater than 240 mg/dl.")
 
-# Task 5: Repeat Tasks 1-4 for patients without heart disease
 
 # Fasting Blood Sugar Analysis
-
 # Task 6: Find and print the total number of patients in the full dataset, save as 'num_patients'
 
+
 # Task 7: Calculate the number of patients with fasting blood sugar over 120 mg/dl, save and print as 'num_highfbs_patients'
+
 
 # Task 8: Estimate how many patients should have high fasting blood sugar (fbs > 120) if representative of 8% U.S. diabetes rate in 1988
 # - Compare this value with the observed number of patients with high fasting blood sugar
 
+
 # Task 9: Set up a hypothesis test to see if the rate of fbs > 120 in this sample is more than 8%
 # - Define null and alternative hypotheses for this test
 
+
 # Task 10: Run the hypothesis test, compare p-value to a significance threshold of 0.05, and interpret the result
 
- 
