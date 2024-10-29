@@ -1338,7 +1338,97 @@ print(pred_5hr)
 
 
 
+Interpreting a Regression Model
+Let’s again inspect the output for a regression that predicts weight based on height. 
+The regression line looks something like this:
 
+plot of height vs. weight with a regression line drawn through the points
+
+Note that the units of the intercept and slope of a regression line match the units of the original variables; 
+the intercept of this line is measured in kg, and the slope is measured in kg/cm. 
+To make sense of the intercept (which we calculated previously as -21.67 kg), let’s zoom out on this plot:
+
+plot of height vs. weight with a regression line drawn through the points, zoomed out so that we can see where the line crosses the y-axis (a vertical line at x=0)
+
+We see that the intercept is the predicted value of the outcome variable (weight) when the predictor variable (height) is equal to zero. 
+In this case, the interpretation of the intercept is that a person who is 0 cm tall is expected to weigh -21 kg. This is pretty non-sensical because it’s impossible for someone to be 0 cm tall!
+
+However, in other cases, this value does make sense and is useful to interpret. For example, if we were predicting ice cream sales based on temperature, 
+the intercept would be the expected sales when the temperature is 0 degrees.
+
+To visualize the slope, let’s zoom in on our plot:
+
+plot of height vs. weight with a regression line drawn through the points, zoomed in so that we can see that each horizontal increase of height 
+by 1cm is associated with a 0.5 kg increase in height.
+
+Remember that slope can be thought of as rise/run — the ratio between the vertical and horizontal distances between any two points on the line. 
+Therefore, the slope (which we previously calculated to be 0.50 kg/cm) is the expected difference in the outcome variable (weight) for a one unit difference in the predictor variable (height). 
+In other words, we expect that a one centimeter difference in height is associated with .5 additional kilograms of weight.
+
+Note that the slope gives us two pieces of information: the magnitude AND the direction of the relationship between the x and y variables. 
+For example, suppose we had instead fit a regression of weight with minutes of exercise per day as a predictor — and calculated a slope of -.1. 
+
+We would interpret this to mean that people who exercise for one additional minute per day are expected to weigh 0.1 kg LESS.
+
+Code:
+Interpretation of the intercept:
+A student who studied for 0 hours is expected to score a 43 on the test.
+
+
+Interpretation of the slope:
+
+For every additional 1 hour of studying, students are expected to score 9.8 points higher on the test.
+
+
+
+Assumptions of Linear Regression Part 1
+There are a number of assumptions of simple linear regression, which are important to check if you are fitting a linear model. 
+The first assumption is that the relationship between the outcome variable and predictor is linear (can be described by a line). 
+We can check this before fitting the regression by simply looking at a plot of the two variables.
+
+The next two assumptions (normality and homoscedasticity) are easier to check after fitting the regression. 
+We will learn more about these assumptions in the following exercises, but first, we need to calculate two things: fitted values and residuals.
+
+Again consider our regression model to predict weight based on height (model formula 'weight ~ height'). 
+The fitted values are the predicted weights for each person in the dataset that was used to fit the model, 
+while the residuals are the differences between the predicted weight and the true weight for each person. 
+Visually:
+
+plot showing a line with points on either side. Dotted lines connect each point to the closest vertical location on the line, 
+which is labeled as the fitted value for that point.
+
+We can calculate the fitted values using .predict() by passing in the original data. 
+The result is a pandas series containing predicted values for each person in the original dataset:
+
+fitted_values = results.predict(body_measurements)
+print(fitted_values.head())
+
+Output:
+
+0    66.673077
+1    59.100962
+2    71.721154
+3    70.711538
+4    65.158654
+dtype: float64
+
+The residuals are the differences between each of these fitted values and the true values of the outcome variable. 
+They can be calculated by subtracting the fitted values from the actual values. 
+We can perform this element-wise subtraction in Python by simply subtracting one python series from the other, as shown below:
+
+residuals = body_measurements.weight - fitted_values
+print(residuals.head())
+
+Output:
+
+0   -2.673077
+1   -1.100962
+2    3.278846
+3   -3.711538
+4    2.841346
+dtype: float64
+
+Code:
 
 
 
