@@ -1429,6 +1429,70 @@ Output:
 dtype: float64
 
 Code:
+# Load libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+
+# Read in the data
+students = pd.read_csv('test_data.csv')
+
+# Fit the model
+model = sm.OLS.from_formula('score ~ hours_studied', students)
+results = model.fit()
+
+# Calculate `fitted_values` here:
+fitted_values = results.predict(students)
+
+# Calculate `residuals` here:
+residuals = students.score - fitted_values
+
+# Print the first 5 residuals here:
+print(residuals.head())
+
+
+
+Assumptions of Linear Regression Part 2
+Once we’ve calculated the fitted values and residuals for a model, we can check the normality and homoscedasticity assumptions of linear regression.
+
+Normality Assumption
+The normality assumption states that the residuals should be normally distributed. 
+This assumption is made because, statistically, the residuals of any independent dataset will approach a normal distribution 
+when the dataset is large enough. To learn more about this click here.
+
+To check the normality assumption, we can inspect a histogram of the residuals and make sure that the distribution looks approximately normal (no skew or multiple “humps”):
+
+plt.hist(residuals)
+plt.show()
+
+symmetric histogram with a single hump
+
+These residuals appear normally distributed, leading us to conclude that the normality assumption is satisfied.
+
+If the plot instead looked something like the distribution below (which is skewed right), we would be concerned that the normality assumption is not met:
+
+histogram which is right skewed: there is a longer tail on the right side than the left
+
+Homoscedasticity Assumption
+Homoscedasticity is a fancy way of saying that the residuals have equal variation across all values of the predictor (independent) variable. 
+When homoscedasticity is not met, this is called heteroscedasticity, meaning that the variation in the size of the error term differs across the independent variable.
+
+Since a linear regression seeks to minimize residuals and gives equal weight to all observations, heteroscedasticity can lead to bias in the results.
+
+A common way to check this is by plotting the residuals against the fitted values.
+
+plt.scatter(fitted_values, residuals)
+plt.show()
+
+scatter plot with a splatter of randomly distributed points
+
+If the homoscedasticity assumption is met, then this plot will look like a random splatter of points, centered around y=0 (as in the example above).
+
+If there are any patterns or asymmetry, that would indicate the assumption is NOT met and linear regression may not be appropriate. 
+
+Code:
+
 
 
 
