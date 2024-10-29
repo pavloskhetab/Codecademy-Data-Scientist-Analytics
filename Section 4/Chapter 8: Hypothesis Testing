@@ -1563,6 +1563,183 @@ plt.show()
 This will output the following plot (without the additional labels or colors):
 
 Code:
+# Load libraries
+import codecademylib3
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Read in the data
+students = pd.read_csv('test_data.csv')
+
+# Calculate group means
+print(students.groupby('breakfast').mean().score)
+
+# Create the scatter plot here:
+plt.scatter(students.breakfast, students.score)
+
+# Add the additional line here:
+plt.plot([0,1], [61.664, 73.721])
+
+# Show the plot
+plt.show()
 
 
 
+Categorical Predictors: Fit and Interpretation
+Now that we’ve seen what a regression model with a binary predictor looks like visually,
+we can actually fit the model using statsmodels.api.OLS.from_formula(), the same way we did for a quantitative predictor:
+
+model = sm.OLS.from_formula('height ~ play_bball', data)
+results = model.fit()
+print(results.params)
+
+Output:
+
+Intercept     169.016
+play_bball     14.628
+dtype: float64
+
+Note that this will work if the play_bball variable is coded with 0s and 1s, but it will also work if it is coded with Trues and Falses, 
+or even if it is coded with strings like 'yes' and 'no' (in this case, the coefficient label will look something like play_bball[T.yes] in the params output, 
+indicating that 'yes' corresponds to a 1).
+
+To interpret this output, we first need to remember that the intercept is the expected value of the outcome variable when the predictor is equal to zero. 
+In this case, the intercept is therefore the mean height of non-basketball players.
+
+The slope is the expected difference in the outcome variable for a one unit difference in the predictor variable. 
+In this case, a one unit difference in play_bball is the difference between not being a basketball player and being a basketball player. 
+Therefore, the slope is the difference in mean heights for basketball players and non-basketball players.
+
+Instructions
+
+1.The students dataset has been loaded for you in script.py. Create and fit a regression model of score predicted by breakfast using sm.OLS.from_formula() and print out the coefficients.
+
+2. Code has been provided for you in script.py to calculate the mean test score for students who ate breakfast (saved as mean_score_breakfast) 
+and the mean score for students who did not eat breakfast (saved as mean_score_no_breakfast). 
+Calculate and print the difference in mean scores. Can you find how this number relates to the regression output?
+
+Code:
+# Load libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+
+# Read in the data
+students = pd.read_csv('test_data.csv')
+
+# Calculate and print group means
+mean_score_no_breakfast = np.mean(students.score[students.breakfast == 0])
+mean_score_breakfast = np.mean(students.score[students.breakfast == 1])
+print('Mean score (no breakfast): ', mean_score_no_breakfast)
+print('Mean score (breakfast): ', mean_score_breakfast)
+
+# Fit the model and print the coefficients
+model = sm.OLS.from_formula('score ~ breakfast', students)
+results = model.fit()
+print(results.params)
+
+# Calculate and print the difference in group means
+difference_in_group_means = mean_score_breakfast - mean_score_no_breakfast
+print(difference_in_group_means)
+
+
+
+Review
+Congratulations! As a recap, you’ve learned to:
+
+Fit a simple OLS linear regression model
+Use both quantitative and binary categorical predictors
+Interpret the coefficients of a regression model
+Check the assumptions of a regression model
+
+Instructions
+A new dataset named website has been loaded for you in the workspace containing simulated data for a sample of visitors to a website, 
+including the amount of time in seconds they spent on the website (time_seconds), their age (age), and information about whether they accessed the website using Chrome or Safari (browser).
+
+Try to work through the following steps (solution code is provided in solution.py). 
+Note that after showing each plot with plt.show(), we’ve included the command plt.clf() in the starting code to ensure that plots are not layered on top of each other.
+
+Create a plot of time_seconds (vertical axis) versus age (horizontal axis). Is there a linear relationship between these variables?
+Fit a linear model to predict time_seconds using the age variable
+Use the coefficients from the linear model to plot the regression line on top of your original plot.
+Calculate the fitted values and residuals
+Check the normality assumption by plotting a histogram of the residuals. Are they approximately normally distributed?
+Check the homoscedasticity assumption by plotting a the residuals against the fitted values. Is this assumption satisfied?
+Use your model to predict the amount of time that a 40 year old person will spend on the website.
+Fit another model that predicts time_seconds based on browser.
+Print out the coefficients. What is the difference in average time spent on each browser?
+
+Code:
+# Load libraries
+import codecademylib3
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+
+# Read in the data
+website = pd.read_csv('website.csv')
+
+# Print the first five rows
+print(website.head())
+
+# Create a scatter plot of time vs age
+plt.scatter(website.time_seconds, website.age)
+plt.xlabel('time in seconds')
+plt.ylabel('age')
+
+# Show then clear plot
+plt.show()
+plt.clf()
+
+# Fit a linear regression to predict time_seconds based on age
+model = sm.OLS.from_formula('time_seconds ~  age', website)
+results = model.fit()
+
+# Plot the scatter plot with the line on top
+plt.scatter(website.age, website.time_seconds)
+plt.plot(website.age, results.params[0] + results.params[1]*website.age)
+plt.xlabel('time in seconds')
+plt.ylabel('age')
+
+# Show then clear plot
+plt.show()
+plt.clf()
+
+# Calculate fitted values
+fitted_values = results.predict(website)
+
+# Calculate residuals
+residuals = website.time_seconds - fitted_values
+
+# Check normality assumption
+plt.hist(residuals)
+
+# Show then clear the plot
+plt.show()
+plt.clf()
+
+# Check homoscedasticity assumption
+plt.scatter(fitted_values, residuals)
+plt.axhline(y = 0)
+
+# Show then clear the plot
+plt.show()
+plt.clf()
+
+# Predict amount of time on website for 40 year old
+new_data = {'age' : 40} 
+pred_age_40 = results.predict(new_data)
+print('Predicted time on website for a 40 year old: ', pred_age_40)
+
+# Fit a linear regression to predict time_seconds based on the browser
+model = sm.OLS.from_formula('time_seconds ~ browser', website)
+results = model.fit()
+print(results.params)
+
+# Calculate and print the group means (for comparison)
+mean_times = website.groupby('browser').mean().time_seconds
+print(mean_times)
+print('Mean time difference (Chrome - Safari):', mean_times['Chrome'] - mean_times['Safari'])
