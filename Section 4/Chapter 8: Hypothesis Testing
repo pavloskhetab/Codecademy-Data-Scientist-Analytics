@@ -1492,7 +1492,77 @@ If the homoscedasticity assumption is met, then this plot will look like a rando
 If there are any patterns or asymmetry, that would indicate the assumption is NOT met and linear regression may not be appropriate. 
 
 Code:
+# Load libraries
+import codecademylib3
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
 
+# Read in the data
+students = pd.read_csv('test_data.csv')
+
+# Fit the model
+model = sm.OLS.from_formula('score ~ hours_studied', students)
+results = model.fit()
+
+# Calculate fitted values
+fitted_values = results.predict(students)
+
+# Calculate residuals
+residuals = students.score - fitted_values
+
+# Plot a histogram of the residuals here:
+plt.hist(residuals)
+plt.show()
+plt.clf()
+
+# Plot the residuals against the fitted vals here:
+plt.scatter(fitted_values, residuals)
+
+# Add a dotted horizontal line at y=0
+plt.axhline(y=0, color='gray', linestyle='--')
+
+plt.show()
+
+
+
+Categorical Predictors
+In the previous exercises, we used a quantitative predictor in our linear regression, but it’s important to note that we can also use categorical predictors. 
+The simplest case of a categorical predictor is a binary variable (only two categories).
+
+For example, suppose we surveyed 100 adults and asked them to report their height in cm and whether or not they play basketball. 
+We’ve coded the variable bball_player so that it is equal to 1 if the person plays basketball and 0 if they do not. A plot of height vs. bball_player is below:
+
+Scatter plot of height vs. whether or not someone plays basketball (0 means they don't, and 1 means they do); 
+non-basketball players appear shorter on average than basketball players.
+
+We see that people who play basketball tend to be taller than people who do not. Just like before, we can draw a line to fit these points. 
+Take a moment to think about what that line might look like!
+
+You might have guessed (correctly!) that the best fit line for this plot is the one that goes through the mean height for each group. 
+To re-create the scatter plot with the best fit line, we could use the following code:
+
+# Calculate group means
+print(data.groupby('play_bball').mean().height)
+
+Output:
+
+play_bball
+0	169.016
+1	183.644
+# Create scatter plot
+plt.scatter(data.play_bball, data.height)
+
+# Add the line using calculated group means
+plt.plot([0,1], [169.016, 183.644])
+
+# Show the plot
+plt.show()
+
+This will output the following plot (without the additional labels or colors):
+
+Code:
 
 
 
