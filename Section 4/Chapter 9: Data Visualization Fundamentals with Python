@@ -3,7 +3,8 @@ Line Graphs in Matplotlib
 Introduction
 Matplotlib is a Python library used to create charts and graphs.
 
-In this first lesson, you will get an overview of the basic commands necessary to build and label a line graph. The concepts you will learn include:
+In this first lesson, you will get an overview of the basic commands necessary to build and label a line graph. 
+The concepts you will learn include:
 
 Creating a line graph from data
 Changing the appearance of the line
@@ -17,3 +18,32 @@ By the end of the lesson, you’ll be well on your way to becoming a master at p
 
 To the right, you can see an example of the kind of chart you’ll be able to make by the end of this lesson!
 
+
+
+Basic Line Plot
+Line graphs are helpful for visualizing how a variable changes over time.
+
+Some possible data that would be displayed with a line graph:
+
+average prices of gasoline over the past decade
+weight of an individual over the past couple of months
+average temperature along a line of longitude over different latitudes
+
+Using Matplotlib methods, the following code will create a simple line graph using .plot() and display it using .show() :
+
+x_values = [0, 1, 2, 3, 4]
+y_values = [0, 1, 4, 9, 16]
+plt.plot(x_values, y_values)
+plt.show()
+
+x_values is a variable holding a list of x-values for each point on our line graph
+y_values is a variable holding a list of y-values for each point on our line graph
+plt is the name we have given to the Matplotlib module we have imported at the top of the code
+plt.plot(x_values, y_values) will create the line graph
+plt.show() will actually display the graph
+Our graph would look like this:
+
+
+Let’s get some practice with plotting lines.
+
+Code:
