@@ -222,4 +222,56 @@ axis_labels
 Now, you can try adding labels to plots of your own.
 
 Code:
+import codecademylib
+from matplotlib import pyplot as plt
 
+x = range(12)
+y = [3000, 3005, 3010, 2900, 2950, 3050, 3000, 3100, 2980, 2980, 2920, 3010]
+plt.plot(x, y)
+plt.axis([0, 12, 2900, 3100])
+plt.xlabel('Time')
+plt.ylabel('Dollars spent on coffee')
+plt.title('My Last Twelve Years of Coffee Drinking')
+plt.show()
+
+
+
+Subplots
+Sometimes, we want to display two lines side-by-side, rather than in the same set of x- and y-axes. 
+When we have multiple axes in the same picture, we call each set of axes a subplot. 
+The picture or object that contains all of the subplots is called a figure.
+
+We can have many different subplots in the same figure, and we can lay them out in many different ways. We can think of our layouts as having rows and columns of subplots. 
+For instance, the following figure has six subplots split into 2 rows and 3 columns:
+
+We can create subplots using .subplot().
+
+The command plt.subplot() needs three arguments to be passed into it:
+
+The number of rows of subplots
+The number of columns of subplots
+The index of the subplot we want to create
+For instance, the command plt.subplot(2, 3, 4) would create “Subplot 4” from the figure above.
+
+Any plt.plot() that comes after plt.subplot() will create a line plot in the specified subplot. For instance:
+
+# Data sets
+x = [1, 2, 3, 4]
+y = [1, 2, 3, 4]
+
+# First Subplot
+plt.subplot(1, 2, 1)
+plt.plot(x, y, color='green')
+plt.title('First Subplot')
+
+# Second Subplot
+plt.subplot(1, 2, 2)
+plt.plot(x, y, color='steelblue')
+plt.title('Second Subplot')
+
+# Display both subplots
+plt.show()
+
+This would result in a figure with the two plots arranged like this:
+
+Code:
