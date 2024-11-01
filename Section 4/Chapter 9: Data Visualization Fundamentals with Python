@@ -463,3 +463,137 @@ This would result in this y-axis labeling:
 y_ticks
 
 Now, let’s practice with tick marks.
+
+Code:
+import codecademylib
+from matplotlib import pyplot as plt
+
+month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep","Oct", "Nov", "Dec"]
+
+months = range(12)
+conversion = [0.05, 0.08, 0.18, 0.28, 0.4, 0.66, 0.74, 0.78, 0.8, 0.81, 0.85, 0.85]
+
+plt.xlabel("Months")
+plt.ylabel("Conversion")
+
+plt.plot(months, conversion)
+
+# Your work here
+ax = plt.subplot()
+ax.set_xticks(months)
+ax.set_xticklabels(month_names)
+ax.set_yticks([0.10, 0.25, 0.5, 0.75])
+ax.set_yticklabels(['10%', '25%', '50%', '75%'])
+plt.show()
+
+
+
+Figures
+When we’re making lots of plots, it’s easy to end up with lines that have been plotted and not displayed. 
+If we’re not careful, these “forgotten” lines will show up in your new plots. In order to be sure that you don’t have any stray lines, 
+you can use the command plt.close('all') to clear all existing plots before you plot a new one.
+
+Previously, we learned how to put two 
+Preview: Docs Loading link description
+sets
+ of axes into the same figure. Sometimes, we would rather have two separate figures. We can use the command plt.figure() to create new figures and size them how we want. 
+We can add the keyword figsize=(width, height) to set the size of the figure, in inches. We use parentheses (( and )) to pass in the width and height, which are separated by a comma (,).
+
+To create a figure with a width of 4 inches, and height of 10 inches, we would use:
+
+plt.figure(figsize=(4, 10))
+
+It would look tall and skinny, like this:
+
+tall_fig
+
+Once we’ve created a figure, we might want to save it so that we can use it in a presentation or a website. 
+We can use the command plt.savefig() to save out to many different file formats, such as png, svg, or pdf. 
+After plotting, we can call plt.savefig('name_of_graph.png'):
+
+# Figure 2
+plt.figure(figsize=(4, 10)) 
+plt.plot(x, parabola)
+plt.savefig('tall_and_narrow.png')
+
+This will save tall_and_narrow.png to our file system.
+
+Code:
+import codecademylib
+from matplotlib import pyplot as plt
+
+word_length = [8, 11, 12, 11, 13, 12, 9, 9, 7, 9]
+power_generated = [753.9, 768.8, 780.1, 763.7, 788.5, 782, 787.2, 806.4, 806.2, 798.9]
+years = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009]
+plt.close('all')
+
+plt.figure()
+plt.plot(years, word_length)
+plt.savefig('winning_word_lengths.png')
+
+plt.figure(figsize=(7,3))
+plt.plot(years, power_generated)
+plt.savefig('power_generated.png')
+
+plt.show()
+
+
+
+Review
+Now you’ve played around with several two-dimensional line plots in Matplotlib. You’ve seen how you can create simple, readable plots with few commands. 
+You’ve also learned some commands to style and label your plots better. These are the concepts you’ve seen in Matplotlib so far:
+
+Creating a line graph from data
+Changing the appearance of the line
+Zooming in on different parts of the axis
+Putting labels on titles and axes
+Creating a more complex figure layout
+Adding legends to graphs
+Changing tick labels and positions
+Saving what you’ve made
+Moving on, we’ll learn how to make different kinds of plots (beyond line graphs!) in Matplotlib and how to choose between those plots when displaying data.
+
+Let’s do a final round of practice with all of the cool plotting concepts you’ve learned so far!
+
+Instructions
+Checkpoint 1 Enabled
+1.Define three lists, x, y1, and y2 and fill them with integers. These numbers can be anything you want, but it would be neat to have them be actual metrics that you want to compare. 
+This is a fun site you can look at to find example datasets to plot!
+
+Checkpoint 2 Step instruction is unavailable until previous steps are completed
+2.Plot y1 vs x and display the plot.
+
+Checkpoint 3 Step instruction is unavailable until previous steps are completed
+3.On the same graph, plot y2 vs x (after the line where you plot y1 vs x)
+
+Checkpoint 4 Step instruction is unavailable until previous steps are completed
+4.Make the y1 line a pink line and the y2 line a gray line. Give both lines round markers.
+
+Checkpoint 5 Step instruction is unavailable until previous steps are completed
+5.Give your graph a title of “Two Lines on One Graph”, and label the x-axis ”Amazing X-axis” and y-axis ”Incredible Y-axis”.
+
+Checkpoint 6 Step instruction is unavailable until previous steps are completed
+6.Give the graph a legend and put it in the lower right.
+
+Checkpoint 7 Step instruction is unavailable until previous steps are completed
+7.Good job! Feel free to continue playing around in this space. Maybe make some subplots and separate out the lines. 
+Maybe practice with zooming in on certain parts of the graph or selecting certain x- or y-ticks to display. When you’re ready, run the code one last time and move on.
+
+Code:
+import codecademylib
+from matplotlib import pyplot as plt
+
+#data https://www.tylervigen.com/spurious/correlation/5137_popularity-of-the-surprised-pikachu-meme_correlates-with_the-number-of-middle-school-teachers-in-puerto-rico
+
+x=[2010,	2011,	2012,	2013,	2014,	2015,	2016,	2017,	2018,	2019,	2020,	2021,	2022]
+y1=[0, 0,	0.142857,	0.25,	0, 0, 0, 0, 24.5714, 35.5833,	21.4167, 12.25, 10.6667] # Popularity of the 'surprised pikachu' meme (Relative popularity)
+y2=[630, 670, 800, 610, 710, 850, 1090, 1140, 3500, 3410, 2830, 1900, 2050] # The number of middle school teachers in Puerto Rico (Laborers)
+
+plt.plot(x, y1, color = 'pink', marker = 'o')
+plt.plot(x, y2, color = 'gray', marker = 'o')
+plt.title('Two Lines on One Graph')
+plt.xlabel('Amazing X-axis')
+plt.ylabel('Incredible Y-axis')
+plt.legend(['Y1', 'Y2'], loc = 4)
+plt.show()
+#plt.clf()
