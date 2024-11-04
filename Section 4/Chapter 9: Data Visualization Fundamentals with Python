@@ -809,6 +809,9 @@ plt.show()
 Stacked Bars
 If we want to compare two sets of data while preserving knowledge of the total between them, 
 we can also stack the bars instead of putting them side by side. 
+
+A set is an unordered collection of elements without any duplicates.
+
 For instance, if someone was plotting the hours they’ve spent on entertaining themselves with 
 video games and books in the past week, and wanted to also get a feel for total hours spent on 
 entertainment, they could create a stacked bar chart:
