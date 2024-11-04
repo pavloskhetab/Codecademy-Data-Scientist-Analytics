@@ -700,5 +700,82 @@ Now, our graph is much easier to understand:labeled_planet_chart
 Let’s add the appropriate labels for the chart you made in the last exercise for the coffee shop, MatplotSip.
 
 Code:
+import codecademylib
+from matplotlib import pyplot as plt
+
+drinks = ["cappuccino", "latte", "chai", "americano", "mocha", "espresso"]
+sales =  [91, 76, 56, 66, 52, 27]
+
+plt.bar(range(len(drinks)), sales)
+
+#create your ax object here
+ax = plt.subplot()
+ax.set_xticks(range(len(drinks)))
+ax.set_xticklabels(drinks)
+plt.show()
+
+
+
+Side-By-Side Bars
+We can use a bar chart to compare two 
+Preview: Docs Loading link description
+sets
+ of data with the same types of axis values. To do this, we plot two sets of bars next to each other, 
+so that the values of each category can be compared. 
+For example, here is a chart with side-by-side bars for the populations of the United States and 
+China over the age of 65 (in percentages):population_bars
+
+(data taken from World Bank)
+
+Some examples of data that side-by-side bars could be useful for include:
+
+the populations of two countries over time
+prices for different foods at two different restaurants
+enrollments in different 
+Preview: Docs Loading link description
+classes
+ for males and females
+In the graph above, there are 7 sets of bars, with 2 bars in each set. 
+Each bar has a width of 0.8 (the default width for all bars in Matplotlib).
+
+If our first blue bar is at x=0, then we want the next blue bar to be at x=2, 
+and the next to be at x=4, etc.
+Our first orange bar should be at x=0.8 (so that it is touching the blue bar), 
+and the next orange bar should be at x=2.8, etc.
+This is a lot of math, but we can make Python do it for us by copying and pasting this code:
+
+# China Data (blue bars)
+n = 1  # This is our first dataset (out of 2)
+t = 2 # Number of datasets
+d = 7 # Number of sets of bars
+w = 0.8 # Width of each bar
+x_values1 = [t*element + w*n for element
+             in range(d)]
+
+That just generated the first set of x-values. 
+To generate the second set, paste the code again, but change n to 2, because this is the second dataset:
+
+# US Data (orange bars)
+n = 2  # This is our second dataset (out of 2)
+t = 2 # Number of datasets
+d = 7 # Number of sets of bars
+w = 0.8 # Width of each bar
+x_values2 = [t*element + w*n for element
+             in range(d)]
+
+Let’s examine our special code:
+
+[t*element + w*n for element in range(d)]
+
+This is called a list comprehension. It’s a special way of generating a list from a formula. 
+You can learn more about it in this article. 
+For making side-by-side bar graphs, you’ll never need to change this line; 
+just paste it into your code and make sure to define n, t, d, and w correctly.
+
+In the instructions below, we’ll experiment with side-by-side bars to 
+compare different locations of the MatplotSip coffee empire.
+
+Code:
+
 
 
