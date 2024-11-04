@@ -776,6 +776,65 @@ In the instructions below, we’ll experiment with side-by-side bars to
 compare different locations of the MatplotSip coffee empire.
 
 Code:
+import codecademylib
+from matplotlib import pyplot as plt
+
+drinks = ["cappuccino", "latte", "chai", "americano", "mocha", "espresso"]
+sales1 =  [91, 76, 56, 66, 52, 27]
+sales2 = [65, 82, 36, 68, 38, 40]
+
+#Paste the x_values code here
+n = 1  # This is our first dataset (out of 2)
+t = 2 # Number of datasets
+d = len(drinks) # Number of sets of bars
+w = 0.8 # Width of each bar
+store1_x = [t*element + w*n for element
+             in range(d)]
+
+plt.bar(store1_x, sales1)
+
+n = 2  # This is our second dataset (out of 2)
+t = 2 # Number of datasets
+d = len(drinks) # Number of sets of bars
+w = 0.8 # Width of each bar
+store2_x = [t*element + w*n for element
+             in range(d)]
+plt.bar(store2_x, sales2)
+plt.legend(['Sales1', 'Sales2'])
+
+plt.show()
 
 
 
+Stacked Bars
+If we want to compare two sets of data while preserving knowledge of the total between them, 
+we can also stack the bars instead of putting them side by side. 
+For instance, if someone was plotting the hours they’ve spent on entertaining themselves with 
+video games and books in the past week, and wanted to also get a feel for total hours spent on 
+entertainment, they could create a stacked bar chart:
+
+entertainment
+
+We do this by using the keyword bottom. The top set of bars will have bottom set to 
+the heights of the other set of bars. So the first set of bars is plotted normally:
+
+video_game_hours = [1, 2, 2, 1, 2]
+
+plt.bar(range(len(video_game_hours)),
+  video_game_hours) 
+
+and the second set of bars has bottom specified:
+
+book_hours = [2, 3, 4, 2, 1]
+
+plt.bar(range(len(book_hours)),
+  book_hours,
+  bottom=video_game_hours)
+
+This starts the book_hours bars at the heights of the video_game_hours bars. 
+So, for example, on Monday the orange bar representing hours spent reading will start at 
+a value of 1 instead of 0, because 1 hour was spent playing video games.
+
+Let’s try this out with the MatplotSip data from the last exercise.
+
+Code:
