@@ -841,3 +841,70 @@ a value of 1 instead of 0, because 1 hour was spent playing video games.
 Let’s try this out with the MatplotSip data from the last exercise.
 
 Code:
+import codecademylib
+from matplotlib import pyplot as plt
+
+drinks = ["cappuccino", "latte", "chai", "americano", "mocha", "espresso"]
+sales1 =  [91, 76, 56, 66, 52, 27]
+sales2 = [65, 82, 36, 68, 38, 40]
+  
+plt.bar(range(len(drinks)), sales1, label = 'Location1')
+plt.bar(range(len(drinks)), sales2, bottom=sales1, label = 'Location2')
+plt.legend()
+
+plt.show()
+
+
+
+Error Bars
+In the previous exercise, you learned to represent data as bars of different heights. 
+Sometimes, we need to visually communicate some sort of uncertainty in the heights of those bars. Here are some examples:
+
+The average number of students in a 3rd grade classroom is 30, but some 
+Preview: Docs Loading link description
+classes
+ have as few as 18 and others have as many as 35 students.
+We measured that the weight of a certain fruit was 35g, but we know that our scale isn’t very precise, 
+so the true weight of the fruit might be as much as 40g or as little as 30g.
+The average price of a soda is $1.00, but we also want to communicate that the standard deviation is $0.20.
+
+To display error visually in a bar chart, we often use error bars to show where each bar could be, taking 
+Preview: Docs The two types of errors in Python are syntax errors and exceptions. 
+Exceptions may arise even if the code is syntactically correct.
+errors
+ into account.
+
+error_bars
+
+Each of the black lines is called an error bar. The taller the bar is, the more uncertain we are 
+about the height of the blue bar. The horizontal lines at the top and bottom are called caps. 
+They make it easier to read the error bars.
+
+If we wanted to show an error of +/- 2, we would add the keyword yerr=2 to our plt.bar command. 
+To make the caps wide and easy to read, we would add the keyword capsize=10:
+
+values = [10, 13, 11, 15, 20]
+yerr = 2
+plt.bar(range(len(values)), values, yerr=yerr, capsize=10)
+plt.show()
+
+If we want a different amount of error for each bar, we can make yerr equal to a list 
+rather than a single number:
+
+values = [10, 13, 11, 15, 20]
+yerr = [1, 3, 0.5, 2, 4]
+plt.bar(range(len(values)), values, yerr=yerr, capsize=10)
+plt.show()
+
+This code results in error bars of different sizes:
+
+variable_error
+
+Like the list of x-axis labels, Matplotlib reads this in the same order as the list of y-values. 
+So, the first index of your error list should correspond to the first index of your y-values list, 
+the second index of your error list should correspond to the second index of your y-values list, and so on.
+
+Code:
+
+
+
