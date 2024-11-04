@@ -597,3 +597,21 @@ plt.ylabel('Incredible Y-axis')
 plt.legend(['Y1', 'Y2'], loc = 4)
 plt.show()
 #plt.clf()
+
+
+
+Different Plot Types
+Introduction
+In the previous lesson, you learned how to create and label a line plot using Matplotlib! 
+In this lesson, you’ll learn how to create and when to use different types of plots:
+
+Compare categories of data with bar graphs
+Show uncertainty in data using error bars and shading
+Compare proportional datasets using pie charts
+Analyze frequency data using histograms
+Instructions
+Examine the plots in the file system to the right. You will be building these plots throughout the lesson! 
+Continue to the next exercise when you’re ready.
+
+
+
