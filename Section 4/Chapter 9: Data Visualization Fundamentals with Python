@@ -968,6 +968,51 @@ If we wanted to add 2 to each element in y_values, we use this code:
 y_upper = [i + 2 for i in y_values]
 
 Code:
+import codecademylib
+from matplotlib import pyplot as plt
+
+months = range(12)
+month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+revenue = [16000, 14000, 17500, 19500, 21500, 21500, 22000, 23000, 20000, 19500, 18000, 16500]
+
+#your work here
+plt.plot(months, revenue)
+
+ax = plt.subplot()
+ax.set_xticks(months)
+ax.set_xticklabels(month_names)
+y_lower = [0.9*i for i in revenue]
+y_upper = [1.1*i for i in revenue]
+plt.fill_between(months, revenue, y_lower, y_upper, alpha=0.2)
+plt.show()
+
+
+
+Pie Chart
+If we want to display elements of a data set as proportions of a whole, we can use a pie chart.
+
+Pie charts are helpful for displaying data like:
+
+Different ethnicities that make up a school district
+Different macronutrients (carbohydrates, fat, protein) that make up a meal
+Different responses to an online poll
+In Matplotlib, you can make a pie chart with the command plt.pie, passing in the values you want to chart:
+
+budget_data = [500, 1000, 750, 300, 100]
+
+plt.pie(budget_data)
+plt.show()
+
+to Clipboard
+
+Which would create a chart like:
+
+budget_skew
+
+This looks weird and tilted. When we make pie charts in Matplotlib, we almost always want to set the axes to be equal to fix this issue. 
+To do this, we use plt.axis('equal'), which results in a chart like this:
+
+Code:
 
 
 
