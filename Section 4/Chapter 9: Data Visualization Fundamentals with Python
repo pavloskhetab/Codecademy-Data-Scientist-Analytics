@@ -1013,6 +1013,123 @@ This looks weird and tilted. When we make pie charts in Matplotlib, we almost al
 To do this, we use plt.axis('equal'), which results in a chart like this:
 
 Code:
+import codecademylib
+from matplotlib import pyplot as plt
+import numpy as np
 
+payment_method_names = ["Card Swipe", "Cash", "Apple Pay", "Other"]
+payment_method_freqs = [270, 77, 32, 11]
+
+#make your pie chart here
+plt.pie(payment_method_freqs)
+plt.axis('equal')
+plt.show()
+
+
+
+Pie Chart Labeling
+We also want to be able to understand what each slice of the pie represents. 
+To do this, we can either:
+
+use a legend to label each color, or
+put labels on the chart itself.
+Method 1
+budget_data = [500, 1000, 750, 300, 100]
+budget_categories = ['marketing', 'payroll', 'engineering', 'design', 'misc']
+
+plt.pie(budget_data)
+plt.legend(budget_categories)
+
+to Clipboard
+
+This puts the category names into a legend on the chart:pie_legend
+
+Method 2
+#option 2
+plt.pie(budget_data, labels=budget_categories)
+
+to Clipboard
+
+This puts the category names into labels next to each corresponding slice:
+
+pie_labels
+
+One other useful labeling tool for pie charts is adding the percentage of the total that each slice occupies. 
+Matplotlib can add this automatically with the keyword autopct. 
+We pass in string formatting instructions to format the labels how we want. Some common formats are:
+
+'%0.2f' — 2 decimal places, like 4.08
+'%0.2f%%' — 2 decimal places, but with a percent sign at the end, like 4.08%. You need two consecutive percent signs because 
+the first one acts as an escape character, so that the second one gets displayed on the chart.
+'%d%%' — rounded to the nearest int and with a percent sign at the end, like 4%.
+So, a full call to plt.pie might look like:
+
+plt.pie(budget_data,
+        labels=budget_categories,
+        autopct='%0.1f%%')
+
+to Clipboard
+
+and the resulting chart would look like:budget_chart_full
+
+Code:
+import codecademylib
+from matplotlib import pyplot as plt
+
+payment_method_names = ["Card Swipe", "Cash", "Apple Pay", "Other"]
+payment_method_freqs = [270, 77, 32, 11]
+
+plt.pie(payment_method_freqs, autopct='%0.1f%%')
+plt.axis('equal')
+plt.legend(payment_method_names, loc=0)
+plt.show()
+
+
+
+Histogram
+Sometimes we want to get a feel for a large dataset with many samples beyond knowing just the basic metrics of mean, median, or standard deviation. 
+To get more of an intuitive sense for a dataset, we can use a histogram to display all the values.
+
+A histogram tells us how many values in a dataset fall between different 
+Preview: Docs Loading link description
+sets
+ of numbers (i.e., how many numbers fall between 0 and 10? Between 10 and 20? Between 20 and 30?). 
+Each of these questions represents a bin, for instance, our first bin might be between 0 and 10.
+
+All bins in a histogram are always the same size. The width of each bin is the distance between the minimum and maximum values of each bin. 
+In our example, the width of each bin would be 10.
+
+Each bin is represented by a different rectangle whose height is the number of elements from the dataset that fall within that bin.
+
+Here is an example:
+
+histogram
+
+To make a histogram in Matplotlib, we use the command plt.hist. plt.hist finds the minimum and the maximum values in your dataset and 
+creates 10 equally-spaced bins between those values.
+
+The histogram above, for example, was created with the following code:
+
+plt.hist(dataset) 
+plt.show()
+
+to Clipboard
+
+If we want more than 10 bins, we can use the keyword bins to set how many bins we want to divide the data into. The keyword range selects the minimum and maximum values to plot. 
+For example, if we wanted to take our data from the last example and make a new histogram that just displayed the values from 66 to 69, divided into 40 bins (instead of 10), 
+we could use this function call:
+
+plt.hist(dataset, range=(66,69), bins=40)
+
+to Clipboard
+
+which would result in a histogram that looks like this:
+
+histogram_range
+
+Histograms are best for showing the shape of a dataset. For example, you might see that values are close together, or skewed to one side. With this added intuition, 
+we often discover other types of analysis we want to perform.
+
+Code:
 
 
