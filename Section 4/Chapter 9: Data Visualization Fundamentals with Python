@@ -920,10 +920,8 @@ plt.show()
 
 
 Fill Between
-We’ve learned how to display 
-Preview: Docs Loading link description
-errors
- on bar charts using error bars. Let’s take a look at how we might do this in an aesthetically pleasing way on line graphs. 
+We’ve learned how to display on bar charts using error bars. 
+Let’s take a look at how we might do this in an aesthetically pleasing way on line graphs. 
 In Matplotlib, we can use plt.fill_between() to shade error. This function takes three arguments:
 
 x-values — this works just like the x-values of plt.plot()
