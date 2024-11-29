@@ -6,6 +6,20 @@ in order to understand patterns and trends that may not be visible from just see
 In this project, you will examine some graphs that we have created, and then you will recreate them using Matplotlib. 
 This will give you a chance to practice with the plot types and properties we explored in Lesson 2.
 
+
+Bar Chart with Error
+12 min
+First, we are going to look at the chart called bar_chart.png.
+
+bar_chart
+
+The data you will need to recreate this chart is in the 
+Preview: Docs Loading link description
+lists
+ past_years_averages, years, and error.
+
+Save your recreated chart to a file called my_bar_chart.png.
+
 Code:
 import codecademylib
 from matplotlib import pyplot as plt
@@ -30,6 +44,56 @@ plt.ylabel('Test Average')
 plt.savefig('my_bar_chart.png')
 
 plt.show()
+
+
+
+Side By Side Bars
+18 min
+Now, we are going to look at the chart called side-by-side.png. 
+This displays the differences in average test scores between students who went to two different middle schools before enrolling in your high school.
+
+sidebyside
+
+The data you will need to recreate this chart is in the 
+Preview: Docs Loading link description
+lists
+ middle_school_a, middle_school_b, and unit_topics.
+
+Save your recreated chart to a file called my_side_by_side.png.
+import codecademylib
+from matplotlib import pyplot as plt
+
+unit_topics = ['Limits', 'Derivatives', 'Integrals', 'Diff Eq', 'Applications']
+middle_school_a = [80, 85, 84, 83, 86]
+middle_school_b = [73, 78, 77, 82, 86]
+
+def create_x(t, w, n, d):
+    return [t*x + w*n for x in range(d)]
+
+# Make your chart here
+school_a_x = create_x(2, 0.8, 1, 5)
+school_b_x = create_x(2, 0.8, 2, 5)
+
+plt.figure(figsize=(10,8))
+
+ax = plt.subplot()
+
+plt.bar(school_a_x, middle_school_a)
+plt.bar(school_b_x, middle_school_b)
+
+middle_x = [ (a + b) / 2.0 for a, b in zip(school_a_x, school_b_x)]
+
+ax.set_xticks(middle_x)
+ax.set_xticklabels(unit_topics)
+
+plt.legend(['Middle School A', 'Middle School B'])
+plt.title('Test Averages on Different Units')
+plt.ylabel('test average')
+plt.xlabel('unit')
+
+plt.show()
+
+plt.savefig('my_side_by_side.png')
 
 
 
