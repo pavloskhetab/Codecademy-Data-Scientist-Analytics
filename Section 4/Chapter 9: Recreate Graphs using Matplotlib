@@ -211,3 +211,35 @@ lists
 Save your recreated chart to a file called my_pie_chart.png.
 
 Code:
+import codecademylib
+from matplotlib import pyplot as plt
+
+unit_topics = ['Limits', 'Derivatives', 'Integrals', 'Diff Eq', 'Applications']
+num_hardest_reported = [1, 3, 10, 15, 1]
+
+#Make your plot here
+plt.figure(figsize=(10,8))
+plt.pie(num_hardest_reported, labels=unit_topics, autopct='%1d%%')
+plt.axis('equal')
+
+plt.title('Hardest Topics')
+
+plt.show()
+plt.savefig('my_pie_chart.png')
+
+
+
+Line with Shaded Error
+8 min
+Now, we are going to look at the chart called line_graph.png. This displays the relationship between the time students say they studied and the scores they received on their final exams.
+
+fill_between
+
+The data you will need to recreate this chart is in the 
+Preview: Docs Loading link description
+lists
+ hours_reported and exam_scores.
+
+Save your recreated chart to a file called my_line_graph.png.
+
+Code:
