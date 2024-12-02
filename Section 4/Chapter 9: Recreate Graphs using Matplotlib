@@ -60,6 +60,8 @@ lists
  middle_school_a, middle_school_b, and unit_topics.
 
 Save your recreated chart to a file called my_side_by_side.png.
+
+Code:
 import codecademylib
 from matplotlib import pyplot as plt
 
@@ -86,6 +88,12 @@ middle_x = [ (a + b) / 2.0 for a, b in zip(school_a_x, school_b_x)]
 ax.set_xticks(middle_x)
 ax.set_xticklabels(unit_topics)
 
+# x-axis limits for a specific subplot
+ax.set_xlim(0, 10)
+
+# y-axis limits for a specific subplot
+ax.set_ylim(70, 90)
+
 plt.legend(['Middle School A', 'Middle School B'])
 plt.title('Test Averages on Different Units')
 plt.ylabel('test average')
@@ -97,3 +105,17 @@ plt.savefig('my_side_by_side.png')
 
 
 
+Stacked Bars
+14 min
+Now, we are going to look at the chart called stacked-bars.png. This graph displays the breakdown of students who got As, Bs, Cs, Ds, and Fs in each unit.
+
+stacked
+
+The data you will need to recreate this chart is in the 
+Preview: Docs Loading link description
+lists
+ As, Bs, Cs, Ds, Fs, and unit_topics.
+
+Save your recreated chart to a file called my_stacked_bar.png.
+
+Code:
