@@ -304,3 +304,100 @@ It is crucial that any pie chart you see or create follows these two rules.
 
 
 
+Plotting Pie Charts Using Matplotlib
+7 min
+Let’s bake our own pie create our own pie chart using Matplotlib. The seaborn library does not currently have any pie chart libraries.
+
+Let’s say we have the following table that represents the proportion of grades a students gets on tests during their school year:
+
+Grades	Proportions
+A	.09
+B	.28
+C	.41
+D	.18
+F	.04
+
+First, let’s think about the type of data we are dealing with. Since we have proportions of different categories, we know we are working with categorical data. 
+If we want to visualize this on a graph, we can create a pie chart or a bar chart. Let’s create a pie chart!
+
+To create a pie chart in Matplotlib, we go through a few steps (these may vary depending on the format of your data). 
+Let’s imagine that the table of values is in a csv file called student_grades.csv, so we can use pandas to access them.
+
+Load in the dataset using pandas
+student_grades = pd.read_csv("student_grades.csv")
+
+to Clipboard
+
+Create two variables: one that represents the wedge sizes of your pie chart (each proportion) and one that represents the labels that correspond to each wedge. 
+Use pandas to access both columns of data: Grades and Proportion.
+wedge_sizes = student_grades["Proportions"]
+grade_labels = student_grades["Grades"]
+
+to Clipboard
+
+Plot the wedge sizes and labels. Use the .pie() method from the Matplotlib library. The first parameter is the size of each wedge in the pie chart, and the second is the labels parameter, 
+which is a list of the category names.
+plt.pie(wedge_sizes, labels = grade_labels)
+
+to Clipboard
+
+Set the pie chart to be a perfect circle using the .axis() method from the Matplotlib library.
+plt.axis('equal')
+
+to Clipboard
+
+Give the plot a title and show it.
+plt.title(“Student Grade Distribution”)
+plt.show()
+
+to Clipboard
+
+Our output in this example is:Pie chart that shows the distribution of student grades from the dictionary variable
+Code:
+import matplotlib.pyplot as plt
+import pandas as pd
+import codecademylib3
+
+water_usage = pd.read_csv("water_usage.csv")
+print(water_usage.head())
+
+wedge_sizes = water_usage['prop']
+pie_labels = water_usage['water_source']
+
+plt.pie(wedge_sizes, labels=pie_labels)
+plt.axis('equal')
+
+plt.title('Distribution of House Water Usage')
+
+plt.show()
+plt.close()
+
+
+
+Pitfalls of Pie Charts
+4 min
+We have learned about pie charts and their use cases, as well as how to plot them in Python. 
+However, while pie charts are commonly used in media and journals, there are several issues that can arise. 
+Let’s dig into the use cases of both pie charts and bar charts to gain a better understanding of when it’s best to use one or the other.
+
+Comparing Category Sizes
+One of the main points of data visualization is to make it easier for a reader to compare different 
+Preview: Docs Loading link description
+sets
+ of information. Slices on a pie chart are tough to compare as the human eye has difficulty comparing areas. Let’s look at the example below:
+
+In this diagram are three similar pie charts, each with five slices. For all the pie charts, it is tough to decipher the relative sizes of each slice, making them an unideal visualization for the data at hand.
+
+(Source: Wikipedia)
+
+Looking at any of these pie charts, you will struggle to perceive the relative sizes of each slice. If our audience needs this nuanced understanding of the data, a bar chart is much more effective.
+
+In this diagram are three similar bar charts, each one corresponding to the pie charts above. 
+For all three bar charts, it is easy to compare the relative sizes of each bar within the graph, making them all an ideal visualization for the data at hand.
+
+(Source: Wikipedia)
+
+Let’s look at the same data represented on bar charts.
+
+You can immediately identify the relative size of each bar here. This would be a case where we should definitely take a pass on the pie.
+
