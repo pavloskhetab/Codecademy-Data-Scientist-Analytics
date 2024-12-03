@@ -401,3 +401,47 @@ Let’s look at the same data represented on bar charts.
 
 You can immediately identify the relative size of each bar here. This would be a case where we should definitely take a pass on the pie.
 
+Code:
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import codecademylib3
+
+pie_data = pd.read_csv("pie_data.csv")
+
+graph_counts = pie_data["values"]
+
+graph_labels = pie_data["labels"]
+
+plt.subplot(1,2,1)
+plt.pie(graph_counts, labels = graph_labels)
+plt.axis('Equal')
+plt.title("Tough to Compare")
+
+plt.subplot(1,2,2)
+sns.barplot(graph_labels, graph_counts)
+plt.title("Easy to Compare")
+
+plt.show()
+plt.close()
+
+
+
+Making Your Pie Chart Better
+4 min
+A good life motto is normally the more slices of pie, the better. Unfortunately, this does not ring true with pie charts. 
+With too many slices, trying to decipher the visual becomes cumbersome — sometimes even more cumbersome than reading off data from a table. 
+Take a look at the example below. There are twenty wedges in the graph. 
+Trying to match each piece to its label is way too much effort when a visual is supposed to make readability simple for the viewer.
+
+A pie chart with too many slices (twenty to be exact). There are numerous labels on the right side of the graph, making it hard to decipher what each slice represents. 
+Trying to get any information from this graph would be more difficult than reading the data off a table.
+
+When you find yourself in a situation like this, you have a couple of options.
+
+You can aggregate your pie slices to create fewer while still portraying an informative story.
+You can see if a bar chart does a more effective job at portraying the information. 
+Bar charts do not suffer nearly as much as pie charts when it comes to visualizing numerous categories. 
+This is because they are not constrained to one circle — instead, numerous bars.
+
+Code:
