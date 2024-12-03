@@ -1,0 +1,71 @@
+Visualizing Categorical Data
+
+You work at a veterinary office and want to compare the number of different types of pets people have in a specific town. 
+This will give you a sense of what supplies you may need and how many office visits you should expect over the coming year. 
+The different types of pets we want to compare are:
+
+Dogs
+Cats
+Fish
+Chinchillas
+Birds
+Snakes
+Lizards
+We could summarize this data numerically using a table of frequencies:
+
+Type of Pet	Number of Pets
+Dogs	4325
+Birds	2423
+Cats	5126
+Fish	3223
+Chinchillas	978
+Snakes	1112
+Lizards	453
+
+This table of values is informative for a reader. However, it is time-consuming for a casual reader to recognize patterns in the data and pick out useful information. 
+We can create a bar chart that displays our data in a way that is easier for readers to digest and more descriptive than a table of values.
+
+Bar chart of the number of pets in the city based on the table of values above
+
+In this example, we can immediately identify the most and least popular pets on the bar chart. 
+We also see the range and difference between the number of each pet in each column very clearly.
+
+Instructions
+Visualizing categorical data mainly involves the use of pie charts and bar charts. The image to the right shows both of them as well as slight variants. 
+In this lesson, we will explore both of these graphs including:
+
+use cases
+pros and cons
+modifying them for best communication
+Let’s get started!
+
+
+
+Introduction to Bar Charts
+6 min
+Now that we have seen what a bar chart looks like, let’s examine more in-depth how and when we utilize them! 
+Bar charts are generally used to visualize the relative frequencies of categories within a variable. 
+Therefore, they are primarily helpful for visually summarizing categorical variables rather than quantitative variables. 
+If you can organize your variable into distinct categories, a bar chart is often a great option! If not, you may need to resort to a different visual.
+
+Once you have your distinct categories, a bar chart is best used to display the different value counts of each category. 
+We can also compare means, but we would recommend using a side-by-side box plot for that instead because they give a full picture of the five-number summary.
+
+Vertical vs. Horizontal Bar Charts
+Within a bar chart, we have two axes. One axis represents the discrete values within a categorical variable we are comparing, while the other axis measures the counts of each of these values. 
+Depending on how we orient these axes, we can either have a horizontal bar chart or a vertical bar chart. Let’s take a look at each below.
+
+Two bar charts: one is horizontal, and one is vertical. Both have five categorical variables along their categorical axes.
+
+Bar Charts vs. Histograms
+Finally, we have one last thing to go over before we jump into coding our own charts. 
+If you have ever run into histograms, you may notice that bar charts and histograms look almost identical. 
+However, these are the key differences between them:
+
+Bar charts are used for categorical variables, while histograms are used for quantitative data.
+Histograms must always be arranged in a specific order because they represent a range of numerical values. 
+For a bar chart, each bar represents frequencies of category variables within a category. Unless the variable is ordinal, the bars could be arranged in any order.
+This image shows the difference between bar charts and histograms. Bar charts noticeably have gaps between the bars, while histograms often have no gaps. 
+The histogram also shows numeric ranges along the x-axis, while the bar chart shows categories.
+
+For convenience, click here if you would like to see the above image in a separate window.
