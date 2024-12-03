@@ -121,4 +121,122 @@ Click here if you would like to see the animation in a separate window.
 This is accurate according to the counts as well. 
 Anytime you see a bar graph, the area should always be proportional to the counts being represented.
 
+
+
+Now that we know all about bar charts, let’s create our own in Python! To do this, we are going to use a library called seaborn. 
+It creates powerful visuals without any syntax headaches, and it is built off of the Matplotlib library.
+
+Let’s say we have a dataset called flu.csv that says whether patients have tested positive or negative for flu at a clinic in the past week. 
+The first five elements in the column Results are shown below.
+
+Results
+Positive
+Negative
+Negative
+Negative
+Positive
+
+We want to create a bar chart that plots the counts of each of the values positive and negative within the Results column. 
+Let’s walk through this with the help of the pandas library and the seaborn library with the following steps:
+
+1) Import the necessary libraries.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+to Clipboard
+
+2) Import flu.csv using the .read_csv() method. You can inspect the first five rows of the data with the .head() method in pandas.
+
+flu_results = pd.read_csv("flu.csv")
+print(flu_results.head())
+
+to Clipboard
+
+3) Plot the counts of your intended category with the .countplot() method in seaborn. The only required argument of this method is the x parameter, which takes in the data column we are plotting. 
+In our case, this is the Results column.
+
+sns.countplot(flu_results["Results"])
+
+to Clipboard
+
+4) Show the Plot.
+
+plt.show()
+
+to Clipboard
+
+Our output in this example is:This is bar chart that shows the counts of positive and negative test results from the tests.csv file. 
+The number of positive results is about 50 people, and the number of negative test results is about 300.
+
+This builds a basic bar chart. We can customize our .countplot() chart, which we will cover later in this lesson.
+
+We also want to note that the .countplot() method is not the only method that builds bar charts in the seaborn library. barplot() can also be used to plot a bar chart in Python, 
+and it is more flexible in that it can use any function to determine the height of the bars. 
+For this lesson, we’ve chosen to use .countplot() because the syntax is simpler and does what we need!
+
+Code:
+import codecademylib3
+import pandas as pd 
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("games.csv")
+print(df.head())
+
+sns.countplot(df["victory_status"])
+plt.show()
+plt.close()
+
+
+
+Bar Chart Ordering
+11 min
+You will often see bar graphs with bars set in a certain order. This can help communicate meaningful features about your data. 
+Whether our category labels are ordinal or nominal will affect how we want to order our bars and what features we can emphasize. 
+Let’s investigate.
+
+Nominal Data
+Nominal data has labels with no specific order. Thus, we have a lot of creative freedom when choosing where each bar goes on our chart. 
+One way would order our data is by ascending or descending order. Let’s apply this ordering to our games.csv data using the .value_counts() pandas method in the order parameter.
+
+sns.countplot(df["victory_status"], order=df["victory_status"].value_counts(ascending=True).index)
+
+to Clipboard
+
+The bar chart in this graphic also contains the same data as the above charts. This time the data is set in ascending order. 
+The labels are ordered from: "draw", "outoftime", "mate", and "resign."
+
+From the way we ordered the graphs, it is immediately clear that resign is the most common game outcome and the mode of our victory_status column, while draw is the least common.
+
+In the above example we have value_counts(ascending=True). If we want the bars in reverse order, we can take ascending=True out of the .value_counts() method (descending order is the default).
+The index call specifies the row labels of the DataFrame.
+
+Ordinal Data
+If we are working with ordinal data, we should plot the data according to our categorical variables. 
+For example, let’s say we want to plot the number of students per grade level at a college. 
+We have a table below, which is a preview data from a students.csv file.
+
+Grade Level
+Second Year
+Second Year
+First Year
+Third year
+Fourth Year
+
+We can order the categorical values as First Year, Second Year, Third Year, and Fourth Year since they are ordinal. 
+Using .countplot(), we can input these as a list in the order parameter.
+
+sns.countplot(df["Grade Level"], order=["First Year", "Second Year", "Third Year", "Fourth Year"])
+
+to Clipboard
+
+A bar chart of the counts of students in each grade level (first year, second year, third year, and fourth year). 
+There are about 500 second years, while the rest of the grade levels have about 400 students.
+
+From this chart, we get takeaways that we couldn’t just from looking at the column of data. 
+We can see that the college had an influx of students for the second year class, as Second Year is the mode (most observed value) of the Grade Level column of data. 
+All other years have roughly the same number of students. Putting bars in order according to the ordinal data helps us see these patterns and make our visuals informative for readers.
+
 Code:
