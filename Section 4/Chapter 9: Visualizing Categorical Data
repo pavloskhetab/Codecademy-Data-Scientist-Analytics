@@ -240,3 +240,67 @@ We can see that the college had an influx of students for the second year class,
 All other years have roughly the same number of students. Putting bars in order according to the ordinal data helps us see these patterns and make our visuals informative for readers.
 
 Code:
+import codecademylib3
+import pandas as pd 
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("school_data.csv")
+print(df.head())
+
+value_order = ["NOT ENOUGH DATA", "VERY WEAK", "WEAK", "NEUTRAL", "STRONG", "VERY STRONG"]
+
+type_of_data = "ordinal"
+
+
+# plot using .countplot() method here
+sns.countplot(df['Supportive Environment'], order=value_order)
+plt.xticks(rotation=30)
+
+# Adjust layout to prevent cutting off labels
+plt.tight_layout()
+
+# show your plot here
+plt.show()
+plt.close()
+
+
+
+Pie Charts
+2 min
+So far in this lesson, we have looked at bar charts as a way to plot categorical data. However, bar charts are not the only option. 
+Often, you will run into pie charts as a way to display categorical data. While bar charts are usually used for visualizing a table of frequencies, 
+pie charts are an alternative when you want to visualize a table of proportions.
+
+Pie charts are made up of slices that are combined to make a full circle. Each slice represents a proportion, and the sum of each proportion (slice) adds up to 1 (or 100%).
+
+These slices are meant to give viewers a relative size of the data, similar to how bars in a bar chart act. 
+The arc length (size of the slice’s angle) of each slice is proportional to the quantity it represents. This also means that the area of each slice is proportional to this quantity as well.
+
+Before we dive into pie chart use cases and how to plot them, we want to address the fact that pie charts are the most issue-ridden graphing visual. 
+We will explore why later in this lesson. They are still one of the most commonly used visualization tools, so learning all about them will prove to be vital as a data analyst.
+
+The main reason one would use a pie chart is to represent a part-to-whole relationship in your data. 
+If you want to compare relative sizes of your data and see how they all are part of a larger sum while worrying less about their precise sizes, a pie chart may be a good option.
+
+Let’s take a look at an example of a pie chart with some given data. The following table represents the distribution of each various pies ordered at a restaurant known for its worldwide cuisine.
+
+Type of Pie	Proportion
+Chicken Pastilla	.28
+Meat	.07
+Bobotie	.17
+Sugar	.11
+Puko	.37
+The resulting pie chart would look like the following:
+
+Pie chart with a distribution of five types of pies: chicken pastilla, meat, bobotie, sugar, and puko
+
+Instructions
+Take a look at the animation on the right. This shows the sectors of the pie chart. Notice a few things:
+
+Both the arc length and area of each sector are proportional to the percentage of the circle it makes up.
+The sum of each sector adds up to 100 percent.
+It is crucial that any pie chart you see or create follows these two rules.
+
+
+
