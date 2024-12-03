@@ -69,3 +69,56 @@ This image shows the difference between bar charts and histograms. Bar charts no
 The histogram also shows numeric ranges along the x-axis, while the bar chart shows categories.
 
 For convenience, click here if you would like to see the above image in a separate window.
+Code:
+import codecademylib3
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+
+# add in your answers here!
+left_plot = "Bar Chart"
+right_plot = "Histogram"
+
+heroes_data = pd.read_csv("heroes_information.csv")
+# line of code used to clean up messy data
+heroes_data_cleaned = heroes_data[heroes_data.Alignment != "-"]
+
+#### code for left plot
+plt.subplot(1, 2, 1)
+sns.countplot(heroes_data_cleaned["Alignment"])
+
+#### code for right plot
+plt.subplot(1, 2, 2)
+sns.histplot(heroes_data_cleaned["Height"])
+plt.xlim(0,500)
+
+plt.show()
+
+
+
+Bar Chart Area
+1 min
+Let’s go over one of the most important concepts about bar charts — so important, we gave it its own exercise.
+
+The bars of a bar chart have a couple of key features:
+
+They have lengths that are proportional to the counts they represent
+Each bar’s width in the bar chart is the same, meaning each bar’s area is also proportional to the counts they represent.
+These features make a bar chart super dependable for representing categorical data.
+
+For any chart like a bar chart, the areas we use to represent values must always be equivalent to the relative sizes of the values they represent.
+Otherwise, readers could be misled and potentially identify patterns that do not actually exist.
+
+Instructions
+Let’s take a look at the animation to the right. It shows counts transforming into a bar chart. 
+Even without the counts, we could see the relative sizes of each bar in the chart:
+
+Bar “a” is half the size of bar “b”.
+Bar “b” is half the size of bar “c”.
+Bar “c” is twice the size of bar “d”.
+Click here if you would like to see the animation in a separate window.
+
+This is accurate according to the counts as well. 
+Anytime you see a bar graph, the area should always be proportional to the counts being represented.
+
+Code:
