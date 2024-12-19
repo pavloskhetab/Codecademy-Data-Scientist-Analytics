@@ -511,3 +511,6 @@ import codecademylib3
 
 df = pd.read_csv("Health_AnimalBites.csv")
 print(df.head())
+
+# WhereBittenIDDesc, GenderIDDesc, SpeciesIDDesc
+
