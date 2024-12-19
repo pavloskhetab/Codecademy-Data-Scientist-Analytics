@@ -478,3 +478,36 @@ plt.show()
 
 
 
+Review
+1 min
+Give yourself a pat on the back! You have done some deep dives into two of the most common visuals for categorical data. Let’s review some of the key concepts from this lesson.
+
+Bar Charts
+Bar charts are useful for visualizing counts of categorical data.
+In a bar chart, the height and area are proportional to the value represented. This makes it easy to compare different 
+Preview: Docs Loading link description
+variables
+ in the bar graph.
+Seaborn is a library that makes it easy to create bar charts with the .countplot() method.
+Bar charts have the broadest appeal and are the most common go-to when plotting categorical data.
+Pie Charts
+A pie chart is another way to represent categorical data. Instead of displaying counts of categorical data through bars, 
+a pie chart shows a part-to-whole relationship by displaying each variable as a sector on a circle.
+In a pie chart, the arc length and area of each sector are proportional to the value they represent.
+You can plot pie charts in Python using the .pie() method in Matplotlib. 
+*Pie chart sectors often harder to compare than simple bars, and having too many sectors causes clutter in the visual quickly. 
+This makes use cases for pie charts more limited.
+Instructions
+If you would like some opportunity to explore more plotting of categorical variables, we have imported a csv file from Kaggle about animal bites. 
+We have previewed the data for you on the left. See if there are any columns of data that you would like to explore through bar charts or pie charts.
+
+Happy Coding!
+
+Code:
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import codecademylib3
+
+df = pd.read_csv("Health_AnimalBites.csv")
+print(df.head())
