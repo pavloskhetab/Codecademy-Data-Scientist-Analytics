@@ -514,3 +514,78 @@ print(df.head())
 
 # WhereBittenIDDesc, GenderIDDesc, SpeciesIDDesc
 
+'''
+1. Bar Chart Ideas
+
+Bites by Species:
+Create a bar chart showing the count of bites by SpeciesIDDesc.
+
+Use different colors to represent species.
+
+Bites by Gender:
+Visualize the count of bites by GenderIDDesc.
+
+Consider using a stacked bar chart to break down by another variable, such as SpeciesIDDesc.
+
+Where on the Body:
+Create a bar chart showing the count of bites for each WhereBittenIDDesc category.
+
+Add a hue based on GenderIDDesc for further analysis.
+
+Advice Issued:
+Show the count of incidents where advice was issued (AdvIssuedYNDesc), grouped by SpeciesIDDesc.
+
+Quarantine Status:
+Plot a bar chart comparing SpeciesIDDesc against whether the animals were quarantined (DispositionIDDesc).
+
+Rabies Test Results:
+Create a bar chart showing the number of animals in each ResultsIDDesc category.
+
+You could group or color-code the results by SpeciesIDDesc.
+
+Bites by Zip Code:
+Plot the count of bites for each victim_zip.
+
+This would be more meaningful with the top 10 or 20 zip codes to avoid overloading the chart.
+
+2. Pie Chart Ideas
+
+Proportion of Bites by Species:
+Create a pie chart showing the percentage of total bites contributed by each SpeciesIDDesc.
+
+Bites by Gender:
+Visualize the proportion of bites by GenderIDDesc.
+
+Body Parts Most Bitten:
+Create a pie chart to show the proportion of bites on different body parts (WhereBittenIDDesc).
+
+Vaccination Status:
+Create a pie chart to compare animals vaccinated recently (vaccination_yrs <= 1) vs. those vaccinated longer ago or unknown.
+
+Rabies Test Outcomes:
+Use a pie chart to represent the distribution of ResultsIDDesc.
+
+Advice Given:
+Show the proportion of cases where advice was issued (AdvIssuedYNDesc).
+
+
+3. Combined Insights (Advanced)
+
+Stacked Bar Chart of Species and Body Parts:
+Create a stacked bar chart with SpeciesIDDesc on the x-axis and the stack representing counts for each WhereBittenIDDesc.
+
+Grouped Bar Chart for Quarantine:
+Group DispositionIDDesc (quarantine outcome) by SpeciesIDDesc to identify trends.
+
+Comparing Vaccinated vs. Non-Vaccinated Animals by Species:
+Create a grouped bar chart comparing vaccination status (vaccination_yrs categories: e.g., <1 year, 1–3 years, >3 years, Unknown) for each species.
+'''
+
+# 1. Bar Chart: Bites by Species
+
+
+
+# 2. Pie Chart: Proportion of Bites by Species
+
+# 3. Advanced Chart: Stacked Bar Chart of Species and Body Parts
+
