@@ -581,11 +581,49 @@ Comparing Vaccinated vs. Non-Vaccinated Animals by Species:
 Create a grouped bar chart comparing vaccination status (vaccination_yrs categories: e.g., <1 year, 1–3 years, >3 years, Unknown) for each species.
 '''
 
+# Bites by Species
+species_df = df.SpeciesIDDesc
+
 # 1. Bar Chart: Bites by Species
+plt.figure(figsize=(10, 6))  # Adjust figure size for better readability
+sns.countplot(x=species_df, order=species_df.value_counts().index)
+
+# Add labels and title
+plt.title("Bites by Species", fontsize=16)
+plt.xlabel("Species")
+plt.ylabel("Count")
+plt.xticks(rotation=45)  # Rotate x-axis labels for readability
+plt.show()
+
+# Calculate counts of each species
+species_counts = species_df.value_counts()
+
+# Print species counts
+print(species_counts)
+
+# Define a threshold for grouping
+threshold = 50
+
+# Group small categories
+species_counts_grouped = species_counts.copy()
+small_species = species_counts[species_counts < threshold]
+species_counts_grouped = species_counts_grouped[species_counts_grouped >= threshold]
+species_counts_grouped["Other"] = small_species.sum()
 
 
+# 2. Pie Chart: Proportion of Bites by Species (Grouped)
+plt.figure(figsize=(8, 8))
+plt.pie(
+    species_counts_grouped, 
+    labels=species_counts_grouped.index, 
+    autopct='%1.1f%%', 
+    startangle=140
+)
 
-# 2. Pie Chart: Proportion of Bites by Species
+# Add a title
+plt.title("Proportion of Bites by Species (Grouped)", fontsize=16)
+plt.show()
+
 
 # 3. Advanced Chart: Stacked Bar Chart of Species and Body Parts
 
