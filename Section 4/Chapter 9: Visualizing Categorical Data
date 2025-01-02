@@ -581,49 +581,51 @@ Comparing Vaccinated vs. Non-Vaccinated Animals by Species:
 Create a grouped bar chart comparing vaccination status (vaccination_yrs categories: e.g., <1 year, 1–3 years, >3 years, Unknown) for each species.
 '''
 
-# Bites by Species
-species_df = df.SpeciesIDDesc
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set a consistent Seaborn theme
+sns.set_theme(style="whitegrid")
 
 # 1. Bar Chart: Bites by Species
-plt.figure(figsize=(10, 6))  # Adjust figure size for better readability
-sns.countplot(x=species_df, order=species_df.value_counts().index)
+species_counts = df.SpeciesIDDesc.value_counts()
 
-# Add labels and title
+plt.figure(figsize=(10, 6))
+sns.countplot(x=df.SpeciesIDDesc, order=species_counts.index)
 plt.title("Bites by Species", fontsize=16)
-plt.xlabel("Species")
-plt.ylabel("Count")
-plt.xticks(rotation=45)  # Rotate x-axis labels for readability
+plt.xlabel("Species", fontsize=12)
+plt.ylabel("Count", fontsize=12)
+plt.xticks(rotation=45)
 plt.show()
 
-# Calculate counts of each species
-species_counts = species_df.value_counts()
-
-# Print species counts
-print(species_counts)
-
-# Define a threshold for grouping
-threshold = 50
-
-# Group small categories
-species_counts_grouped = species_counts.copy()
-small_species = species_counts[species_counts < threshold]
-species_counts_grouped = species_counts_grouped[species_counts_grouped >= threshold]
-species_counts_grouped["Other"] = small_species.sum()
-
-
 # 2. Pie Chart: Proportion of Bites by Species (Grouped)
+threshold = 50
+small_species = species_counts[species_counts < threshold]
+species_counts.loc["Other"] = small_species.sum()
+species_counts = species_counts[species_counts >= threshold]
+
 plt.figure(figsize=(8, 8))
 plt.pie(
-    species_counts_grouped, 
-    labels=species_counts_grouped.index, 
+    species_counts, 
+    labels=species_counts.index, 
     autopct='%1.1f%%', 
-    startangle=140
+    startangle=140, 
+    explode=[0.1 if label == "Other" else 0 for label in species_counts.index]
 )
-
-# Add a title
 plt.title("Proportion of Bites by Species (Grouped)", fontsize=16)
 plt.show()
 
-
 # 3. Advanced Chart: Stacked Bar Chart of Species and Body Parts
+counts = df.groupby(['SpeciesIDDesc', 'WhereBittenIDDesc']).size().unstack(fill_value=0)
 
+if counts.empty:
+    print("No data available for the stacked bar chart.")
+else:
+    counts.plot(kind='bar', stacked=True, figsize=(10, 6), colormap='Set2')
+    plt.title("Stacked Bar Chart: Species and Body Parts", fontsize=16)
+    plt.xlabel("Species", fontsize=12)
+    plt.ylabel("Bite Count", fontsize=12)
+    plt.xticks(rotation=45)
+    plt.legend(title="Body Part", bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.tight_layout()
+    plt.show()
