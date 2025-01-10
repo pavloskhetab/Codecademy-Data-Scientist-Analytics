@@ -1,1 +1,53 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+import codecademylib3
 
+# load in the data
+df = pd.read_csv("mushroom_data.csv")
+print(df.head())
+
+# list of all column headers
+columns = df.columns.tolist()
+
+# For each column in the DataFrame
+for column in columns:
+    # Check if the number of unique values is fewer than 6
+    if df[column].nunique() < 6:  
+        # Get the value counts for the column
+        value_counts = df[column].value_counts()
+        
+        # Create the pie chart with a Seaborn color palette
+        plt.pie(value_counts, 
+                labels=value_counts.index, 
+                autopct='%1.1f%%', 
+                startangle=90, 
+                colors=sns.color_palette("Set2", len(value_counts)))  # Using a color palette from Seaborn
+        
+        # Add a title for the pie chart
+        plt.title(f'{column} Value Distribution')
+    
+    else:
+        # Get the value counts of the column
+        value_counts = df[column].value_counts()
+        
+        # Create a countplot (bar chart) for the column, ordered by frequency of counts
+        sns.countplot(x=df[column], 
+                      data=df, 
+                      order=value_counts.index,  # Ordering the bars based on frequency
+                      palette=sns.color_palette("Blues", len(value_counts))[::-1])  # Reversing the palette so darkest is for most frequent
+
+        # Add title for the bar chart
+        plt.title(f'{column} Value Counts')
+        
+        # Rotate the x-axis labels for better readability
+        plt.xticks(rotation=30, fontsize=10)
+    
+    # Increase the font size of the x-axis label
+    plt.xlabel(column, fontsize=12)
+    
+    # Show the plot
+    plt.show()
+    
+    # Clear the current plot to avoid overlap with the next plot
+    plt.clf()
